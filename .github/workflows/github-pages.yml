@@ -1,0 +1,55 @@
+# Publishes static HTML under data/utilities/ plus web/index.html to GitHub Pages.
+# Repo → Settings → Pages: set "Source" to GitHub Actions (not "Deploy from a branch").
+name: Deploy GitHub Pages
+
+on:
+  push:
+    branches:
+      - main
+      - master
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Assemble site
+        run: |
+          set -euo pipefail
+          mkdir -p _site/utilities
+          : > _site/.nojekyll
+          cp web/index.html _site/index.html
+          for f in \
+            data/utilities/pge_oas_debt_dashboard.html \
+            data/utilities/ice_bofa_oas_line_chart.html
+          do
+            test -f "$f" || { echo "missing: $f" >&2; exit 1; }
+            cp "$f" _site/utilities/
+          done
+          test -d data/utilities/ferc1_pge_viewer || { echo "missing dir: data/utilities/ferc1_pge_viewer" >&2; exit 1; }
+          cp -r data/utilities/ferc1_pge_viewer _site/utilities/
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

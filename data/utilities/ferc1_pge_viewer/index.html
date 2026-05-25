@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>FERC Form 1 viewer</title>
+<style>
+:root { font-family: system-ui, sans-serif; color: #0f172a; background: #f8fafc; }
+body { margin: 0; display: flex; flex-direction: column; min-height: 100vh; }
+header { background: #0f172a; color: #f8fafc; padding: 0.75rem 1rem; }
+header h1 { font-size: 1.1rem; margin: 0; }
+header .sub { font-size: 0.78rem; opacity: 0.9; margin: 0.35rem 0 0; font-weight: normal; }
+nav { display: flex; flex-wrap: wrap; gap: 0.35rem; padding: 0.5rem 1rem; background: #e2e8f0; }
+nav button { border: 0; border-radius: 6px; padding: 0.35rem 0.75rem; cursor: pointer;
+  background: #fff; font-size: 0.88rem; }
+nav button.active { background: #2563eb; color: #fff; }
+main { flex: 1; padding: 1rem; overflow: auto; }
+table { border-collapse: collapse; width: 100%; background: #fff; font-size: 0.82rem; }
+th, td { border: 1px solid #e2e8f0; padding: 0.35rem 0.45rem; vertical-align: top; }
+th { background: #f1f5f9; text-align: left; }
+th.num, td.num { text-align: right; font-variant-numeric: tabular-nums; }
+.muted { color: #64748b; font-size: 0.78rem; margin: 0 0 0.5rem; }
+.hidden { display: none; }
+.d1{padding-left:0.6rem}.d2{padding-left:1.2rem}.d3{padding-left:1.8rem}
+.d4{padding-left:2.4rem}.d5{padding-left:3rem}.d6{padding-left:3.6rem}
+</style>
+</head>
+<body>
+<header>
+  <h1 id="title">FERC Form 1</h1>
+  <p id="sub" class="sub"></p>
+</header>
+<nav id="tabs"></nav>
+<main id="main"></main>
+<script>
+async function load() {
+  const data = await (await fetch('./pge_form1_financials.json')).json();
+  document.getElementById('title').textContent = 'FERC Form 1 — ' + data.company;
+  document.getElementById('sub').textContent = (data.amount_display_note || '') + ' '
+    + (data.year_meta || []).map(m => m.year + ': ' + (m.placeholder ? '(pending)' : m.xbrl_member)).join(' · ');
+  const years = data.years;
+  const tabs = document.getElementById('tabs');
+  const main = document.getElementById('main');
+  const panels = [
+    ['income_statement', 'Statement of operations (income)'],
+    ['balance_sheet_assets', 'Balance sheet — assets'],
+    ['balance_sheet_liabilities', 'Balance sheet — liabilities'],
+    ['cash_flows', 'Statement of cash flows']];
+  let first = true;
+  for (const [key, title] of panels) {
+    const id = 'p_' + key;
+    const b = document.createElement('button');
+    b.textContent = title;
+    b.dataset.panel = id;
+    if (first) { b.className = 'active'; first = false; }
+    tabs.appendChild(b);
+    const sec = document.createElement('section');
+    sec.id = id;
+    sec.className = 'panel' + (b.className ? '' : ' hidden');
+    if (!b.className) sec.classList.add('hidden');
+    let thead = '<tr><th>Line</th>';
+    for (const y of years) thead += '<th class="num">' + y + ' (US$ M)</th>';
+    thead += '</tr>';
+    sec.innerHTML = '<table><thead>' + thead + '</thead><tbody></tbody></table>';
+    main.appendChild(sec);
+    const tb = sec.querySelector('tbody');
+    for (const row of data[key]) {
+      const tr = document.createElement('tr');
+      const d = Math.min(row.depth || 0, 6);
+      const c0 = document.createElement('td');
+      c0.className = 'd' + d;
+      c0.textContent = row.label;
+      tr.appendChild(c0);
+      for (const y of years) {
+        const raw = (row.by_year || {})[String(y)];
+        const c = document.createElement('td');
+        c.className = 'num';
+        c.textContent = raw == null ? '' : fmtM(raw);
+        tr.appendChild(c);
+      }
+      tb.appendChild(tr);
+    }
+  }
+  tabs.addEventListener('click', e => {
+    if (e.target.tagName !== 'BUTTON') return;
+    tabs.querySelectorAll('button').forEach(x => x.classList.remove('active'));
+    e.target.classList.add('active');
+    const id = e.target.dataset.panel;
+    main.querySelectorAll('.panel').forEach(p => p.classList.toggle('hidden', p.id !== id));
+  });
+  tabs.querySelector('button')?.click();
+}
+function fmtM(s) {
+  const v = parseFloat(s);
+  if (isNaN(v)) return String(s);
+  const x = v / 1e6;
+  return x.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+}
+load().catch(e => { document.getElementById('main').innerHTML = '<p>' + e + '</p>'; });
+</script>
+</body>
+</html>

@@ -1,0 +1,14 @@
+# Secrets — do not commit
+.env
+.env.local
+.env.*.local
+
+# Large / generated local assets (do not push to GitHub)
+*.tif
+*.tif.aux.xml
+*.qgz
+.DS_Store
+node_modules/
+
+# FERC taxonomy extract is huge; not needed for published dashboards
+data/utilities/ferc1_taxonomy_extracted/

@@ -1,0 +1,316 @@
+statement,concept,label,depth,amount_2024,amount_2025,amount_2026_proforma
+income_statement,ScheduleStatementOfIncomeAbstract,Schedule Statement Of Income,0,,,
+income_statement,ElectricUtilityMember,Electric Utility Member,4,,,
+income_statement,GasUtilityMember,Gas Utility Member,4,,,
+income_statement,OtherUtilityMember,Other Utility Member,4,,,
+income_statement,StatementOfIncomeLineItems,Statement Of Income Line Items,2,,,
+income_statement,UtilityOperatingIncomeAbstract,Utility Operating Income,3,,,
+income_statement,OperatingRevenues,Operating Revenues,4,3460714742,3548184245,3609582978
+income_statement,OperatingExpensesAbstract,Operating Expenses,3,,,
+income_statement,OperationExpense,Operation Expense,4,2003804192,1961359620,2042059363
+income_statement,MaintenanceExpense,Maintenance Expense,4,274450195,326003423,309233613
+income_statement,DepreciationExpense,Depreciation Expense,4,392816166,525171285,472763537
+income_statement,DepreciationExpenseForAssetRetirementCosts,Depreciation Expense For Asset Retirement Costs,4,13420449,1431028,7648511
+income_statement,AmortizationAndDepletionOfUtilityPlant,Amortization And Depletion Of Utility Plant,4,79219629,3842149,42776816
+income_statement,AmortizationOfElectricPlantAcquisitionAdjustments,Amortization Of Electric Plant Acquisition Adjustments,4,0,0,0
+income_statement,AmortizationOfPropertyLossesUnrecoveredPlantAndRegulatoryStudyCosts,Amortization Of Property Losses Unrecovered Plant And Regulatory Study Costs,4,1899953,1900046,1956999
+income_statement,AmortizationOfConversionExpenses,Amortization Of Conversion Expenses,4,0,0,0
+income_statement,RegulatoryDebits,Regulatory Debits,4,21600074,30353150,26755910
+income_statement,RegulatoryCredits,Regulatory Credits,4,16653804,11724528,14614841
+income_statement,TaxesOtherThanIncomeTaxesUtilityOperatingIncome,Taxes Other Than Income Taxes Utility Operating Income,4,173230151,187937578,186001380
+income_statement,IncomeTaxesOperatingIncome,Income Taxes Operating Income,4,5845379,6460018,6337279
+income_statement,IncomeTaxesUtilityOperatingIncomeOther,Income Taxes Utility Operating Income Other,4,13653558,15751884,15143803
+income_statement,ProvisionsForDeferredIncomeTaxesUtilityOperatingIncome,Provisions For Deferred Income Taxes Utility Operating Income,4,830068797,544565394,707936608
+income_statement,ProvisionForDeferredIncomeTaxesCreditOperatingIncome,Provision For Deferred Income Taxes Credit Operating Income,4,872487715,647188660,782633333
+income_statement,InvestmentTaxCreditAdjustments,Investment Tax Credit Adjustments,4,60295123,133710395,99912842
+income_statement,GainsFromDispositionOfPlant,Gains From Disposition Of Plant,4,0,0,0
+income_statement,LossesFromDispositionOfServiceCompanyPlant,Losses From Disposition Of Service Company Plant,4,0,0,0
+income_statement,GainsFromDispositionOfAllowances,Gains From Disposition Of Allowances,4,0,0,0
+income_statement,LossesFromDispositionOfAllowances,Losses From Disposition Of Allowances,4,0,0,0
+income_statement,AccretionExpense,Accretion Expense,4,3163181,3139198,3245725
+income_statement,GainsFromDispositionOfEnvironmentalCredits,Gains From Disposition Of Environmental Credits,4,,33331250,34331188
+income_statement,LossesFromDispositionOfEnvironmentalCredits,Losses From Disposition Of Environmental Credits,4,,0,0
+income_statement,UtilityOperatingExpenses,Utility Operating Expenses,4,2984325328,3049380730,3107358620
+income_statement,NetUtilityOperatingIncome,Net Utility Operating Income,4,476389414,498803515,502224358
+income_statement,OtherIncomeAndDeductionsAbstract,Other Income And Deductions,3,,,
+income_statement,OtherIncomeAbstract,Other Income,4,,,
+income_statement,NonutilityOperatingIncomeAbstract,Nonutility Operating Income,5,,,
+income_statement,RevenuesFromMerchandisingJobbingAndContractWork,Revenues From Merchandising Jobbing And Contract Work,6,,60990,62820
+income_statement,CostsAndExpensesOfMerchandisingJobbingAndContractWork,Costs And Expenses Of Merchandising Jobbing And Contract Work,6,0,-28678,-14769
+income_statement,RevenuesFromNonutilityOperations,Revenues From Nonutility Operations,6,3769578,3560877,3775184
+income_statement,ExpensesOfNonutilityOperations,Expenses Of Nonutility Operations,6,7021690,4993741,6187947
+income_statement,NonoperatingRentalIncome,Nonoperating Rental Income,6,308684,-324157,-7969
+income_statement,EquityInEarningsOfSubsidiaryCompanies,Equity In Earnings Of Subsidiary Companies,6,1278305,1862508,1617519
+income_statement,InterestAndDividendIncome,Interest And Dividend Income,6,5954821,3725004,4985110
+income_statement,AllowanceForOtherFundsUsedDuringConstruction,Allowance For Other Funds Used During Construction,6,23190377,17686684,21051686
+income_statement,MiscellaneousNonoperatingIncome,Miscellaneous Nonoperating Income,6,17884638,17734070,18343635
+income_statement,GainOnDispositionOfProperty,Gain On Disposition Of Property,6,0,2725,1403
+income_statement,OtherIncome,Other Income,6,45364713,39343638,43624801
+income_statement,OtherIncomeDeductionsAbstract,Other Income Deductions,5,,,
+income_statement,LossOnDispositionOfProperty,Loss On Disposition Of Property,6,,,
+income_statement,MiscellaneousAmortization,Miscellaneous Amortization,6,,,
+income_statement,Donations,Donations,6,2448733,2092812,2338896
+income_statement,LifeInsurance,Life Insurance,6,-1865398,-2996000,-2503620
+income_statement,Penalties,Penalties,6,217991,4207,114432
+income_statement,ExpendituresForCertainCivicPoliticalAndRelatedActivities,Expenditures For Certain Civic Political And Related Activities,6,1683614,2329176,2066587
+income_statement,OtherDeductions,Other Deductions,6,11437125,16406881,14339663
+income_statement,OtherIncomeDeductions,Other Income Deductions,6,13922065,17837076,16355958
+income_statement,TaxesApplicableToOtherIncomeAndDeductionsAbstract,Taxes Applicable To Other Income And Deductions,5,,,
+income_statement,TaxesOtherThanIncomeTaxesOtherIncomeAndDeductions,Taxes Other Than Income Taxes Other Income And Deductions,6,414051,294082,364688
+income_statement,IncomeTaxesFederal,Income Taxes Federal,6,-4248414,-4260284,-4381979
+income_statement,IncomeTaxesOther,Income Taxes Other,6,-1813370,-1787239,-1854314
+income_statement,ProvisionForDeferredIncomeTaxesOtherIncomeAndDeductions,Provision For Deferred Income Taxes Other Income And Deductions,6,8217792,13664808,11269539
+income_statement,ProvisionForDeferredIncomeTaxesCreditOtherIncomeAndDeductions,Provision For Deferred Income Taxes Credit Other Income And Deductions,6,2702006,8190868,5609830
+income_statement,InvestmentTaxCreditAdjustmentsNonutilityOperations,Investment Tax Credit Adjustments Nonutility Operations,6,,,
+income_statement,InvestmentTaxCredits,Investment Tax Credits,6,,8957,9226
+income_statement,TaxesOnOtherIncomeAndDeductions,Taxes On Other Income And Deductions,6,-131947,-288458,-216509
+income_statement,NetOtherIncomeAndDeductions,Net Other Income And Deductions,6,31574595,21795020,27485352
+income_statement,InterestChargesAbstract,Interest Charges,5,,,
+income_statement,InterestOnLongTermDebt,Interest On Long Term Debt,6,195186585,212570060,209994672
+income_statement,AmortizationOfDebtDiscountAndExpense,Amortization Of Debt Discount And Expense,6,1539130,1428894,1528532
+income_statement,AmortizationOfLossOnReacquiredDebt,Amortization Of Loss On Reacquired Debt,6,1104802,1115979,1143702
+income_statement,AmortizationOfPremiumOnDebtCredit,Amortization Of Premium On Debt Credit,6,0,0,0
+income_statement,AmortizationOfGainOnReacquiredDebtCredit,Amortization Of Gain On Reacquired Debt Credit,6,0,0,0
+income_statement,InterestOnDebtToAssociatedCompanies,Interest On Debt To Associated Companies,6,0,0,0
+income_statement,OtherInterestExpense,Other Interest Expense,6,9172712,9153903,9438207
+income_statement,AllowanceForBorrowedFundsUsedDuringConstructionCredit,Allowance For Borrowed Funds Used During Construction Credit,6,15344389,11263956,13703298
+income_statement,NetInterestCharges,Net Interest Charges,6,191658840,213004880,208401816
+income_statement,IncomeBeforeExtraordinaryItems,Income Before Extraordinary Items,6,316305169,307593655,321307894
+income_statement,ExtraordinaryItemsAbstract,Extraordinary Items,5,,,
+income_statement,ExtraordinaryIncome,Extraordinary Income,6,,,
+income_statement,ExtraordinaryDeductions,Extraordinary Deductions,6,,,
+income_statement,NetExtraordinaryItems,Net Extraordinary Items,6,0,0,0
+income_statement,IncomeTaxesExtraordinaryItems,Income Taxes Extraordinary Items,6,,,
+income_statement,ExtraordinaryItemsAfterTaxes,Extraordinary Items After Taxes,6,0,0,0
+income_statement,NetIncomeLoss,Net Income (Loss),3,316305169,307593655,321307894
+balance_sheet_assets,ScheduleComparativeBalanceSheetAssetsAndOtherDebitsAbstract,Schedule Comparative Balance Sheet Assets And Other Debits,0,,,
+balance_sheet_assets,ComparativeBalanceSheetLineItems,Comparative Balance Sheet Line Items,2,,,
+balance_sheet_assets,AssetsAndOtherDebitsAbstract,Assets And Other Debits,3,,,
+balance_sheet_assets,UtilityPlantAbstract,Utility Plant,4,,,
+balance_sheet_assets,UtilityPlant,Utility Plant,5,15111925280,16218702929,16135273528
+balance_sheet_assets,ConstructionWorkInProgress,Construction Work In Progress,5,569951129,414862438,507178987
+balance_sheet_assets,UtilityPlantAndConstructionWorkInProgress,Utility Plant And Construction Work In Progress,5,15681876409,16633565367,16642452515
+balance_sheet_assets,AccumulatedProvisionForDepreciationAmortizationAndDepletionOfPlantUtility,Accumulated Provision For Depreciation Amortization And Depletion Of Plant Utility,5,6196192797,6556171085,6567467399
+balance_sheet_assets,UtilityPlantNet,Utility Plant Net,5,9485683612,10077394282,10074985115
+balance_sheet_assets,NuclearFuelInProcessOfRefinementConversionEnrichmentAndFabrication,Nuclear Fuel In Process Of Refinement Conversion Enrichment And Fabrication,5,0,0,0
+balance_sheet_assets,NuclearFuelMaterialsAndAssembliesStockAccountMajorOnly,Nuclear Fuel Materials And Assemblies Stock Account Major Only,5,0,0,0
+balance_sheet_assets,NuclearFuelAssembliesInReactorMajorOnly,Nuclear Fuel Assemblies In Reactor Major Only,5,0,0,0
+balance_sheet_assets,SpentNuclearFuelMajorOnly,Spent Nuclear Fuel Major Only,5,0,0,0
+balance_sheet_assets,NuclearFuelUnderCapitalLeases,Nuclear Fuel Under Capital Leases,5,0,0,0
+balance_sheet_assets,AccumulatedProvisionForAmortizationOfNuclearFuelAssemblies,Accumulated Provision For Amortization Of Nuclear Fuel Assemblies,5,0,0,0
+balance_sheet_assets,NuclearFuelNet,Nuclear Fuel Net,5,0,0,0
+balance_sheet_assets,UtilityPlantAndNuclearFuelNet,Utility Plant And Nuclear Fuel Net,5,9485683612,10077394282,10074985115
+balance_sheet_assets,OtherElectricPlantAdjustments,Other Electric Plant Adjustments,5,0,0,0
+balance_sheet_assets,GasStoredUndergroundNoncurrent,Gas Stored Underground Noncurrent,5,0,0,0
+balance_sheet_assets,OtherPropertyAndInvestmentsAbstract,Other Property And Investments,4,,,
+balance_sheet_assets,NonutilityProperty,Nonutility Property,5,2892161,2892138,2978914
+balance_sheet_assets,AccumulatedProvisionForDepreciationAndAmortizationOfNonutilityProperty,Accumulated Provision For Depreciation And Amortization Of Nonutility Property,5,549606,580889,582205
+balance_sheet_assets,InvestmentInAssociatedCompanies,Investment In Associated Companies,5,0,0,0
+balance_sheet_assets,InvestmentInSubsidiaryCompanies,Investment In Subsidiary Companies,5,86245684,89052874,90278757
+balance_sheet_assets,NoncurrentPortionOfAllowances,Noncurrent Portion Of Allowances,5,0,0,0
+balance_sheet_assets,OtherInvestments,Other Investments,5,13246789,18809411,16508943
+balance_sheet_assets,SinkingFunds,Sinking Funds,5,0,0,0
+balance_sheet_assets,DepreciationFund,Depreciation Fund,5,0,0,0
+balance_sheet_assets,AmortizationFundFederal,Amortization Fund Federal,5,0,0,0
+balance_sheet_assets,OtherSpecialFunds,Other Special Funds,5,69963786,84797541,79702083
+balance_sheet_assets,SpecialFunds,Special Funds,5,0,0,0
+balance_sheet_assets,DerivativeInstrumentAssetsLongTerm,Derivative Instrument Assets Long Term,5,2161907,1449111,1859674
+balance_sheet_assets,DerivativeInstrumentAssetsHedgesLongTerm,Derivative Instrument Assets Hedges Long Term,5,0,0,0
+balance_sheet_assets,OtherPropertyAndInvestments,Other Property And Investments,5,173960721,196420186,190746167
+balance_sheet_assets,CurrentAndAccruedAssetsAbstract,Current And Accrued Assets,4,,,
+balance_sheet_assets,CashAndWorkingFunds,Cash And Working Funds,5,0,0,0
+balance_sheet_assets,Cash,Cash,5,460719,17030226,9007837
+balance_sheet_assets,SpecialDeposits,Special Deposits,5,125094853,123237654,127891241
+balance_sheet_assets,WorkingFunds,Working Funds,5,0,0,0
+balance_sheet_assets,TemporaryCashInvestments,Temporary Cash Investments,5,12000000,59000000,36565000
+balance_sheet_assets,NotesReceivable,Notes Receivable,5,0,0,0
+balance_sheet_assets,CustomerAccountsReceivable,Customer Accounts Receivable,5,231923765,227154932,236425529
+balance_sheet_assets,OtherAccountsReceivable,Other Accounts Receivable,5,58056268,65100969,63425977
+balance_sheet_assets,AccumulatedProvisionForUncollectibleAccountsCredit,Accumulated Provision For Uncollectible Accounts Credit,5,11815522,12540157,12543175
+balance_sheet_assets,NotesReceivableFromAssociatedCompanies,Notes Receivable From Associated Companies,5,0,0,0
+balance_sheet_assets,AccountsReceivableFromAssociatedCompanies,Accounts Receivable From Associated Companies,5,1786663,17021,928897
+balance_sheet_assets,FuelStock,Fuel Stock,5,21338923,20520498,21557602
+balance_sheet_assets,FuelStockExpensesUndistributed,Fuel Stock Expenses Undistributed,5,0,0,0
+balance_sheet_assets,Residuals,Residuals,5,0,0,0
+balance_sheet_assets,PlantMaterialsAndOperatingSupplies,Plant Materials And Operating Supplies,5,87914386,94244273,93811709
+balance_sheet_assets,Merchandise,Merchandise,5,0,0,0
+balance_sheet_assets,OtherMaterialsAndSupplies,Other Materials And Supplies,5,0,0,0
+balance_sheet_assets,NuclearMaterialsHeldForSale,Nuclear Materials Held For Sale,5,0,0,0
+balance_sheet_assets,AllowanceInventoryAndWithheld,Allowance Inventory And Withheld,5,513783,4450707,2556712
+balance_sheet_assets,StoresExpenseUndistributed,Stores Expense Undistributed,5,4343197,4756089,4686132
+balance_sheet_assets,GasStoredCurrent,Gas Stored Current,5,0,0,0
+balance_sheet_assets,LiquefiedNaturalGasStoredAndHeldForProcessing,Liquefied Natural Gas Stored And Held For Processing,5,0,0,0
+balance_sheet_assets,Prepayments,Prepayments,5,98995958,99185007,102063197
+balance_sheet_assets,AdvancesForGas,Advances For Gas,5,0,0,0
+balance_sheet_assets,InterestAndDividendsReceivable,Interest And Dividends Receivable,5,0,0,0
+balance_sheet_assets,RentsReceivable,Rents Receivable,5,0,0,0
+balance_sheet_assets,AccruedUtilityRevenues,Accrued Utility Revenues,5,177284816,180135074,184071243
+balance_sheet_assets,MiscellaneousCurrentAndAccruedAssets,Miscellaneous Current And Accrued Assets,5,0,0,0
+balance_sheet_assets,DerivativeInstrumentAssets,Derivative Instrument Assets,5,34395859,33040014,34729475
+balance_sheet_assets,DerivativeInstrumentAssetsHedges,Derivative Instrument Assets Hedges,5,0,0,0
+balance_sheet_assets,CurrentAndAccruedAssets,Current And Accrued Assets,5,840131761,913883196,903317703
+balance_sheet_assets,DeferredDebitsAbstract,Deferred Debits,4,,,
+balance_sheet_assets,UnamortizedDebtExpense,Unamortized Debt Expense,5,14608223,16688208,16117662
+balance_sheet_assets,ExtraordinaryPropertyLosses,Extraordinary Property Losses,5,0,0,0
+balance_sheet_assets,UnrecoveredPlantAndRegulatoryStudyCosts,Unrecovered Plant And Regulatory Study Costs,5,160790054,161162526,165805579
+balance_sheet_assets,OtherRegulatoryAssets,Other Regulatory Assets,5,724330912,669563221,717855478
+balance_sheet_assets,PreliminarySurveyAndInvestigationCharges,Preliminary Survey And Investigation Charges,5,10522530,8535817,9815049
+balance_sheet_assets,PreliminaryNaturalGasSurveyAndInvestigationChargesAndOtherPreliminarySurveyAndInvestigationCharges,Preliminary Natural Gas Survey And Investigation Charges And Other Preliminary Survey And Investigation Charges,5,0,0,0
+balance_sheet_assets,OtherPreliminarySurveyAndInvestigationCharges,Other Preliminary Survey And Investigation Charges,5,0,0,0
+balance_sheet_assets,ClearingAccounts,Clearing Accounts,5,-9,42580,21924
+balance_sheet_assets,TemporaryFacilities,Temporary Facilities,5,36671,1124,19464
+balance_sheet_assets,MiscellaneousDeferredDebits,Miscellaneous Deferred Debits,5,9730684,11705880,11039830
+balance_sheet_assets,DeferredLossesFromDispositionOfUtilityPlant,Deferred Losses From Disposition Of Utility Plant,5,0,0,0
+balance_sheet_assets,ResearchDevelopmentAndDemonstrationExpenditures,Research Development And Demonstration Expenditures,5,0,0,0
+balance_sheet_assets,UnamortizedLossOnReacquiredDebt,Unamortized Loss On Reacquired Debt,5,14986918,14123482,14991856
+balance_sheet_assets,AccumulatedDeferredIncomeTaxes,Accumulated Deferred Income Taxes,5,590385635,6687494,307492661
+balance_sheet_assets,UnrecoveredPurchasedGasCosts,Unrecovered Purchased Gas Costs,5,0,0,0
+balance_sheet_assets,DeferredDebits,Deferred Debits,5,1525391618,1505303096,1560807778
+balance_sheet_assets,AssetsAndOtherDebits,Assets And Other Debits,4,12025167712,12693000760,12729856763
+balance_sheet_liabilities,ScheduleComparativeBalanceSheetLiabilitiesOtherCreditsAbstract,Schedule Comparative Balance Sheet Liabilities Other Credits,0,,,
+balance_sheet_liabilities,ComparativeBalanceSheetLineItems,Comparative Balance Sheet Line Items,2,,,
+balance_sheet_liabilities,LiabilitiesAndOtherCreditsAbstract,Liabilities And Other Credits,3,,,
+balance_sheet_liabilities,ProprietaryCapitalAbstract,Proprietary Capital,4,,,
+balance_sheet_liabilities,CommonStockIssued,Common Stock Issued,5,2122277163,2406878394,2332515112
+balance_sheet_liabilities,PreferredStockIssued,Preferred Stock Issued,5,0,0,0
+balance_sheet_liabilities,CapitalStockSubscribed,Capital Stock Subscribed,5,0,0,0
+balance_sheet_liabilities,StockLiabilityForConversion,Stock Liability For Conversion,5,0,0,0
+balance_sheet_liabilities,PremiumOnCapitalStock,Premium On Capital Stock,5,0,0,0
+balance_sheet_liabilities,OtherPaidInCapital,Other Paid In Capital,5,18789718,18789718,19353410
+balance_sheet_liabilities,InstallmentsReceivedOnCapitalStock,Installments Received On Capital Stock,5,0,0,0
+balance_sheet_liabilities,DiscountOnCapitalStock,Discount On Capital Stock,5,0,0,0
+balance_sheet_liabilities,CapitalStockExpense,Capital Stock Expense,5,23113532,44095927,34612871
+balance_sheet_liabilities,RetainedEarnings,Retained Earnings,5,1676875055,1750034536,1764858439
+balance_sheet_liabilities,UnappropriatedUndistributedSubsidiaryEarnings,Unappropriated Undistributed Subsidiary Earnings,5,8706023,11523213,10418057
+balance_sheet_liabilities,ReacquiredCapitalStock,Reacquired Capital Stock,5,0,0,0
+balance_sheet_liabilities,NoncorporateProprietorship,Noncorporate Proprietorship,5,0,0,0
+balance_sheet_liabilities,AccumulatedOtherComprehensiveIncome,Accumulated Other Comprehensive Income,5,-3855949,-3792791,-3939101
+balance_sheet_liabilities,ProprietaryCapital,Proprietary Capital,5,3799678478,4139337143,4088593045
+balance_sheet_liabilities,LongTermDebtAbstract,Long Term Debt,4,,,
+balance_sheet_liabilities,Bonds,Bonds,5,4368800000,4678800000,4659514000
+balance_sheet_liabilities,ReacquiredBonds,Reacquired Bonds,5,0,0,0
+balance_sheet_liabilities,AdvancesFromAssociatedCompanies,Advances From Associated Companies,5,0,0,0
+balance_sheet_liabilities,OtherLongTermDebt,Other Long Term Debt,5,170000000,0,87550000
+balance_sheet_liabilities,UnamortizedPremiumOnLongTermDebt,Unamortized Premium On Long Term Debt,5,0,0,0
+balance_sheet_liabilities,UnamortizedDiscountOnLongTermDebtDebit,Unamortized Discount On Long Term Debt Debit,5,281074,256678,276942
+balance_sheet_liabilities,LongTermDebt,Long Term Debt,5,4538518926,4678543322,4746787058
+balance_sheet_liabilities,OtherNoncurrentLiabilitiesAbstract,Other Noncurrent Liabilities,4,,,
+balance_sheet_liabilities,ObligationsUnderCapitalLeaseNoncurrent,Obligations Under Capital Lease Noncurrent,5,588409041,565806493,594421000
+balance_sheet_liabilities,AccumulatedProvisionForPropertyInsurance,Accumulated Provision For Property Insurance,5,300000,800000,566500
+balance_sheet_liabilities,AccumulatedProvisionForInjuriesAndDamages,Accumulated Provision For Injuries And Damages,5,5896183,5672497,5957870
+balance_sheet_liabilities,AccumulatedProvisionForPensionsAndBenefits,Accumulated Provision For Pensions And Benefits,5,225147883,188812455,213189574
+balance_sheet_liabilities,AccumulatedMiscellaneousOperatingProvisions,Accumulated Miscellaneous Operating Provisions,5,0,0,0
+balance_sheet_liabilities,AccumulatedProvisionForRateRefunds,Accumulated Provision For Rate Refunds,5,2705614,0,1393391
+balance_sheet_liabilities,LongTermPortionOfDerivativeInstrumentLiabilities,Long Term Portion Of Derivative Instrument Liabilities,5,71721254,55663470,65603133
+balance_sheet_liabilities,LongTermPortionOfDerivativeInstrumentLiabilitiesHedges,Long Term Portion Of Derivative Instrument Liabilities Hedges,5,0,0,0
+balance_sheet_liabilities,AssetRetirementObligations,Asset Retirement Obligations,5,309492546,311621399,319873682
+balance_sheet_liabilities,OtherNoncurrentLiabilities,Other Noncurrent Liabilities,5,1203672521,1128376314,1201005150
+balance_sheet_liabilities,CurrentAndAccruedLiabilitiesAbstract,Current And Accrued Liabilities,4,,,
+balance_sheet_liabilities,NotesPayable,Notes Payable,5,0,0,0
+balance_sheet_liabilities,AccountsPayable,Accounts Payable,5,478425863,463591071,485138721
+balance_sheet_liabilities,NotesPayableToAssociatedCompanies,Notes Payable To Associated Companies,5,0,0,0
+balance_sheet_liabilities,AccountsPayableToAssociatedCompanies,Accounts Payable To Associated Companies,5,12155943,10252081,11540132
+balance_sheet_liabilities,CustomerDeposits,Customer Deposits,5,26675753,59069435,44158772
+balance_sheet_liabilities,TaxesAccrued,Taxes Accrued,5,19197791,16438597,18352740
+balance_sheet_liabilities,InterestAccrued,Interest Accrued,5,48514317,53263455,52415553
+balance_sheet_liabilities,DividendsDeclared,Dividends Declared,5,57371089,62844522,61911040
+balance_sheet_liabilities,MaturedLongTermDebt,Matured Long Term Debt,5,0,0,0
+balance_sheet_liabilities,MaturedInterest,Matured Interest,5,0,0,0
+balance_sheet_liabilities,TaxCollectionsPayable,Tax Collections Payable,5,21945265,28512528,25985763
+balance_sheet_liabilities,MiscellaneousCurrentAndAccruedLiabilities,Miscellaneous Current And Accrued Liabilities,5,46682459,22863904,35816377
+balance_sheet_liabilities,ObligationsUnderCapitalLeasesCurrent,Obligations Under Capital Leases Current,5,59172193,58826910,60769538
+balance_sheet_liabilities,DerivativesInstrumentLiabilities,Derivatives Instrument Liabilities,5,219038315,213937754,222982676
+balance_sheet_liabilities,DerivativeInstrumentLiabilitiesHedges,Derivative Instrument Liabilities Hedges,5,0,0,0
+balance_sheet_liabilities,CurrentAndAccruedLiabilities,Current And Accrued Liabilities,5,917457734,933936787,953468178
+balance_sheet_liabilities,DeferredCreditsAbstract,Deferred Credits,4,,,
+balance_sheet_liabilities,CustomerAdvancesForConstruction,Customer Advances For Construction,5,605021,825424,736679
+balance_sheet_liabilities,AccumulatedDeferredInvestmentTaxCredits,Accumulated Deferred Investment Tax Credits,5,60671318,194060311,131186789
+balance_sheet_liabilities,DeferredGainsFromDispositionOfUtilityPlant,Deferred Gains From Disposition Of Utility Plant,5,0,0,0
+balance_sheet_liabilities,OtherDeferredCredits,Other Deferred Credits,5,27080559,39544017,34311657
+balance_sheet_liabilities,OtherRegulatoryLiabilities,Other Regulatory Liabilities,5,320924678,352120895,346618470
+balance_sheet_liabilities,UnamortizedGainOnReacquiredDebt,Unamortized Gain On Reacquired Debt,5,0,0,0
+balance_sheet_liabilities,AccumulatedDeferredIncomeTaxesAcceleratedAmortizationProperty,Accumulated Deferred Income Taxes Accelerated Amortization Property,5,0,0,0
+balance_sheet_liabilities,AccumulatedDeferredIncomeTaxesOtherProperty,Accumulated Deferred Income Taxes Other Property,5,944427755,1027088246,1015330741
+balance_sheet_liabilities,AccumulatedDeferredIncomeTaxesOther,Accumulated Deferred Income Taxes Other,5,212130722,178963708,201413631
+balance_sheet_liabilities,DeferredCredits,Deferred Credits,5,1565840053,1812807194,1740003332
+balance_sheet_liabilities,LiabilitiesAndOtherCredits,Liabilities And Other Credits,4,12025167712,12693000760,12729856763
+cash_flows,ScheduleStatementOfCashFlowsAbstract,Schedule Statement Of Cash Flows,0,,,
+cash_flows,CashFlowLineItems,Cash Flow Line Items,2,,,
+cash_flows,NetCashFlowFromOperatingActivitiesAbstract,Net Cash Flow From Operating Activities,3,,,
+cash_flows,NetIncomeLoss,Net Income (Loss),4,316305169,307593655,321307894
+cash_flows,NoncashChargesCreditsToIncomeAbstract,Noncash Charges Credits To Income,4,,,
+cash_flows,DepreciationAndDepletion,Depreciation And Depletion,5,485456244,530444462,523188864
+cash_flows,NoncashAdjustmentsToCashFlowsFromOperatingActivities,Noncash Adjustments To Cash Flows From Operating Activities,5,,,
+cash_flows,DeferredIncomeTaxesNet,Deferred Income Taxes Net,4,-36903130,36561069,-176161
+cash_flows,InvestmentTaxCreditAdjustmentsNet,Investment Tax Credit Adjustments Net,4,0,8957,4613
+cash_flows,NetIncreaseDecreaseInReceivablesOperatingActivities,Net Increase Decrease In Receivables Operating Activities,4,-70145639,-176134712,-126834381
+cash_flows,NetIncreaseDecreaseInInventoryOperatingActivities,Net Increase Decrease In Inventory Operating Activities,4,1210430,9861278,5701930
+cash_flows,NetIncreaseDecreaseInAllowancesInventoryOperatingActivities,Net Increase Decrease In Allowances Inventory Operating Activities,4,,0,0
+cash_flows,NetIncreaseDecreaseInPayablesAndAccruedExpensesOperatingActivities,Net Increase Decrease In Payables And Accrued Expenses Operating Activities,4,53577232,45018652,50776880
+cash_flows,NetIncreaseDecreaseInOtherRegulatoryAssetsOperatingActivities,Net Increase Decrease In Other Regulatory Assets Operating Activities,4,98593793,-48331802,25884925
+cash_flows,NetIncreaseDecreaseInOtherRegulatoryLiabilitiesOperatingActivities,Net Increase Decrease In Other Regulatory Liabilities Operating Activities,4,9204285,-35829819,-13712150
+cash_flows,AllowanceForOtherFundsUsedDuringConstructionOperatingActivities,Allowance For Other Funds Used During Construction Operating Activities,4,23190377,17686684,21051686
+cash_flows,UndistributedEarningsFromSubsidiaryCompaniesOperatingActivities,Undistributed Earnings From Subsidiary Companies Operating Activities,4,1278305,1862508,1617519
+cash_flows,OtherAdjustmentsToCashFlowsFromOperatingActivities,Other Adjustments To Cash Flows From Operating Activities,4,,,
+cash_flows,NetCashFlowFromOperatingActivities,Net Cash Flow From Operating Activities,4,776981263,1102218800,967788032
+cash_flows,OrderNumber,Order Number,3,,1,1
+cash_flows,CashFlowsFromInvestmentActivitiesAbstract,Cash Flows From Investment Activities,3,,,
+cash_flows,ConstructionAndAcquisitionOfPlantIncludingLandAbstract,Construction And Acquisition Of Plant Including Land,4,,,
+cash_flows,GrossAdditionsToUtilityPlantLessNuclearFuelInvestingActivities,Gross Additions To Utility Plant Less Nuclear Fuel Investing Activities,5,1291637940,1200320722,1283358711
+cash_flows,GrossAdditionsToNuclearFuelInvestingActivities,Gross Additions To Nuclear Fuel Investing Activities,5,,0,0
+cash_flows,GrossAdditionsToCommonUtilityPlantInvestingActivities,Gross Additions To Common Utility Plant Investing Activities,5,,0,0
+cash_flows,GrossAdditionsToNonutilityPlantInvestingActivities,Gross Additions To Nonutility Plant Investing Activities,5,23,-23,0
+cash_flows,AllowanceForOtherFundsUsedDuringConstructionInvestingActivities,Allowance For Other Funds Used During Construction Investing Activities,5,23190377,17686684,21051686
+cash_flows,OtherConstructionAndAcquisitionOfPlantInvestmentActivities,Other Construction And Acquisition Of Plant Investment Activities,5,,,
+cash_flows,CashOutflowsForPlant,Cash Outflows For Plant,5,1301395744,1194811529,1285546746
+cash_flows,AcquisitionOfOtherNoncurrentAssets,Acquisition Of Other Noncurrent Assets,4,,0,0
+cash_flows,ProceedsFromDisposalOfNoncurrentAssets,Proceeds From Disposal Of Noncurrent Assets,4,0,,0
+cash_flows,InvestmentsInAndAdvancesToAssociatedAndSubsidiaryCompanies,Investments In And Advances To Associated And Subsidiary Companies,4,0,944682,486511
+cash_flows,ContributionsAndAdvancesFromAssociatedAndSubsidiaryCompanies,Contributions And Advances From Associated And Subsidiary Companies,4,0,0,0
+cash_flows,DispositionOfInvestmentsInAndAdvancesToAssociatedAndSubsidiaryCompaniesAbstract,Disposition Of Investments In And Advances To Associated And Subsidiary Companies,4,,,
+cash_flows,DispositionOfInvestmentsInAndAdvancesToAssociatedAndSubsidiaryCompanies,Disposition Of Investments In And Advances To Associated And Subsidiary Companies,4,,,
+cash_flows,PurchaseOfInvestmentSecurities,Purchase Of Investment Securities,4,,0,0
+cash_flows,ProceedsFromSalesOfInvestmentSecurities,Proceeds From Sales Of Investment Securities,4,,,
+cash_flows,LoansMadeOrPurchased,Loans Made Or Purchased,4,,0,0
+cash_flows,CollectionsOnLoans,Collections On Loans,4,,,
+cash_flows,NetIncreaseDecreaseInReceivablesInvestingActivities,Net Increase Decrease In Receivables Investing Activities,4,,0,0
+cash_flows,NetIncreaseDecreaseInInventoryInvestingActivities,Net Increase Decrease In Inventory Investing Activities,4,,0,0
+cash_flows,NetIncreaseDecreaseInAllowancesHeldForSpeculationInvestingActivities,Net Increase Decrease In Allowances Held For Speculation Investing Activities,4,,,
+cash_flows,NetIncreaseDecreaseInPayablesAndAccruedExpensesInvestingActivities,Net Increase Decrease In Payables And Accrued Expenses Investing Activities,4,,,
+cash_flows,OtherAdjustmentsToCashFlowsFromInvestmentActivities,Other Adjustments To Cash Flows From Investment Activities,4,,,
+cash_flows,CashFlowsProvidedFromUsedInInvestmentActivities,Cash Flows Provided From Used In Investment Activities,4,-1301937268,-1193811549,-1285310641
+cash_flows,OtherAdjustmentsToCashFlowsFromOperatingActivities,Other Adjustments To Cash Flows From Operating Activities,3,,,
+cash_flows,OtherConstructionAndAcquisitionOfPlantInvestmentActivities,Other Construction And Acquisition Of Plant Investment Activities,3,,,
+cash_flows,OtherAdjustmentsToCashFlowsFromInvestmentActivities,Other Adjustments To Cash Flows From Investment Activities,3,,,
+cash_flows,NoncashAdjustmentsToCashFlowsFromOperatingActivities,Noncash Adjustments To Cash Flows From Operating Activities,3,,,
+cash_flows,OtherRetirementsOfBalancesImpactingCashFlowsFromFinancingActivities,Other Retirements Of Balances Impacting Cash Flows From Financing Activities,3,,,
+cash_flows,OtherAdjustmentsToCashFlowsFromFinancingActivities,Other Adjustments To Cash Flows From Financing Activities,3,,,
+cash_flows,OtherAdjustmentsByOutsideSourcesToCashFlowsFromFinancingActivities,Other Adjustments By Outside Sources To Cash Flows From Financing Activities,3,,,
+cash_flows,CashFlowsFromFinancingActivitiesAbstract,Cash Flows From Financing Activities,3,,,
+cash_flows,ProceedsFromIssuanceAbstract,Proceeds From Issuance,4,,,
+cash_flows,ProceedsFromIssuanceOfLongTermDebtFinancingActivities,Proceeds From Issuance Of Long Term Debt Financing Activities,5,670000000,310000000,504700000
+cash_flows,ProceedsFromIssuanceOfPreferredStockFinancingActivities,Proceeds From Issuance Of Preferred Stock Financing Activities,5,,,
+cash_flows,ProceedsFromIssuanceOfCommonStockFinancingActivities,Proceeds From Issuance Of Common Stock Financing Activities,5,341136729,244331270,301516019
+cash_flows,OtherAdjustmentsToCashFlowsFromFinancingActivities,Other Adjustments To Cash Flows From Financing Activities,5,,,
+cash_flows,NetIncreaseInShortTermDebt,Net Increase In Short Term Debt,5,0,0,0
+cash_flows,OtherAdjustmentsByOutsideSourcesToCashFlowsFromFinancingActivities,Other Adjustments By Outside Sources To Cash Flows From Financing Activities,5,,,
+cash_flows,CashProvidedByOutsideSources,Cash Provided By Outside Sources,5,1011136729,554331270,806216019
+cash_flows,PaymentsForRetirementAbstract,Payments For Retirement,4,,,
+cash_flows,PaymentsForRetirementOfLongTermDebtFinancingActivities,Payments For Retirement Of Long Term Debt Financing Activities,4,130000000,170000000,154500000
+cash_flows,PaymentsForRetirementOfPreferredStockFinancingActivities,Payments For Retirement Of Preferred Stock Financing Activities,4,,0,0
+cash_flows,PaymentsForRetirementOfCommonStockFinancingActivities,Payments For Retirement Of Common Stock Financing Activities,4,0,0,0
+cash_flows,OtherRetirementsOfBalancesImpactingCashFlowsFromFinancingActivities,Other Retirements Of Balances Impacting Cash Flows From Financing Activities,4,,,
+cash_flows,NetDecreaseInShortTermDebt,Net Decrease In Short Term Debt,4,145811136,0,75092735
+cash_flows,DividendsOnPreferredStock,Dividends On Preferred Stock,4,,0,0
+cash_flows,DividendsOnCommonStock,Dividends On Common Stock,4,199490742,224972331,218598483
+cash_flows,CashFlowsProvidedFromUsedInFinancingActivities,Cash Flows Provided From Used In Financing Activities,4,532750528,155162256,354275084
+cash_flows,OtherAdjustmentsToCashFlowsFromOperatingActivitiesDescription,Other Adjustments To Cash Flows From Operating Activities Description,3,,,
+cash_flows,OtherConstructionAndAcquisitionOfPlantInvestmentActivitiesDescription,Other Construction And Acquisition Of Plant Investment Activities Description,3,,,
+cash_flows,OtherAdjustmentsToCashFlowsFromInvestmentActivitiesDescription,Other Adjustments To Cash Flows From Investment Activities Description,3,,,
+cash_flows,NoncashAdjustmentsToCashFlowsFromOperatingActivitiesDescription,Noncash Adjustments To Cash Flows From Operating Activities Description,3,,,
+cash_flows,DescriptionOfOtherRetirementsImpactingCashFlowsFromFinancingActivities,Description Of Other Retirements Impacting Cash Flows From Financing Activities,3,,,
+cash_flows,OtherAdjustmentsToCashFlowsFromFinancingActivitiesDescription,Other Adjustments To Cash Flows From Financing Activities Description,3,,,
+cash_flows,DescriptionForOtherAdjustmentsByOutsideSourcesToCashFlowsFromFinancingActivities,Description For Other Adjustments By Outside Sources To Cash Flows From Financing Activities,3,,,
+cash_flows,NetIncreaseDecreaseInCashAndCashEquivalentsAbstract,Net Increase Decrease In Cash And Cash Equivalents,3,,,
+cash_flows,NetIncreaseDecreaseInCashAndCashEquivalents,Net Increase Decrease In Cash And Cash Equivalents,3,7794523,63569507,36752475
+cash_flows,CashAndCashEquivalents,Cash And Cash Equivalents,4,,,

@@ -1,0 +1,113 @@
+:root {
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell,
+    Noto Sans, sans-serif;
+  line-height: 1.45;
+  color: #0f172a;
+  background: #f8fafc;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: minmax(260px, 320px) 1fr;
+  min-height: 100vh;
+}
+
+.sidebar {
+  border-right: 1px solid #e2e8f0;
+  background: #fff;
+  padding: 1rem 1rem 0.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  overflow: auto;
+}
+
+.sidebar-header h1 {
+  font-size: 1.1rem;
+  margin: 0 0 0.35rem;
+}
+
+.sidebar-header p {
+  margin: 0;
+  font-size: 0.85rem;
+}
+
+.muted {
+  color: #64748b;
+}
+
+.layer-group h2 {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: #64748b;
+  margin: 0.75rem 0 0.35rem;
+}
+
+.layer-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.layer-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  padding: 0.35rem 0;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.layer-row input {
+  margin-top: 0.2rem;
+}
+
+.sidebar-footer {
+  margin-top: auto;
+  padding-top: 1rem;
+  font-size: 0.75rem;
+}
+
+.map-wrap {
+  position: relative;
+  min-height: 100vh;
+}
+
+.map {
+  height: 100%;
+  min-height: 100vh;
+  width: 100%;
+}
+
+.leaflet-container {
+  font-family: inherit;
+}
+
+@media (max-width: 720px) {
+  .layout {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 55vh;
+  }
+
+  .map-wrap {
+    min-height: 55vh;
+  }
+
+  .map {
+    min-height: 55vh;
+  }
+}

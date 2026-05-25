@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>PGE — static reports</title>
+  <style>
+    :root { font-family: system-ui, sans-serif; color: #0f172a; background: #f1f5f9; }
+    body { margin: 0; padding: 1.25rem; line-height: 1.5; }
+    .wrap { max-width: 42rem; margin: 0 auto; background: #fff; padding: 1.25rem 1.5rem; border-radius: 8px;
+      box-shadow: 0 1px 3px rgb(0 0 0 / 0.08); }
+    h1 { font-size: 1.2rem; margin: 0 0 0.75rem; }
+    p { margin: 0 0 1rem; color: #475569; font-size: 0.95rem; }
+    ul { margin: 0; padding-left: 1.2rem; }
+    li { margin: 0.4rem 0; }
+    a { color: #2563eb; }
+    .note { font-size: 0.82rem; color: #64748b; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>PGE — published views</h1>
+    <p>Static pages generated from this repository. Links are relative so they work on GitHub Pages project sites (<code>/repo-name/</code>).</p>
+    <ul>
+      <li><a href="utilities/pge_oas_debt_dashboard.html">OAS &amp; borrowing cost dashboard</a> — NPV table + OAS chart</li>
+      <li><a href="utilities/ice_bofa_oas_line_chart.html">ICE BofA OAS line chart</a> — chart only</li>
+      <li><a href="utilities/ferc1_pge_viewer/index.html">FERC Form 1 viewer</a> — tabular financials from bundled JSON</li>
+    </ul>
+    <p class="note">Not investment advice. Regenerate HTML with the scripts under <code>scripts/</code> before pushing if you want the site to reflect new data.</p>
+  </div>
+</body>
+</html>
