@@ -80,12 +80,21 @@ Not investment advice.
 
 Catalyst’s **Public Utility Data Liberation** project publishes annual FERC Form 1 XBRL ZIPs on Zenodo ([record 19947273](https://zenodo.org/records/19947273)). See [PUDL](https://github.com/catalyst-cooperative/pudl) and [FERC1 data source notes](https://docs.catalyst.coop/pudl/en/v2025.7.0/data_sources/ferc1.html).
 
-- **`ferc1_zenodo_zip.py`** — download / list / extract members from those ZIPs (default cache: `data/utilities/ferc1_raw_zips/`).
+- **`ferc1_zenodo_zip.py`** — download / list / extract members from those ZIPs (default cache: `data/utilities/ferc1_raw_zips/`, **gitignored** so clones stay small; re-fetch ZIPs here before running `ferc1_form1_export.py` on a fresh machine).
 - **`ferc1_form1_export.py`** — for a given company (default **Portland General Electric**), pulls **statement of operations**, **balance sheet** (assets + liabilities), and **cash flows** for selected years, using taxonomy presentation order. Each statement is **one table with a column per year**; displayed amounts are **millions of USD** (raw ÷ 1e6, **two decimal places**). A **2026** column is included as an empty placeholder until a filing is added. Writes `pge_form1_financials.json`, `pge_form1_financials.md`, and `index.html` under `data/utilities/ferc1_pge_viewer/` (override with `--out-dir`). JSON stores raw XBRL strings per year under each row’s `by_year`.
 
 ```bash
 python3 scripts/ferc1_zenodo_zip.py list data/utilities/ferc1_raw_zips/ferc1-xbrl-2025.zip | head
 python3 scripts/ferc1_form1_export.py --years 2024 2025
+```
+
+## `nri_wfir_exposure_by_riskr.py`
+
+Summarizes **wildfire** building exposure (`WFIR_EXPB`) and population exposure (`WFIR_EXPP`) by `WFIR_RISKR` from an NRI tract **`.dbf`**. Rows are **highest risk first**; **EXPB** is reported in **millions of USD** and **EXPP** in **millions of persons** (2 dp). Writes `spatial/nri_wfir_*.csv`, `spatial/nri_wfir_exposure_by_riskr.md`, and **`web/nri_wfir_exposure.html`** for GitHub Pages. See [NRI technical documentation](https://hazards.fema.gov/nri/technical-documentation).
+
+```bash
+python3 scripts/nri_wfir_exposure_by_riskr.py
+python3 scripts/nri_wfir_exposure_by_riskr.py --dbf spatial/NRI_Census_Tracts_PGE.dbf -o spatial --html-out web/nri_wfir_exposure.html
 ```
 
 ## GitHub Pages

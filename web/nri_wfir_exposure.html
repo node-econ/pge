@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>NRI wildfire exposure by risk rating</title>
+<style>
+  body { font-family: system-ui, sans-serif; margin: 0; padding: 1rem; background: #f1f5f9; color: #0f172a; }
+  h1 { font-size: 1.2rem; margin: 0 0 0.5rem; }
+  h2 { font-size: 1.05rem; margin: 1.25rem 0 0.5rem; color: #0f172a; }
+  p.meta { font-size: 0.82rem; color: #64748b; margin: 0 0 1rem; line-height: 1.45; max-width: 52rem; }
+  p.back { font-size: 0.88rem; margin: 0 0 1rem; }
+  .wrap { max-width: 52rem; margin: 0 auto 1rem; background: #fff; padding: 1rem 1.25rem; border-radius: 8px;
+    box-shadow: 0 1px 3px rgb(0 0 0 / 0.08); }
+  table { width: 100%; border-collapse: collapse; font-size: 0.88rem; margin-top: 0.35rem; }
+  th, td { border: 1px solid #e2e8f0; padding: 0.45rem 0.55rem; text-align: left; }
+  th { background: #f8fafc; }
+  td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; }
+  tbody tr:nth-child(even) { background: #fafafa; }
+  a { color: #2563eb; }
+</style>
+</head>
+<body>
+  <p class="back"><a href="index.html">← PGE reports</a></p>
+  <div class="wrap">
+    <h1>NRI wildfire: exposure by risk rating</h1>
+    <p class="meta">FEMA National Risk Index census tracts (PGE clip). Rows: <strong>WFIR_RISKR</strong> (highest risk first).
+      <strong>WFIR_EXPB</strong> = building exposure — sums and per-tract means in <strong>millions of USD</strong> (2 dp).
+      <strong>WFIR_EXPP</strong> = population exposure — <strong>sum</strong> in millions of persons (2 dp); <strong>mean per tract</strong> in whole persons (not dollars).
+      Source: <code>NRI_Census_Tracts_PGE.dbf</code>. Not a FEMA publication; confirm definitions in the
+      <a href="https://hazards.fema.gov/nri/technical-documentation">NRI technical documentation</a>.</p>
+    <h2>1. Building exposure (WFIR_EXPB) by WFIR_RISKR</h2>
+    <table>
+      <thead><tr><th>WFIR_RISKR</th><th class="num">Tracts</th><th class="num">Sum (M USD)</th><th class="num">Mean per tract (M USD)</th></tr></thead>
+      <tbody>
+<tr><td>Very High</td><td class="num">2</td><td class="num">1892.94</td><td class="num">946.47</td></tr>
+<tr><td>Relatively High</td><td class="num">1</td><td class="num">469.79</td><td class="num">469.79</td></tr>
+<tr><td>Relatively Moderate</td><td class="num">7</td><td class="num">1422.22</td><td class="num">203.17</td></tr>
+<tr><td>Relatively Low</td><td class="num">58</td><td class="num">11296.28</td><td class="num">194.76</td></tr>
+<tr><td>Very Low</td><td class="num">329</td><td class="num">19913.44</td><td class="num">60.53</td></tr>
+<tr><td>No Rating</td><td class="num">82</td><td class="num">0.00</td><td class="num">0.00</td></tr>
+      </tbody>
+    </table>
+    <h2>2. Population exposure (WFIR_EXPP) by WFIR_RISKR</h2>
+    <table>
+      <thead><tr><th>WFIR_RISKR</th><th class="num">Tracts</th><th class="num">Sum (M persons)</th><th class="num">Mean per tract (persons)</th></tr></thead>
+      <tbody>
+<tr><td>Very High</td><td class="num">2</td><td class="num">0.01</td><td class="num">2,886</td></tr>
+<tr><td>Relatively High</td><td class="num">1</td><td class="num">0.00</td><td class="num">1,207</td></tr>
+<tr><td>Relatively Moderate</td><td class="num">7</td><td class="num">0.01</td><td class="num">1,151</td></tr>
+<tr><td>Relatively Low</td><td class="num">58</td><td class="num">0.05</td><td class="num">803</td></tr>
+<tr><td>Very Low</td><td class="num">329</td><td class="num">0.09</td><td class="num">276</td></tr>
+<tr><td>No Rating</td><td class="num">82</td><td class="num">0.00</td><td class="num">0</td></tr>
+      </tbody>
+    </table>
+  </div>
+</body>
+</html>

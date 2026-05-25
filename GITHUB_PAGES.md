@@ -3,6 +3,7 @@
 The workflow [`.github/workflows/github-pages.yml`](.github/workflows/github-pages.yml) publishes a small static site:
 
 - Landing page: [`web/index.html`](web/index.html) (copied to site root as `index.html`)
+- [`web/nri_wfir_exposure.html`](web/nri_wfir_exposure.html) — NRI wildfire exposure tables (regenerate with `scripts/nri_wfir_exposure_by_riskr.py`)
 - [`data/utilities/pge_oas_debt_dashboard.html`](data/utilities/pge_oas_debt_dashboard.html)
 - [`data/utilities/ice_bofa_oas_line_chart.html`](data/utilities/ice_bofa_oas_line_chart.html)
 - [`data/utilities/ferc1_pge_viewer/`](data/utilities/ferc1_pge_viewer/) (entire directory)
@@ -33,7 +34,7 @@ If you do not see **Pages** in the sidebar, check that you have **admin** access
 
 ### First push if the GitHub repo is empty
 
-From your machine, in the project directory. The repo [`.gitignore`](.gitignore) excludes large rasters (`.tif`), `node_modules/`, and the huge FERC taxonomy extract tree—review **`git status`** before every commit so `.env` and other secrets never ship.
+From your machine, in the project directory. The repo [`.gitignore`](.gitignore) excludes large rasters (`.tif`), `node_modules/`, FERC raw ZIPs (`ferc1_raw_zips/`), and the huge FERC taxonomy extract tree—review **`git status`** before every commit so `.env` and other secrets never ship.
 
 ```bash
 git init

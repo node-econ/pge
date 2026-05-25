@@ -1,4 +1,4 @@
-# Publishes static HTML under data/utilities/ plus web/index.html to GitHub Pages.
+# Publishes static HTML under data/utilities/ plus web/*.html to GitHub Pages.
 # Repo → Settings → Pages: set "Source" to GitHub Actions (not "Deploy from a branch").
 name: Deploy GitHub Pages
 
@@ -30,6 +30,8 @@ jobs:
           mkdir -p _site/utilities
           : > _site/.nojekyll
           cp web/index.html _site/index.html
+          test -f web/nri_wfir_exposure.html || { echo "missing: web/nri_wfir_exposure.html (run scripts/nri_wfir_exposure_by_riskr.py)" >&2; exit 1; }
+          cp web/nri_wfir_exposure.html _site/nri_wfir_exposure.html
           for f in \
             data/utilities/pge_oas_debt_dashboard.html \
             data/utilities/ice_bofa_oas_line_chart.html

@@ -12,3 +12,6 @@ node_modules/
 
 # FERC taxonomy extract is huge; not needed for published dashboards
 data/utilities/ferc1_taxonomy_extracted/
+
+# FERC Form 1 raw XBRL ZIPs (re-download with ferc1_zenodo_zip.py when needed)
+data/utilities/ferc1_raw_zips/
