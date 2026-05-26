@@ -52,7 +52,7 @@ Columns: `observation_date`, `rating_bucket`, `fred_index_segment` (`US_Corporat
 Reads the tidy CSV (no FRED calls) and writes:
 
 - **`data/utilities/ice_bofa_oas_line_chart.html`** — OAS line chart only
-- **`data/utilities/pge_oas_debt_dashboard.html`** — **NPV table + OAS chart** on one page (reads `pge_borrowing_cost_npv_by_rating.csv` if present; otherwise shows a short notice to run the proforma script)
+- **`data/utilities/pge_oas_debt_dashboard.html`** — **Borrowing cost by credit rating** (NPV table with interactive issuance amount + OAS chart; reads `pge_borrowing_cost_npv_by_rating.csv` if present; otherwise shows a short notice to run the proforma script)
 
 **BBB+** is the daily mean of **A** and **BBB** (computed if missing from the CSV). Styling: **BBB+** = black, thicker stroke; **AAA / AA / A** = greens; **BBB / BB / B** = reds. The **line chart** and **NPV table** both omit **CCC & lower** (rows are filtered when reading the NPV CSV for the dashboard).
 

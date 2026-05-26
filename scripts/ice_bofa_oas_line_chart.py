@@ -172,7 +172,9 @@ def chart_payload_dict(
     return {"labels": labels, "datasets": datasets}
 
 
-def chart_init_script(payload_json: str, *, canvas_id: str = "c") -> str:
+def chart_init_script(
+    payload_json: str, *, canvas_id: str = "c", y_axis_label: str = "OAS (%)"
+) -> str:
     return f"""
 const _oasChartData = {payload_json};
 const _oasEl = document.getElementById('{canvas_id}');
@@ -194,7 +196,7 @@ if (_oasEl) {{
           grid: {{ display: false }}
         }},
         y: {{
-          title: {{ display: true, text: 'OAS (%)' }},
+          title: {{ display: true, text: {json.dumps(y_axis_label)} }},
           grid: {{ color: 'rgba(148, 163, 184, 0.25)' }}
         }}
       }}
@@ -249,46 +251,6 @@ def read_npv_csv(path: str) -> list[dict[str, str]]:
     return rows
 
 
-def fmt_money(x: str | float) -> str:
-    try:
-        v = float(x)
-    except (TypeError, ValueError):
-        return str(x)
-    return f"{v:,.0f}"
-
-
-def npv_table_html(rows: list[dict[str, str]]) -> str:
-    if not rows:
-        return '<p class="warn">No NPV rows.</p>'
-    r0 = rows[0]
-    proceeds = r0.get("forecast_proceeds_lt_debt_2026", "")
-    intro = (
-        f"<p class=\"meta\">Forecast 2026 LT debt issuance (proforma): <strong>{fmt_money(proceeds)}</strong> USD. "
-        f"Risk-free {r0.get('riskfree_rate_pct', '')}% + OAS = coupon (%); "
-        f"annual coupon = proceeds × (coupon/100); NPV of {r0.get('term_years', '')} payments at "
-        f"{r0.get('discount_rate_pct', '')}% discount. Sorted by NPV (high → low). CCC & lower excluded.</p>"
-    )
-    head = (
-        "<table class=\"npv\"><thead><tr>"
-        "<th>rating_bucket</th><th>OAS date</th><th>OAS %</th><th>Coupon %</th>"
-        "<th class=\"num\">Annual coupon</th><th class=\"num\">NPV</th>"
-        "</tr></thead><tbody>"
-    )
-    body_parts: list[str] = []
-    for r in rows:
-        body_parts.append(
-            "<tr>"
-            f"<td>{r.get('rating_bucket', '')}</td>"
-            f"<td>{r.get('oas_observation_date', '')}</td>"
-            f"<td class=\"num\">{float(r.get('oas_pct', 0)):,.2f}</td>"
-            f"<td class=\"num\">{float(r.get('coupon_rate_pct', 0)):,.2f}</td>"
-            f"<td class=\"num\">{fmt_money(r.get('coupon_pmt_annual', ''))}</td>"
-            f"<td class=\"num\">{fmt_money(r.get('npv_borrowing_cost', ''))}</td>"
-            "</tr>"
-        )
-    return intro + head + "".join(body_parts) + "</tbody></table>"
-
-
 def build_dashboard_html(
     *,
     labels: list[str],
@@ -297,48 +259,194 @@ def build_dashboard_html(
     npv_missing_note: str,
 ) -> str:
     payload = json.dumps(chart_payload_dict(labels, series), ensure_ascii=True)
+    chart_js = chart_init_script(
+        payload,
+        canvas_id="oasChart",
+        y_axis_label="Option-adjusted spread (%)",
+    )
+    t0, t1 = labels[0], labels[-1]
+
+    footnote_chart = (
+        "Daily option-adjusted spread (% of par), ICE BofA series. <strong>BBB+</strong> is the average of "
+        "<strong>A</strong> and <strong>BBB</strong> each trading day. Investment-grade (AAA–A) in greens; "
+        "high yield (BBB–B) in reds; <strong>BBB+</strong> in black with a wider line. CCC and lower excluded "
+        "from the chart. Not investment advice."
+    )
+
     if npv_rows:
-        table_block = (
-            "<h2>Borrowing cost NPV by rating</h2>" + npv_table_html(npv_rows)
+        r0 = npv_rows[0]
+        eff = (r0.get("oas_observation_date") or "").strip()
+        proceeds = str(int(float(r0.get("forecast_proceeds_lt_debt_2026", 504700000))))
+        rf = float(r0.get("riskfree_rate_pct", 4.0))
+        disc = float(r0.get("discount_rate_pct", 6.0))
+        term = int(float(r0.get("term_years", 30)))
+        spec_rows: list[dict[str, Any]] = []
+        for r in npv_rows:
+            b = (r.get("rating_bucket") or "").strip()
+            if b:
+                spec_rows.append({"rating": b, "oas": float(r.get("oas_pct", 0))})
+        npv_json = json.dumps(
+            {"rf": rf, "discountPct": disc, "term": term, "rows": spec_rows},
+            separators=(",", ":"),
         )
+        footnote_table = (
+            f"The default issuance amount matches the 2026 proforma "
+            f"<strong>proceeds from long-term debt</strong> in the cash-flow model ({int(float(r0.get('forecast_proceeds_lt_debt_2026', 0))):,} USD). "
+            f"Coupon rate equals risk-free {rf:g}% plus the option-adjusted spread as of the effective date; "
+            f"annual coupon equals proceeds times (coupon rate divided by 100). "
+            f"Borrowing cost NPV is the present value of {term} annual coupons discounted at {disc:g}% per year. "
+            "Rows sort by NPV, high to low. CCC and lower are excluded. Not investment advice."
+        )
+        npv_block = f"""
+  <div class="wrap">
+    <div class="calc-row">
+      <label for="debt-proceeds">Long-term debt issuance (USD)</label>
+      <input id="debt-proceeds" type="number" inputmode="numeric" step="1000000" min="0" value="{proceeds}" />
+    </div>
+    <table class="npv">
+      <thead>
+        <tr>
+          <th>Credit Rating</th>
+          <th class="num">Option-Adjusted Spread</th>
+          <th class="num">Coupon %</th>
+          <th class="num">Annual coupon</th>
+          <th class="num">NPV</th>
+        </tr>
+      </thead>
+      <tbody id="npv-tbody"></tbody>
+    </table>
+  </div>
+<script>
+window._npvSpec = {npv_json};
+(function () {{
+  function pvAnnuity(A, r, n) {{
+    if (!(A >= 0) || !isFinite(A)) return 0;
+    if (r <= 0) return A * n;
+    return A * (1 - Math.pow(1 + r, -n)) / r;
+  }}
+  function fmtInt(n) {{
+    return Math.round(n).toLocaleString('en-US');
+  }}
+  function renderNpv() {{
+    var inp = document.getElementById('debt-proceeds');
+    var p = inp ? Number(String(inp.value).replace(/,/g, '')) : NaN;
+    if (!isFinite(p) || p < 0) return;
+    var spec = window._npvSpec;
+    var rf = spec.rf;
+    var disc = spec.discountPct / 100;
+    var n = spec.term;
+    var rows = spec.rows.map(function (row) {{
+      var couponPct = rf + row.oas;
+      var annual = p * (couponPct / 100);
+      var npv = pvAnnuity(annual, disc, n);
+      return {{ rating: row.rating, oas: row.oas, couponPct: couponPct, annual: annual, npv: npv }};
+    }});
+    rows.sort(function (a, b) {{ return b.npv - a.npv; }});
+    var tb = document.getElementById('npv-tbody');
+    if (!tb) return;
+    tb.innerHTML = '';
+    function tdPct(x) {{
+      var c = document.createElement('td');
+      c.className = 'num';
+      c.textContent = typeof x === 'number' && isFinite(x) ? x.toFixed(2) + '%' : '';
+      return c;
+    }}
+    function tdNum(x) {{
+      var c = document.createElement('td');
+      c.className = 'num';
+      c.textContent = typeof x === 'number' && isFinite(x) ? (Math.abs(x - Math.round(x)) < 1e-6 ? fmtInt(x) : x.toFixed(2)) : '';
+      return c;
+    }}
+    function tdText(t) {{
+      var c = document.createElement('td');
+      c.textContent = t;
+      return c;
+    }}
+    rows.forEach(function (r) {{
+      var tr = document.createElement('tr');
+      if (r.rating === 'BBB+') tr.className = 'rating-bbb-plus';
+      tr.appendChild(tdText(r.rating));
+      tr.appendChild(tdPct(r.oas));
+      tr.appendChild(tdPct(r.couponPct));
+      tr.appendChild(tdNum(r.annual));
+      tr.appendChild(tdNum(r.npv));
+      tb.appendChild(tr);
+    }});
+  }}
+  var debtEl = document.getElementById('debt-proceeds');
+  if (debtEl) {{
+    debtEl.addEventListener('input', renderNpv);
+    debtEl.addEventListener('change', renderNpv);
+  }}
+  renderNpv();
+}})();
+</script>
+"""
+        head_date = f'    <p class="effective-date">Effective date: {eff}</p>\n' if eff else ""
     else:
-        table_block = f'<p class="warn">{npv_missing_note}</p>'
+        npv_block = f'  <div class="wrap"><p class="warn">{npv_missing_note}</p></div>\n'
+        head_date = ""
+        footnote_table = (
+            "NPV table was not generated. Run "
+            "<code>python3 scripts/pge_proforma_2026_debt_sensitivity.py</code> and rebuild this page."
+        )
+
     return f"""<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>PGE — OAS & borrowing cost</title>
+<title>Borrowing Cost by Credit Rating</title>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
 <style>
   body {{ font-family: system-ui, sans-serif; margin: 0; padding: 1rem; background: #f1f5f9; color: #0f172a; }}
-  h1 {{ font-size: 1.25rem; margin: 0 0 0.75rem; }}
+  p.back {{ font-size: 0.88rem; margin: 0 0 0.75rem; }}
+  p.back a {{ color: #2563eb; }}
+  header.page-head {{ margin: 0 0 0.75rem; }}
+  header.page-head h1 {{ font-size: 1.35rem; margin: 0; font-weight: 650; color: #0f172a; }}
+  p.effective-date {{ font-size: 0.9rem; color: #475569; margin: 0.35rem 0 0; }}
   h2 {{ font-size: 1.05rem; margin: 0 0 0.5rem; color: #0f172a; }}
   p.meta {{ font-size: 0.8rem; color: #64748b; margin: 0 0 0.75rem; line-height: 1.45; }}
   p.warn {{ font-size: 0.85rem; color: #b45309; background: #fffbeb; padding: 0.75rem; border-radius: 6px; }}
   .wrap {{ max-width: 1100px; margin: 0 auto 1rem; background: #fff; padding: 1rem 1.25rem; border-radius: 8px;
     box-shadow: 0 1px 3px rgb(0 0 0 / 0.08); }}
-  table.npv {{ width: 100%; border-collapse: collapse; font-size: 0.82rem; margin-top: 0.5rem; }}
+  .calc-row {{ margin: 0 0 1rem; display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem 1rem; }}
+  .calc-row label {{ font-size: 0.88rem; font-weight: 600; color: #334155; }}
+  .calc-row input#debt-proceeds {{
+    font-size: 0.95rem; padding: 0.35rem 0.5rem; border: 1px solid #cbd5e1; border-radius: 6px;
+    min-width: 12rem; font-variant-numeric: tabular-nums;
+  }}
+  table.npv {{ width: 100%; border-collapse: collapse; font-size: 0.82rem; margin-top: 0.25rem; }}
   table.npv th, table.npv td {{ border: 1px solid #e2e8f0; padding: 0.4rem 0.5rem; text-align: left; }}
   table.npv th {{ background: #f8fafc; }}
   table.npv td.num, table.npv th.num {{ text-align: right; font-variant-numeric: tabular-nums; }}
-  table.npv tbody tr:nth-child(even) {{ background: #fafafa; }}
+  table.npv tbody tr:nth-child(even):not(.rating-bbb-plus) {{ background: #fafafa; }}
+  table.npv tbody tr.rating-bbb-plus {{ background: #fef9c3 !important; box-shadow: inset 3px 0 0 #ca8a04; }}
   canvas {{ max-height: 65vh; }}
+  footer.footnotes {{ font-size: 0.78rem; color: #475569; line-height: 1.55; max-width: 1100px; margin: 0 auto 1.5rem; }}
+  footer.footnotes h2 {{ font-size: 0.95rem; margin: 0 0 0.4rem; color: #334155; }}
+  footer.footnotes ol {{ margin: 0; padding-left: 1.25rem; }}
+  footer.footnotes li {{ margin: 0.35rem 0; }}
 </style>
 </head>
 <body>
-  <h1>PGE — ICE BofA OAS & borrowing cost</h1>
-  <div class="wrap">
-    {table_block}
-  </div>
-  <div class="wrap">
-    <h2>OAS by rating ({labels[0]} to {labels[-1]})</h2>
-    <p class="meta">Daily OAS (%). <strong>BBB+</strong> = average of <strong>A</strong> and <strong>BBB</strong> each day.
-      IG (AAA–A) greens; HY (BBB–B) reds; <strong>BBB+</strong> black (wide line). CCC & lower excluded. Not investment advice.</p>
+  <p class="back"><a href="../index.html">← PGE reports</a></p>
+  <header class="page-head">
+    <h1>Borrowing Cost by Credit Rating</h1>
+{head_date}  </header>
+{npv_block}  <div class="wrap">
+    <h2>ICE BofA OAS by rating ({t0} to {t1})</h2>
     <canvas id="oasChart" height="400"></canvas>
   </div>
+  <footer class="footnotes">
+    <h2>Notes</h2>
+    <ol>
+      <li>{footnote_table}</li>
+      <li>{footnote_chart}</li>
+    </ol>
+  </footer>
 <script>
-{chart_init_script(payload, canvas_id="oasChart")}
+{chart_js}
 </script>
 </body>
 </html>
