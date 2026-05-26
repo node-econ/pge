@@ -64,8 +64,8 @@
       <span id="fetch-meta"></span>
       Tiles: <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>.
       <strong>Nearest transmission line</strong> table is below the map (from JSON). <strong>NRI tract WFIR_RISKR</strong> is joined when the point lies inside <code>web/NRI_Census_Tracts_PGE.geojson</code>; otherwise the table cell is blank. Also:
-      <a href="../data/wildfire/incidents_nearest_transmission.csv">CSV</a>,
-      <a href="../data/wildfire/incidents_nearest_transmission.md">Markdown</a>.
+      <a id="wf-csv-link" href="../data/wildfire/incidents_nearest_transmission.csv">CSV</a>,
+      <a id="wf-md-link" href="../data/wildfire/incidents_nearest_transmission.md">Markdown</a>.
       Regenerate: <code>python3 scripts/wfigs_nearest_transmission.py</code> (GDAL <code>osgeo</code> + <code>ogr2ogr</code> on PATH).
       <strong>Not</strong> an official evacuation or operations map — decision support only; follow NIFC Open Data terms.
     </p>
@@ -97,11 +97,21 @@
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <script>
 (function () {
-  var GEOJSON_URL = '../data/wildfire/wfigs_incident_locations_or.geojson';
-  var LINES_GEOJSON_URL = '../data/wildfire/transmission_lines_wgs84.geojson';
-  var NEAREST_JSON_URL = '../data/wildfire/incidents_nearest_transmission.json';
+  /**
+   * Local dev: open from repo root (page under /web/) → ../data/wildfire/.
+   * GitHub Pages: page at site root next to /wildfire/ (see github-pages.yml).
+   */
+  var wfBase = /\/web\//.test(window.location.pathname) ? '../data/wildfire/' : 'wildfire/';
+  var GEOJSON_URL = wfBase + 'wfigs_incident_locations_or.geojson';
+  var LINES_GEOJSON_URL = wfBase + 'transmission_lines_wgs84.geojson';
+  var NEAREST_JSON_URL = wfBase + 'incidents_nearest_transmission.json';
   /** Same directory as this page — NRI tracts used for PGE footprint + WFIR_RISKR join */
   var PGE_TRACTS_URL = 'NRI_Census_Tracts_PGE.geojson';
+
+  var csvA = document.getElementById('wf-csv-link');
+  var mdA = document.getElementById('wf-md-link');
+  if (csvA) csvA.href = wfBase + 'incidents_nearest_transmission.csv';
+  if (mdA) mdA.href = wfBase + 'incidents_nearest_transmission.md';
 
   var LINE_STYLE_DEFAULT = { color: '#f97316', weight: 2, opacity: 0.8 };
   /** fillOpacity 0.4 ⇒ ~60% transparent fill over the basemap */

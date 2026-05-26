@@ -1,4 +1,4 @@
-# Publishes static HTML under data/utilities/ plus web/*.html to GitHub Pages.
+# Publishes static HTML under data/utilities/, web/*.html, and data/wildfire/* to GitHub Pages.
 # Repo → Settings → Pages: set "Source" to GitHub Actions (not "Deploy from a branch").
 name: Deploy GitHub Pages
 
@@ -34,6 +34,19 @@ jobs:
           cp web/nri_wfir_exposure.html _site/nri_wfir_exposure.html
           test -f web/NRI_Census_Tracts_PGE.geojson || { echo "missing: web/NRI_Census_Tracts_PGE.geojson (run scripts/export_nri_pge_geojson.py)" >&2; exit 1; }
           cp web/NRI_Census_Tracts_PGE.geojson _site/NRI_Census_Tracts_PGE.geojson
+          test -f web/wfigs_incidents_or_wa.html || { echo "missing: web/wfigs_incidents_or_wa.html" >&2; exit 1; }
+          cp web/wfigs_incidents_or_wa.html _site/wfigs_incidents_or_wa.html
+          mkdir -p _site/wildfire
+          for f in \
+            data/wildfire/wfigs_incident_locations_or.geojson \
+            data/wildfire/transmission_lines_wgs84.geojson \
+            data/wildfire/incidents_nearest_transmission.json \
+            data/wildfire/incidents_nearest_transmission.csv \
+            data/wildfire/incidents_nearest_transmission.md
+          do
+            test -f "$f" || { echo "missing: $f (run scripts after wfigs_incident_locations_fetch.py)" >&2; exit 1; }
+            cp "$f" _site/wildfire/
+          done
           for f in \
             data/utilities/pge_oas_debt_dashboard.html \
             data/utilities/ice_bofa_oas_line_chart.html
