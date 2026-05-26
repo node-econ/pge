@@ -263,7 +263,7 @@ def build_dashboard_html(
           <th class="num">Option-Adjusted Spread</th>
           <th class="num">Coupon %</th>
           <th class="num">Annual coupon</th>
-          <th class="num">NPV</th>
+          <th class="num">NPV (USD)</th>
         </tr>
       </thead>
       <tbody id="npv-tbody"></tbody>
@@ -279,6 +279,10 @@ window._npvSpec = {npv_json};
   }}
   function fmtInt(n) {{
     return Math.round(n).toLocaleString('en-US');
+  }}
+  function fmtUsd(n) {{
+    if (!(typeof n === 'number' && isFinite(n))) return '';
+    return '$' + Math.round(n).toLocaleString('en-US');
   }}
   function renderNpv() {{
     var inp = document.getElementById('debt-proceeds');
@@ -310,6 +314,12 @@ window._npvSpec = {npv_json};
       c.textContent = typeof x === 'number' && isFinite(x) ? (Math.abs(x - Math.round(x)) < 1e-6 ? fmtInt(x) : x.toFixed(2)) : '';
       return c;
     }}
+    function tdUsd(x) {{
+      var c = document.createElement('td');
+      c.className = 'num';
+      c.textContent = fmtUsd(x);
+      return c;
+    }}
     function tdText(t) {{
       var c = document.createElement('td');
       c.textContent = t;
@@ -322,7 +332,7 @@ window._npvSpec = {npv_json};
       tr.appendChild(tdPct(r.oas));
       tr.appendChild(tdPct(r.couponPct));
       tr.appendChild(tdNum(r.annual));
-      tr.appendChild(tdNum(r.npv));
+      tr.appendChild(tdUsd(r.npv));
       tb.appendChild(tr);
     }});
   }}
