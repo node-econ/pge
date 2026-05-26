@@ -14,8 +14,12 @@
     li { margin: 0.4rem 0; }
     a { color: #2563eb; }
     footer.footnotes {
-      max-width: 42rem; margin: 0 auto 1.5rem; padding: 0 1.25rem;
-      font-size: 0.82rem; color: #475569; line-height: 1.55;
+      margin-top: 1.25rem;
+      padding-top: 1rem;
+      border-top: 1px solid #e2e8f0;
+      font-size: 0.82rem;
+      color: #475569;
+      line-height: 1.55;
     }
     footer.footnotes h2 { font-size: 0.95rem; margin: 0 0 0.4rem; color: #334155; }
     footer.footnotes ol { margin: 0; padding-left: 1.25rem; }
@@ -31,13 +35,13 @@
       <li><a href="nri_wfir_exposure.html">NRI wildfire exposure</a> — tract building exposure by risk category; county expected annual loss (WFIR_EALT)</li>
       <li><a href="wfigs_incidents_or_wa.html">WFIGS incidents (Oregon) demo map</a> — current NIFC incident points + transmission screening (published snapshot; regenerate scripts in repo)</li>
     </ul>
+    <footer class="footnotes">
+      <h2>Notes</h2>
+      <ol>
+        <li>Static pages are generated from this repository. Links are relative so they work on GitHub Pages project sites (<code>/repo-name/</code>).</li>
+        <li>Not investment advice. Regenerate HTML with the scripts under <code>scripts/</code> before pushing if you want the site to reflect new data.</li>
+      </ol>
+    </footer>
   </div>
-  <footer class="footnotes">
-    <h2>Notes</h2>
-    <ol>
-      <li>Static pages are generated from this repository. Links are relative so they work on GitHub Pages project sites (<code>/repo-name/</code>).</li>
-      <li>Not investment advice. Regenerate HTML with the scripts under <code>scripts/</code> before pushing if you want the site to reflect new data.</li>
-    </ol>
-  </footer>
 </body>
 </html>
