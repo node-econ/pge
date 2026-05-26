@@ -1,0 +1,11 @@
+{
+  "fetched_at_utc": "2026-05-26T02:51:18+00:00",
+  "source": "https://services3.arcgis.com/T4QMspbfLg3qTGWY/arcgis/rest/services/WFIGS_Incident_Locations_Current/FeatureServer/0/query",
+  "where_clause": "POOState IN ('US-OR')",
+  "states": [
+    "US-OR"
+  ],
+  "bbox_wsen": null,
+  "feature_count": 18,
+  "attribution": "National Interagency Fire Center (NIFC) / WFIGS \u2014 verify license on data-nifc.opendata.arcgis.com"
+}

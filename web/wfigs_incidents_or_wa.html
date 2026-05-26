@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>WFIGS incidents — Oregon (demo)</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+  <style>
+    :root { font-family: system-ui, sans-serif; color: #0f172a; }
+    body { margin: 0; background: #f1f5f9; }
+    .banner {
+      background: #fef3c7; color: #92400e; padding: 0.65rem 1rem; font-size: 0.88rem;
+      border-bottom: 1px solid #fcd34d; line-height: 1.45;
+    }
+    .banner code { font-size: 0.84rem; background: rgb(255 255 255 / 0.7); padding: 0.1rem 0.35rem; border-radius: 4px; }
+    .wrap { max-width: 56rem; margin: 0 auto; padding: 1rem 1rem 1.25rem; }
+    h1 { font-size: 1.15rem; margin: 0 0 0.35rem; }
+    p.meta { font-size: 0.82rem; color: #64748b; margin: 0 0 0.75rem; line-height: 1.45; max-width: 52rem; }
+    p.back { font-size: 0.88rem; margin: 0 0 0.75rem; }
+    a { color: #2563eb; }
+    #map { height: min(70vh, 640px); width: 100%; border-radius: 8px; border: 1px solid #e2e8f0;
+      background: #e2e8f0; box-shadow: 0 1px 3px rgb(0 0 0 / 0.08); }
+    .map-foot { font-size: 0.78rem; color: #64748b; margin: 0.4rem 0 0; }
+    .err { background: #fee2e2; color: #991b1b; padding: 0.75rem 1rem; border-radius: 8px; font-size: 0.88rem; margin-top: 0.5rem; }
+    .leaflet-popup-content { font-size: 0.88rem; line-height: 1.45; margin: 0.6rem 0.85rem; }
+    .leaflet-popup-content dt { font-weight: 600; color: #475569; margin-top: 0.35rem; }
+    .leaflet-popup-content dt:first-child { margin-top: 0; }
+    .leaflet-popup-content dd { margin: 0.1rem 0 0 0; }
+    h2.table-title { font-size: 1.05rem; margin: 1.25rem 0 0.4rem; color: #0f172a; }
+    p.table-caption { font-size: 0.78rem; color: #64748b; margin: 0 0 0.5rem; line-height: 1.4; }
+    .table-wrap {
+      overflow: auto;
+      max-height: min(50vh, 420px);
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      background: #fff;
+      box-shadow: 0 1px 3px rgb(0 0 0 / 0.06);
+    }
+    table.nearest { width: 100%; border-collapse: collapse; font-size: 0.8rem; }
+    table.nearest th, table.nearest td { border-bottom: 1px solid #e2e8f0; padding: 0.35rem 0.5rem; text-align: left; vertical-align: top; }
+    table.nearest th { background: #f8fafc; font-weight: 600; color: #475569; position: sticky; top: 0; z-index: 1; white-space: normal; }
+    table.nearest td.num { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+    table.nearest tbody tr[data-line-oid] { cursor: pointer; }
+    table.nearest tbody tr[data-line-oid]:hover { background: #eff6ff !important; }
+    #nearest-table-missing { font-size: 0.82rem; color: #64748b; margin: 0.35rem 0 0; }
+  </style>
+</head>
+<body>
+  <div class="banner" id="local-note">
+    <strong>Local demo:</strong> open this page through a tiny web server from the <strong>repository root</strong>
+    (so the browser can load the GeoJSON). Example:
+    <code>cd /path/to/PGE &amp;&amp; python3 -m http.server 8765</code>
+    then visit <code>http://localhost:8765/web/wfigs_incidents_or_wa.html</code>.
+    Regenerate: <code>python3 scripts/wfigs_incident_locations_fetch.py --user-agent "…"</code> then
+    <code>python3 scripts/wfigs_nearest_transmission.py</code> (map + table; adds NRI <code>WFIR_RISKR</code> when the point falls inside <code>web/NRI_Census_Tracts_PGE.geojson</code>).
+  </div>
+  <div class="wrap">
+    <p class="back"><a href="index.html">← PGE reports</a></p>
+    <h1>WFIGS current incidents (Oregon)</h1>
+    <p class="meta">
+      Points from <code>data/wildfire/wfigs_incident_locations_or.geojson</code> (NIFC WFIGS current incident locations, <code>POOState = US-OR</code>).
+      Transmission lines from <code>data/wildfire/transmission_lines_wgs84.geojson</code> (exported by <code>wfigs_nearest_transmission.py</code>).
+      <strong>PGE service area</strong> on the map: census tracts from <code>web/NRI_Census_Tracts_PGE.geojson</code> (≈60% transparent fill).
+      <span id="fetch-meta"></span>
+      Tiles: <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>.
+      <strong>Nearest transmission line</strong> table is below the map (from JSON). <strong>NRI tract WFIR_RISKR</strong> is joined when the point lies inside <code>web/NRI_Census_Tracts_PGE.geojson</code>; otherwise the table cell is blank. Also:
+      <a href="../data/wildfire/incidents_nearest_transmission.csv">CSV</a>,
+      <a href="../data/wildfire/incidents_nearest_transmission.md">Markdown</a>.
+      Regenerate: <code>python3 scripts/wfigs_nearest_transmission.py</code> (GDAL <code>osgeo</code> + <code>ogr2ogr</code> on PATH).
+      <strong>Not</strong> an official evacuation or operations map — decision support only; follow NIFC Open Data terms.
+    </p>
+    <div id="map" role="application" aria-label="Map of Oregon wildfire incident points"></div>
+    <p class="map-foot">Blue tint: PGE service area (NRI census tracts). Click a fire marker or a table row to highlight the nearest transmission line (full shapefile feature used in the distance test). Markers: popup for incident details.</p>
+    <div id="load-err" class="err" style="display:none;"></div>
+
+    <h2 class="table-title">Nearest transmission line</h2>
+    <p class="table-caption" id="nearest-table-caption"></p>
+    <div class="table-wrap" id="nearest-table-wrap" style="display:none;">
+      <table class="nearest" id="nearest-table" aria-describedby="nearest-table-caption">
+        <thead>
+          <tr>
+            <th class="num">Distance (Miles)</th>
+            <th>Incident</th>
+            <th>County</th>
+            <th class="num">% Cont.</th>
+            <th class="num">Acres</th>
+            <th>NRI tract WFIR_RISKR</th>
+            <th>Line name</th>
+            <th class="num">Line OID</th>
+          </tr>
+        </thead>
+        <tbody id="nearest-table-body"></tbody>
+      </table>
+    </div>
+    <p id="nearest-table-missing" style="display:none;"></p>
+  </div>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script>
+(function () {
+  var GEOJSON_URL = '../data/wildfire/wfigs_incident_locations_or.geojson';
+  var LINES_GEOJSON_URL = '../data/wildfire/transmission_lines_wgs84.geojson';
+  var NEAREST_JSON_URL = '../data/wildfire/incidents_nearest_transmission.json';
+  /** Same directory as this page — NRI tracts used for PGE footprint + WFIR_RISKR join */
+  var PGE_TRACTS_URL = 'NRI_Census_Tracts_PGE.geojson';
+
+  var LINE_STYLE_DEFAULT = { color: '#f97316', weight: 2, opacity: 0.8 };
+  /** fillOpacity 0.4 ⇒ ~60% transparent fill over the basemap */
+  var PGE_TRACT_STYLE = {
+    fillColor: '#2563eb',
+    fillOpacity: 0.4,
+    color: '#1e3a8a',
+    weight: 1,
+    opacity: 0.55
+  };
+  var LINE_STYLE_HIGHLIGHT = { color: '#9a3412', weight: 5, opacity: 1 };
+
+  function esc(s) {
+    if (s == null || s === '') return '';
+    return String(s)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;');
+  }
+
+  function fmtDate(ms) {
+    if (ms == null || ms === '') return '—';
+    var d = new Date(ms);
+    return isNaN(d.getTime()) ? esc(ms) : d.toISOString().replace('T', ' ').slice(0, 16) + ' UTC';
+  }
+
+  function popupHtml(props, nearestByIrwin, wfirByIrwin) {
+    var key = String(props.IrwinID || '').trim();
+    var oid = nearestByIrwin[key];
+    var wfir = wfirByIrwin[key];
+    var rows = [
+      ['Incident', props.IncidentName],
+      ['County', props.POOCounty],
+      ['State', props.POOState],
+      ['Discovered', fmtDate(props.FireDiscoveryDateTime)],
+      ['Modified', fmtDate(props.ModifiedOnDateTime_dt)],
+      ['Contained', props.PercentContained != null ? props.PercentContained + '%' : '—'],
+      ['Size (acres)', props.IncidentSize != null ? props.IncidentSize : '—'],
+      ['NRI tract WFIR_RISKR', wfir != null && wfir !== '' ? wfir : ''],
+      ['IrwinID', props.IrwinID],
+      ['GACC', props.GACC]
+    ];
+    if (oid != null && oid !== '') {
+      rows.push(['Nearest line OBJECTID', oid]);
+    }
+    var parts = rows.map(function (r) {
+      return '<dt>' + esc(r[0]) + '</dt><dd>' + esc(r[1]) + '</dd>';
+    });
+    return '<dl>' + parts.join('') + '</dl>';
+  }
+
+  var map = L.map('map', { scrollWheelZoom: true }).setView([43.94, -120.55], 7);
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 19,
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+  }).addTo(map);
+
+  var errEl = document.getElementById('load-err');
+  var metaEl = document.getElementById('fetch-meta');
+  var noteEl = document.getElementById('local-note');
+  var capEl = document.getElementById('nearest-table-caption');
+  var wrapEl = document.getElementById('nearest-table-wrap');
+  var bodyEl = document.getElementById('nearest-table-body');
+  var missEl = document.getElementById('nearest-table-missing');
+
+  var linesLayer = null;
+
+  function highlightLine(objectId) {
+    if (!linesLayer) return;
+    var want = objectId == null || objectId === '' ? NaN : Number(objectId);
+    linesLayer.eachLayer(function (lyr) {
+      var oid = lyr._lineOid;
+      var match = !isNaN(want) && Number(oid) === want;
+      lyr.setStyle(match ? LINE_STYLE_HIGHLIGHT : LINE_STYLE_DEFAULT);
+    });
+  }
+
+  function cell(isNum, text) {
+    var td = document.createElement('td');
+    if (isNum) td.className = 'num';
+    td.textContent = text == null || text === '' ? '—' : String(text);
+    return td;
+  }
+
+  /** Table cell: empty string stays blank (no em dash). */
+  function cellBlankOk(text) {
+    var td = document.createElement('td');
+    td.textContent = text == null || text === '' ? '' : String(text);
+    return td;
+  }
+
+  Promise.all([
+    fetch(GEOJSON_URL).then(function (r) {
+      if (!r.ok) throw new Error('HTTP ' + r.status + ' — incidents GeoJSON');
+      return r.json();
+    }),
+    fetch(LINES_GEOJSON_URL).then(function (r) { return r.ok ? r.json() : null; }),
+    fetch(NEAREST_JSON_URL).then(function (r) { return r.ok ? r.json() : { rows: [], meta: {} }; }),
+    fetch(PGE_TRACTS_URL).then(function (r) { return r.ok ? r.json() : null; }).catch(function () { return null; })
+  ])
+    .then(function (results) {
+      var incidentData = results[0];
+      var linesData = results[1];
+      var nearestPayload = results[2];
+      var pgeTractsData = results[3];
+
+      if (incidentData._meta && incidentData._meta.fetched_at_utc) {
+        metaEl.textContent = 'Snapshot: ' + incidentData._meta.fetched_at_utc + '. ';
+      }
+
+      if (pgeTractsData && pgeTractsData.type === 'FeatureCollection' && pgeTractsData.features && pgeTractsData.features.length) {
+        var pgeLayer = L.geoJSON(pgeTractsData, {
+          style: function () { return PGE_TRACT_STYLE; },
+          interactive: false
+        });
+        pgeLayer.addTo(map);
+        metaEl.textContent += 'PGE tract overlay loaded. ';
+      }
+
+      var nearestByIrwin = {};
+      var wfirByIrwin = {};
+      (nearestPayload.rows || []).forEach(function (row) {
+        var key = String(row.IrwinID || '').trim();
+        if (key) {
+          nearestByIrwin[key] = row.line_OBJECTID;
+          wfirByIrwin[key] = row.WFIR_RISKR;
+        }
+      });
+
+      if (linesData && linesData.type === 'FeatureCollection' && linesData.features && linesData.features.length) {
+        linesLayer = L.geoJSON(linesData, {
+          style: function () { return LINE_STYLE_DEFAULT; },
+          onEachFeature: function (feat, lyr) {
+            var p = feat.properties || {};
+            lyr._lineOid = p.OBJECTID;
+          }
+        });
+        linesLayer.addTo(map);
+      }
+
+      var fc = incidentData.type === 'FeatureCollection' ? incidentData : { type: 'FeatureCollection', features: [] };
+      var firesLayer = L.geoJSON(fc, {
+        pointToLayer: function (_feature, latlng) {
+          return L.circleMarker(latlng, {
+            radius: 9,
+            color: '#9a3412',
+            weight: 2,
+            fillColor: '#ea580c',
+            fillOpacity: 0.85
+          });
+        },
+        onEachFeature: function (feature, lyr) {
+          var p = feature.properties || {};
+          lyr.bindPopup(popupHtml(p, nearestByIrwin, wfirByIrwin));
+          lyr.on('click', function () {
+            var oid = nearestByIrwin[String(p.IrwinID || '').trim()];
+            highlightLine(oid);
+          });
+        }
+      }).addTo(map);
+
+      var fitGroup = L.featureGroup([firesLayer]);
+      if (fitGroup.getBounds().isValid()) {
+        map.fitBounds(fitGroup.getBounds().pad(0.08));
+      }
+      if (fc.features && fc.features.length > 0) {
+        noteEl.style.display = 'none';
+      }
+
+      var rows = (nearestPayload.rows || []).slice();
+      rows.sort(function (a, b) {
+        return (Number(a.nearest_dist_mi) || 0) - (Number(b.nearest_dist_mi) || 0);
+      });
+      var nm = nearestPayload.meta || {};
+      if (nm.generated_utc) {
+        capEl.textContent = 'NRI WFIR_RISKR when the point is inside web/NRI_Census_Tracts_PGE.geojson. Distances: EPSG:5070 planimetric meters to nearest shapefile line feature. Generated UTC: ' +
+          nm.generated_utc + '.';
+      } else {
+        capEl.textContent = 'NRI WFIR_RISKR when the point is inside web/NRI_Census_Tracts_PGE.geojson. Distances: EPSG:5070 planimetric meters to nearest transmission line feature.';
+      }
+      if (!linesLayer) {
+        capEl.textContent += ' Lines overlay missing — run wfigs_nearest_transmission.py so ogr2ogr writes transmission_lines_wgs84.geojson.';
+      }
+
+      rows.forEach(function (row) {
+        var tr = document.createElement('tr');
+        var oid = row.line_OBJECTID;
+        if (oid != null && oid !== '') tr.setAttribute('data-line-oid', String(oid));
+        tr.appendChild(cell(true, row.nearest_dist_mi));
+        tr.appendChild(cell(false, row.IncidentName));
+        tr.appendChild(cell(false, row.POOCounty));
+        tr.appendChild(cell(true, row.PercentContained));
+        tr.appendChild(cell(true, row.IncidentSize));
+        tr.appendChild(cellBlankOk(row.WFIR_RISKR));
+        tr.appendChild(cell(false, row.line_FENAME));
+        tr.appendChild(cell(true, row.line_OBJECTID));
+        tr.addEventListener('click', function () {
+          highlightLine(row.line_OBJECTID);
+          var la = Number(row.latitude);
+          var lo = Number(row.longitude);
+          if (!isNaN(la) && !isNaN(lo)) {
+            map.setView([la, lo], Math.max(map.getZoom(), 11));
+          }
+        });
+        bodyEl.appendChild(tr);
+      });
+      wrapEl.style.display = rows.length ? 'block' : 'none';
+      if (!rows.length) {
+        missEl.style.display = 'block';
+        missEl.textContent = 'No rows in nearest-transmission JSON.';
+      }
+    })
+    .catch(function (e) {
+      errEl.style.display = 'block';
+      errEl.textContent = 'Could not load map data (' + esc(e.message) + '). Start a server in the repo root, then reload.';
+    });
+})();
+  </script>
+</body>
+</html>

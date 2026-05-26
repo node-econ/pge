@@ -58,7 +58,8 @@ Reads the tidy CSV (no FRED calls) and writes:
 
 ```bash
 python3 scripts/ice_bofa_oas_line_chart.py --years 2
-python3 scripts/ice_bofa_oas_line_chart.py --no-dashboard   # chart HTML only
+# Chart HTML only (omit --no-dashboard to also write the combined OAS + NPV dashboard):
+python3 scripts/ice_bofa_oas_line_chart.py --no-dashboard
 ```
 
 Open the HTML in a browser (Chart.js loads from a CDN).
@@ -93,7 +94,8 @@ python3 scripts/ferc1_form1_export.py --years 2024 2025
 Summarizes **wildfire** building exposure (`WFIR_EXPB`) and population exposure (`WFIR_EXPP`) by `WFIR_RISKR` from an NRI tract **`.dbf`**. Rows are **highest risk first**; **EXPB** totals use **$** and **millions of USD**; **EXPP** totals are **whole persons**. Writes `spatial/nri_wfir_*.csv`, `spatial/nri_wfir_exposure_by_riskr.md`, and **`web/nri_wfir_exposure.html`** (includes a Leaflet map over OpenStreetMap; loads **`web/NRI_Census_Tracts_PGE.geojson`**). See [NRI technical documentation](https://hazards.fema.gov/nri/technical-documentation).
 
 ```bash
-python3 scripts/export_nri_pge_geojson.py   # requires GDAL ogr2ogr; writes web/NRI_Census_Tracts_PGE.geojson
+python3 scripts/export_nri_pge_geojson.py
+# requires GDAL ogr2ogr; writes web/NRI_Census_Tracts_PGE.geojson
 python3 scripts/nri_wfir_exposure_by_riskr.py
 python3 scripts/nri_wfir_exposure_by_riskr.py --dbf spatial/NRI_Census_Tracts_PGE.dbf -o spatial --html-out web/nri_wfir_exposure.html
 ```
@@ -105,6 +107,44 @@ Exports `spatial/NRI_Census_Tracts_PGE.shp` to **`web/NRI_Census_Tracts_PGE.geoj
 ```bash
 python3 scripts/export_nri_pge_geojson.py
 python3 scripts/export_nri_pge_geojson.py --shp spatial/NRI_Census_Tracts_PGE.shp -o web/NRI_Census_Tracts_PGE.geojson --simplify 0.00025
+```
+
+## `wfigs_incident_locations_fetch.py`
+
+Downloads **current** WFIGS wildland fire **incident point locations** from NIFC’s public ArcGIS layer (`WFIGS_Incident_Locations_Current`), filtered by **`POOState`** (default **Oregon only**: `US-OR`). Pass **`--states US-OR,US-WA`** to include Washington or other values. Writes **GeoJSON** plus a **`.meta.json`** sidecar (fetch time, query, attribution reminder). Optional **CSV** for a quick triage table.
+
+Uses **stdlib only** (`urllib`); set a truthful **`--user-agent`** for your organization.
+
+```bash
+python3 scripts/wfigs_incident_locations_fetch.py --user-agent "YourOrg-wfigs/1.0 (contact@example.com)"
+python3 scripts/wfigs_incident_locations_fetch.py --csv-out data/wildfire/wfigs_incident_locations_or.csv
+python3 scripts/wfigs_incident_locations_fetch.py --bbox -125.0,41.9,-116.0,46.5 -o data/wildfire/wfigs_bbox.geojson
+```
+
+**Data terms:** [NIFC Open Data](https://data-nifc.opendata.arcgis.com/). **Context** (WindNinja, ELMFIRE, triage ladder): [`docs/wildfire_rapid_assessment.md`](../docs/wildfire_rapid_assessment.md).
+
+**Demo map:** [`web/wfigs_incidents_or_wa.html`](../web/wfigs_incidents_or_wa.html) — from repo root run `python3 -m http.server 8765`, then open `http://localhost:8765/web/wfigs_incidents_or_wa.html` (needs HTTP so the browser can load `../data/wildfire/…`).
+
+## `wfigs_nearest_transmission.py`
+
+For each **Oregon** incident in the GeoJSON, looks up **WFIR_RISKR** from **`web/NRI_Census_Tracts_PGE.geojson`** when the point falls inside a tract (blank otherwise). Finds the closest feature in **`spatial/Transmission_Lines.shp`** (Web Mercator) using **EPSG:5070** for distance in meters. Writes **`data/wildfire/incidents_nearest_transmission.csv`**, **`.md`**, and **`.json`** (JSON feeds the table on `web/wfigs_incidents_or_wa.html`). Also runs **`ogr2ogr`** to write **`data/wildfire/transmission_lines_wgs84.geojson`** (all lines in WGS 84 for the map overlay and highlight). Requires **GDAL Python bindings** and **`ogr2ogr` on your PATH** (`brew install gdal` on macOS).
+
+```bash
+python3 scripts/wfigs_nearest_transmission.py
+python3 scripts/wfigs_nearest_transmission.py --geojson data/wildfire/wfigs_incident_locations_or.geojson --lines spatial/Transmission_Lines.shp -o data/wildfire/out.csv --md-out data/wildfire/out.md --json-out data/wildfire/out.json
+# CSV/MD/JSON only; skip ogr2ogr (no transmission_lines_wgs84.geojson)
+python3 scripts/wfigs_nearest_transmission.py --skip-lines-geojson
+```
+
+Run after `wfigs_incident_locations_fetch.py`. See [`docs/wildfire_rapid_assessment.md`](../docs/wildfire_rapid_assessment.md) §1b and §2 (time horizon). **Spread model:** [`docs/wildfire_ignition_spread_model.md`](../docs/wildfire_ignition_spread_model.md), [`wildfire_ignitions_spread_handoff.py`](wildfire_ignitions_spread_handoff.py).
+
+## `wildfire_ignitions_spread_handoff.py`
+
+Reads **`data/wildfire/incidents_nearest_transmission.json`** and writes **`data/wildfire/ignitions_spread_model_handoff.md`**: per-incident WGS84 + copy-paste **`fuel_wx_ign.py`** stubs (ELMFIRE Tutorial 03). Stdlib only. **`--top N`** limits to the N closest fires (by miles).
+
+```bash
+python3 scripts/wildfire_ignitions_spread_handoff.py
+python3 scripts/wildfire_ignitions_spread_handoff.py --top 5 -o data/wildfire/handoff_top5.md
 ```
 
 ## GitHub Pages
