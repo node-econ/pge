@@ -90,11 +90,21 @@ python3 scripts/ferc1_form1_export.py --years 2024 2025
 
 ## `nri_wfir_exposure_by_riskr.py`
 
-Summarizes **wildfire** building exposure (`WFIR_EXPB`) and population exposure (`WFIR_EXPP`) by `WFIR_RISKR` from an NRI tract **`.dbf`**. Rows are **highest risk first**; **EXPB** is reported in **millions of USD** and **EXPP** in **millions of persons** (2 dp). Writes `spatial/nri_wfir_*.csv`, `spatial/nri_wfir_exposure_by_riskr.md`, and **`web/nri_wfir_exposure.html`** for GitHub Pages. See [NRI technical documentation](https://hazards.fema.gov/nri/technical-documentation).
+Summarizes **wildfire** building exposure (`WFIR_EXPB`) and population exposure (`WFIR_EXPP`) by `WFIR_RISKR` from an NRI tract **`.dbf`**. Rows are **highest risk first**; **EXPB** totals use **$** and **millions of USD**; **EXPP** totals are **whole persons**. Writes `spatial/nri_wfir_*.csv`, `spatial/nri_wfir_exposure_by_riskr.md`, and **`web/nri_wfir_exposure.html`** (includes a Leaflet map over OpenStreetMap; loads **`web/NRI_Census_Tracts_PGE.geojson`**). See [NRI technical documentation](https://hazards.fema.gov/nri/technical-documentation).
 
 ```bash
+python3 scripts/export_nri_pge_geojson.py   # requires GDAL ogr2ogr; writes web/NRI_Census_Tracts_PGE.geojson
 python3 scripts/nri_wfir_exposure_by_riskr.py
 python3 scripts/nri_wfir_exposure_by_riskr.py --dbf spatial/NRI_Census_Tracts_PGE.dbf -o spatial --html-out web/nri_wfir_exposure.html
+```
+
+## `export_nri_pge_geojson.py`
+
+Exports `spatial/NRI_Census_Tracts_PGE.shp` to **`web/NRI_Census_Tracts_PGE.geojson`** (WGS 84, selected fields, light geometry simplify) for the NRI exposure map. Requires **GDAL** `ogr2ogr` on your machine (`brew install gdal` on macOS).
+
+```bash
+python3 scripts/export_nri_pge_geojson.py
+python3 scripts/export_nri_pge_geojson.py --shp spatial/NRI_Census_Tracts_PGE.shp -o web/NRI_Census_Tracts_PGE.geojson --simplify 0.00025
 ```
 
 ## GitHub Pages

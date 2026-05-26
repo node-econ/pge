@@ -4,6 +4,7 @@
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>NRI wildfire exposure by risk rating</title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
 <style>
   body { font-family: system-ui, sans-serif; margin: 0; padding: 1rem; background: #f1f5f9; color: #0f172a; }
   h1 { font-size: 1.2rem; margin: 0 0 0.5rem; }
@@ -18,6 +19,8 @@
   td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; }
   tbody tr:nth-child(even) { background: #fafafa; }
   a { color: #2563eb; }
+  #map { height: min(52vh, 520px); width: 100%; border-radius: 8px; border: 1px solid #e2e8f0; margin-top: 0.35rem; }
+  .map-note { font-size: 0.78rem; color: #64748b; margin: 0.35rem 0 0; }
 </style>
 </head>
 <body>
@@ -25,34 +28,102 @@
   <div class="wrap">
     <h1>NRI wildfire: exposure by risk rating</h1>
     <p class="meta">FEMA National Risk Index census tracts (PGE clip). Rows: <strong>WFIR_RISKR</strong> (highest risk first).
-      <strong>WFIR_EXPB</strong> = building exposure — sums and per-tract means in <strong>millions of USD</strong> (2 dp).
-      <strong>WFIR_EXPP</strong> = population exposure — <strong>sum</strong> in millions of persons (2 dp); <strong>mean per tract</strong> in whole persons (not dollars).
-      Source: <code>NRI_Census_Tracts_PGE.dbf</code>. Not a FEMA publication; confirm definitions in the
+      <strong>WFIR_EXPB</strong> = building exposure — <strong>total</strong> in millions of USD (table shows <strong>$</strong> with comma grouping).
+      <strong>WFIR_EXPP</strong> = population exposure — <strong>total persons</strong> (comma grouping).
+      Source: <code>NRI_Census_Tracts_PGE.dbf</code>. Map: tract boundaries from <code>NRI_Census_Tracts_PGE.geojson</code> (EPSG:4326, simplified) over
+      <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>. Not a FEMA publication; confirm definitions in the
       <a href="https://hazards.fema.gov/nri/technical-documentation">NRI technical documentation</a>.</p>
+    <h2>Tract map (wildfire risk rating)</h2>
+    <div id="map" role="img" aria-label="Map of NRI census tracts colored by WFIR_RISKR"></div>
+    <p class="map-note">Tiles © OpenStreetMap contributors. Click a tract for attributes.</p>
     <h2>1. Building exposure (WFIR_EXPB) by WFIR_RISKR</h2>
     <table>
-      <thead><tr><th>WFIR_RISKR</th><th class="num">Tracts</th><th class="num">Sum (M USD)</th><th class="num">Mean per tract (M USD)</th></tr></thead>
+      <thead><tr><th>WFIR_RISKR</th><th class="num">Tracts</th><th class="num">Sum (million USD)</th></tr></thead>
       <tbody>
-<tr><td>Very High</td><td class="num">2</td><td class="num">1892.94</td><td class="num">946.47</td></tr>
-<tr><td>Relatively High</td><td class="num">1</td><td class="num">469.79</td><td class="num">469.79</td></tr>
-<tr><td>Relatively Moderate</td><td class="num">7</td><td class="num">1422.22</td><td class="num">203.17</td></tr>
-<tr><td>Relatively Low</td><td class="num">58</td><td class="num">11296.28</td><td class="num">194.76</td></tr>
-<tr><td>Very Low</td><td class="num">329</td><td class="num">19913.44</td><td class="num">60.53</td></tr>
-<tr><td>No Rating</td><td class="num">82</td><td class="num">0.00</td><td class="num">0.00</td></tr>
+<tr><td>Very High</td><td class="num">2</td><td class="num">$1,892.94</td></tr>
+<tr><td>Relatively High</td><td class="num">1</td><td class="num">$469.79</td></tr>
+<tr><td>Relatively Moderate</td><td class="num">7</td><td class="num">$1,422.22</td></tr>
+<tr><td>Relatively Low</td><td class="num">58</td><td class="num">$11,296.28</td></tr>
+<tr><td>Very Low</td><td class="num">329</td><td class="num">$19,913.44</td></tr>
+<tr><td>No Rating</td><td class="num">82</td><td class="num">$0.00</td></tr>
       </tbody>
     </table>
     <h2>2. Population exposure (WFIR_EXPP) by WFIR_RISKR</h2>
     <table>
-      <thead><tr><th>WFIR_RISKR</th><th class="num">Tracts</th><th class="num">Sum (M persons)</th><th class="num">Mean per tract (persons)</th></tr></thead>
+      <thead><tr><th>WFIR_RISKR</th><th class="num">Tracts</th><th class="num">Sum (persons)</th></tr></thead>
       <tbody>
-<tr><td>Very High</td><td class="num">2</td><td class="num">0.01</td><td class="num">2,886</td></tr>
-<tr><td>Relatively High</td><td class="num">1</td><td class="num">0.00</td><td class="num">1,207</td></tr>
-<tr><td>Relatively Moderate</td><td class="num">7</td><td class="num">0.01</td><td class="num">1,151</td></tr>
-<tr><td>Relatively Low</td><td class="num">58</td><td class="num">0.05</td><td class="num">803</td></tr>
-<tr><td>Very Low</td><td class="num">329</td><td class="num">0.09</td><td class="num">276</td></tr>
-<tr><td>No Rating</td><td class="num">82</td><td class="num">0.00</td><td class="num">0</td></tr>
+<tr><td>Very High</td><td class="num">2</td><td class="num">5,772</td></tr>
+<tr><td>Relatively High</td><td class="num">1</td><td class="num">1,207</td></tr>
+<tr><td>Relatively Moderate</td><td class="num">7</td><td class="num">8,056</td></tr>
+<tr><td>Relatively Low</td><td class="num">58</td><td class="num">46,573</td></tr>
+<tr><td>Very Low</td><td class="num">329</td><td class="num">90,916</td></tr>
+<tr><td>No Rating</td><td class="num">82</td><td class="num">0</td></tr>
       </tbody>
     </table>
   </div>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+(function () {
+  const GEOJSON_URL = 'NRI_Census_Tracts_PGE.geojson';
+  const map = L.map('map', { scrollWheelZoom: false }).setView([44.2, -123.0], 8);
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 19,
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+  }).addTo(map);
+
+  function wfirColor(r) {
+    switch (r) {
+      case 'Very High': return '#7f1d1d';
+      case 'Relatively High': return '#dc2626';
+      case 'Relatively Moderate': return '#ea580c';
+      case 'Relatively Low': return '#ca8a04';
+      case 'Very Low': return '#16a34a';
+      case 'No Rating': return '#94a3b8';
+      default: return '#64748b';
+    }
+  }
+
+  function fmtUsdM(v) {
+    if (v == null || isNaN(v)) return '—';
+    return '$' + (Number(v) / 1e6).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + 'M';
+  }
+  function fmtPop(v) {
+    if (v == null || isNaN(v)) return '—';
+    return Math.round(Number(v)).toLocaleString();
+  }
+
+  fetch(GEOJSON_URL)
+    .then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })
+    .then(function (data) {
+      const layer = L.geoJSON(data, {
+        style: function (feature) {
+          const r = feature.properties.WFIR_RISKR;
+          return {
+            color: '#334155',
+            weight: 0.6,
+            fillColor: wfirColor(r),
+            fillOpacity: 0.55
+          };
+        },
+        onEachFeature: function (feature, lyr) {
+          const p = feature.properties || {};
+          const lines = [
+            '<strong>' + (p.TRACTFIPS || '') + '</strong>',
+            p.COUNTY ? 'County: ' + p.COUNTY : '',
+            p.WFIR_RISKR ? 'Wildfire risk: ' + p.WFIR_RISKR : '',
+            'Building exposure: ' + fmtUsdM(p.WFIR_EXPB),
+            'Population exposure: ' + fmtPop(p.WFIR_EXPP) + ' persons'
+          ].filter(Boolean);
+          lyr.bindPopup(lines.join('<br/>'));
+        }
+      }).addTo(map);
+      map.fitBounds(layer.getBounds(), { padding: [18, 18] });
+    })
+    .catch(function () {
+      document.getElementById('map').innerHTML =
+        '<p style="padding:1rem;color:#b45309;">Could not load tract GeoJSON. Run <code>python3 scripts/export_nri_pge_geojson.py</code> and publish <code>NRI_Census_Tracts_PGE.geojson</code> next to this page.</p>';
+    });
+})();
+</script>
 </body>
 </html>

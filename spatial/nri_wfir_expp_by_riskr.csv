@@ -1,7 +1,7 @@
-WFIR_RISKR,tract_count,WFIR_EXPP_sum_millions_persons,WFIR_EXPP_mean_persons_per_tract
-Very High,2,0.01,2886
-Relatively High,1,0.00,1207
-Relatively Moderate,7,0.01,1151
-Relatively Low,58,0.05,803
-Very Low,329,0.09,276
-No Rating,82,0.00,0
+WFIR_RISKR,tract_count,WFIR_EXPP_sum_persons
+Very High,2,5772
+Relatively High,1,1207
+Relatively Moderate,7,8056
+Relatively Low,58,46573
+Very Low,329,90916
+No Rating,82,0

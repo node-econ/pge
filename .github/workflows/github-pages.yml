@@ -32,6 +32,8 @@ jobs:
           cp web/index.html _site/index.html
           test -f web/nri_wfir_exposure.html || { echo "missing: web/nri_wfir_exposure.html (run scripts/nri_wfir_exposure_by_riskr.py)" >&2; exit 1; }
           cp web/nri_wfir_exposure.html _site/nri_wfir_exposure.html
+          test -f web/NRI_Census_Tracts_PGE.geojson || { echo "missing: web/NRI_Census_Tracts_PGE.geojson (run scripts/export_nri_pge_geojson.py)" >&2; exit 1; }
+          cp web/NRI_Census_Tracts_PGE.geojson _site/NRI_Census_Tracts_PGE.geojson
           for f in \
             data/utilities/pge_oas_debt_dashboard.html \
             data/utilities/ice_bofa_oas_line_chart.html

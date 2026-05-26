@@ -3,7 +3,8 @@
 The workflow [`.github/workflows/github-pages.yml`](.github/workflows/github-pages.yml) publishes a small static site:
 
 - Landing page: [`web/index.html`](web/index.html) (copied to site root as `index.html`)
-- [`web/nri_wfir_exposure.html`](web/nri_wfir_exposure.html) — NRI wildfire exposure tables (regenerate with `scripts/nri_wfir_exposure_by_riskr.py`)
+- [`web/nri_wfir_exposure.html`](web/nri_wfir_exposure.html) — NRI wildfire exposure tables + OSM map (regenerate HTML with `scripts/nri_wfir_exposure_by_riskr.py`, GeoJSON with `scripts/export_nri_pge_geojson.py`)
+- [`web/NRI_Census_Tracts_PGE.geojson`](web/NRI_Census_Tracts_PGE.geojson) — tract polygons for that map (EPSG:4326, simplified; GDAL required to rebuild)
 - [`data/utilities/pge_oas_debt_dashboard.html`](data/utilities/pge_oas_debt_dashboard.html)
 - [`data/utilities/ice_bofa_oas_line_chart.html`](data/utilities/ice_bofa_oas_line_chart.html)
 - [`data/utilities/ferc1_pge_viewer/`](data/utilities/ferc1_pge_viewer/) (entire directory)
