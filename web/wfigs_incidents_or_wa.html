@@ -84,7 +84,7 @@
             <th>County</th>
             <th class="num">% Cont.</th>
             <th class="num">Acres</th>
-            <th>NRI tract WFIR_RISKR</th>
+            <th>Risk Level</th>
             <th>Line name</th>
             <th class="num">Line OID</th>
           </tr>
@@ -139,25 +139,35 @@
     return isNaN(d.getTime()) ? esc(ms) : d.toISOString().replace('T', ' ').slice(0, 16) + ' UTC';
   }
 
-  function popupHtml(props, nearestByIrwin, wfirByIrwin) {
+  function fmtSizeAcres(props) {
+    var a = props.IncidentSize;
+    if (a != null && a !== '') return String(a);
+    if (props.FinalAcres != null && props.FinalAcres !== '') return String(props.FinalAcres);
+    return '—';
+  }
+
+  function fmtContained(props) {
+    var t = fmtDate(props.ContainmentDateTime);
+    if (t !== '—') return t;
+    if (props.PercentContained != null && props.PercentContained !== '') {
+      return String(props.PercentContained) + '%';
+    }
+    return '—';
+  }
+
+  function popupHtml(props, wfirByIrwin) {
     var key = String(props.IrwinID || '').trim();
-    var oid = nearestByIrwin[key];
     var wfir = wfirByIrwin[key];
+    var risk = wfir != null && wfir !== '' ? String(wfir) : '—';
     var rows = [
+      ['Risk Level', risk],
       ['Incident', props.IncidentName],
       ['County', props.POOCounty],
-      ['State', props.POOState],
       ['Discovered', fmtDate(props.FireDiscoveryDateTime)],
       ['Modified', fmtDate(props.ModifiedOnDateTime_dt)],
-      ['Contained', props.PercentContained != null ? props.PercentContained + '%' : '—'],
-      ['Size (acres)', props.IncidentSize != null ? props.IncidentSize : '—'],
-      ['NRI tract WFIR_RISKR', wfir != null && wfir !== '' ? wfir : ''],
-      ['IrwinID', props.IrwinID],
-      ['GACC', props.GACC]
+      ['Contained', fmtContained(props)],
+      ['Size', fmtSizeAcres(props)]
     ];
-    if (oid != null && oid !== '') {
-      rows.push(['Nearest line OBJECTID', oid]);
-    }
     var parts = rows.map(function (r) {
       return '<dt>' + esc(r[0]) + '</dt><dd>' + esc(r[1]) + '</dd>';
     });
@@ -266,7 +276,7 @@
         },
         onEachFeature: function (feature, lyr) {
           var p = feature.properties || {};
-          lyr.bindPopup(popupHtml(p, nearestByIrwin, wfirByIrwin));
+          lyr.bindPopup(popupHtml(p, wfirByIrwin));
           lyr.on('click', function () {
             var oid = nearestByIrwin[String(p.IrwinID || '').trim()];
             highlightLine(oid);
@@ -288,10 +298,10 @@
       });
       var nm = nearestPayload.meta || {};
       if (nm.generated_utc) {
-        capEl.textContent = 'NRI WFIR_RISKR when the point is inside web/NRI_Census_Tracts_PGE.geojson. Distances: EPSG:5070 planimetric meters to nearest shapefile line feature. Generated UTC: ' +
+        capEl.textContent = 'Risk Level (NRI WFIR_RISKR) when the point is inside web/NRI_Census_Tracts_PGE.geojson. Distances: EPSG:5070 planimetric meters to nearest shapefile line feature. Generated UTC: ' +
           nm.generated_utc + '.';
       } else {
-        capEl.textContent = 'NRI WFIR_RISKR when the point is inside web/NRI_Census_Tracts_PGE.geojson. Distances: EPSG:5070 planimetric meters to nearest transmission line feature.';
+        capEl.textContent = 'Risk Level (NRI WFIR_RISKR) when the point is inside web/NRI_Census_Tracts_PGE.geojson. Distances: EPSG:5070 planimetric meters to nearest transmission line feature.';
       }
       if (!linesLayer) {
         capEl.textContent += ' Lines overlay missing — run wfigs_nearest_transmission.py so ogr2ogr writes transmission_lines_wgs84.geojson.';

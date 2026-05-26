@@ -10,24 +10,34 @@
     .wrap { max-width: 42rem; margin: 0 auto; background: #fff; padding: 1.25rem 1.5rem; border-radius: 8px;
       box-shadow: 0 1px 3px rgb(0 0 0 / 0.08); }
     h1 { font-size: 1.2rem; margin: 0 0 0.75rem; }
-    p { margin: 0 0 1rem; color: #475569; font-size: 0.95rem; }
     ul { margin: 0; padding-left: 1.2rem; }
     li { margin: 0.4rem 0; }
     a { color: #2563eb; }
-    .note { font-size: 0.82rem; color: #64748b; }
+    footer.footnotes {
+      max-width: 42rem; margin: 0 auto 1.5rem; padding: 0 1.25rem;
+      font-size: 0.82rem; color: #475569; line-height: 1.55;
+    }
+    footer.footnotes h2 { font-size: 0.95rem; margin: 0 0 0.4rem; color: #334155; }
+    footer.footnotes ol { margin: 0; padding-left: 1.25rem; }
+    footer.footnotes li { margin: 0.35rem 0; }
   </style>
 </head>
 <body>
   <div class="wrap">
     <h1>PGE — published views</h1>
-    <p>Static pages generated from this repository. Links are relative so they work on GitHub Pages project sites (<code>/repo-name/</code>).</p>
     <ul>
       <li><a href="utilities/pge_oas_debt_dashboard.html">Borrowing cost by credit rating</a> — NPV table + OAS chart</li>
       <li><a href="utilities/ferc1_pge_viewer/index.html">FERC Form 1 viewer</a> — tabular financials from bundled JSON</li>
       <li><a href="nri_wfir_exposure.html">NRI wildfire exposure</a> — tract building exposure by risk category; county expected annual loss (WFIR_EALT)</li>
       <li><a href="wfigs_incidents_or_wa.html">WFIGS incidents (Oregon) demo map</a> — current NIFC incident points + transmission screening (published snapshot; regenerate scripts in repo)</li>
     </ul>
-    <p class="note">Not investment advice. Regenerate HTML with the scripts under <code>scripts/</code> before pushing if you want the site to reflect new data.</p>
   </div>
+  <footer class="footnotes">
+    <h2>Notes</h2>
+    <ol>
+      <li>Static pages are generated from this repository. Links are relative so they work on GitHub Pages project sites (<code>/repo-name/</code>).</li>
+      <li>Not investment advice. Regenerate HTML with the scripts under <code>scripts/</code> before pushing if you want the site to reflect new data.</li>
+    </ol>
+  </footer>
 </body>
 </html>
