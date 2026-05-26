@@ -4,7 +4,7 @@ Export ``spatial/NRI_Census_Tracts_PGE.shp`` to GeoJSON (EPSG:4326) for web maps
 
 Requires **GDAL** ``ogr2ogr`` on PATH (e.g. ``brew install gdal`` on macOS).
 
-Keeps a small attribute set for popups and file size, simplifies geometry slightly,
+Keeps a small attribute set for popups and file size (tract id, county, state abbreviation, wildfire risk, building and population exposure, WFIR_EALT), simplifies geometry slightly,
 and writes ``web/NRI_Census_Tracts_PGE.geojson`` by default (used by ``nri_wfir_exposure.html``).
 
 OpenStreetMap tile use: follow https://operations.osmfoundation.org/policies/tiles/
@@ -61,7 +61,7 @@ def main() -> None:
         "-t_srs",
         "EPSG:4326",
         "-select",
-        "TRACTFIPS,COUNTY,WFIR_RISKR,WFIR_EXPB,WFIR_EXPP",
+        "TRACTFIPS,COUNTY,STATEABBRV,WFIR_RISKR,WFIR_EXPB,WFIR_EXPP,WFIR_EALT",
         "-lco",
         "COORDINATE_PRECISION=6",
     ]

@@ -7,7 +7,6 @@ The workflow [`.github/workflows/github-pages.yml`](.github/workflows/github-pag
 - [`web/NRI_Census_Tracts_PGE.geojson`](web/NRI_Census_Tracts_PGE.geojson) — tract polygons for that map (EPSG:4326, simplified; GDAL required to rebuild)
 - [`web/wfigs_incidents_or_wa.html`](web/wfigs_incidents_or_wa.html) — WFIGS Oregon demo map (copied to site root); bundled GeoJSON/JSON/CSV under **`wildfire/`** on the published site (regenerate with `wfigs_incident_locations_fetch.py` + `wfigs_nearest_transmission.py`)
 - [`data/utilities/pge_oas_debt_dashboard.html`](data/utilities/pge_oas_debt_dashboard.html)
-- [`data/utilities/ice_bofa_oas_line_chart.html`](data/utilities/ice_bofa_oas_line_chart.html)
 - [`data/utilities/ferc1_pge_viewer/`](data/utilities/ferc1_pge_viewer/) (entire directory)
 
 No API keys or GitHub credentials are stored in the workflow. You do **not** need to paste tokens into the chat.

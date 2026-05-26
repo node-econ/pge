@@ -1,14 +1,15 @@
 #!/usr/bin/env python3
 """
-Wildfire (WFIR) exposure by wildfire risk rating (WFIR_RISKR) from an NRI census-tract
-shapefile attribute table (.dbf only — no geometry).
+Wildfire (WFIR) summaries from an NRI census-tract shapefile attribute table (.dbf only — no geometry).
 
 Produces CSV + Markdown under ``spatial/``, and a static HTML page under ``web/`` for GitHub Pages.
 
-- **WFIR_EXPB**: building exposure total per rating — **millions of USD** with a **$** prefix and comma grouping (2 dp).
-- **WFIR_EXPP**: population exposure total per rating — **whole persons** with comma grouping (no means).
+- **WFIR_EXPB**: building exposure total per wildfire **risk category** (``WFIR_RISKR``) — **millions of USD**
+  with a **$** prefix and comma grouping (2 dp).
+- **WFIR_EALT** (expected annual loss from wildfire): summed by **county**, using **STCOFIPS** from the same
+  tract attributes (labels from **COUNTY** and **STATEABBRV**).
 
-Rows are sorted **highest risk first** (Very High → … → Very Low), then No Rating / missing.
+Rows in the risk table are sorted **highest risk first** (Very High → … → Very Low), then No Rating / missing.
 
 The HTML page includes a **Leaflet** map with **OpenStreetMap** tiles and tract polygons loaded from
 ``NRI_Census_Tracts_PGE.geojson`` (generate with ``scripts/export_nri_pge_geojson.py``).
@@ -106,41 +107,53 @@ def fmt_usd_millions(value: float) -> str:
     return f"${value / 1e6:,.2f}"
 
 
-def fmt_persons_sum(value: float) -> str:
-    return f"{int(round(value)):,}"
+def fmt_usd_ealt(value: float) -> str:
+    """Expected annual loss (tract-level field summed); show as whole USD."""
+    return f"${round(value):,}"
 
 
-def build_html(rows: list[tuple[str, dict[str, float]]]) -> str:
-    """rows: (label, {tracts, expb, expp}) sorted for display."""
+def county_display_name(county: str | None, stabbr: str | None, stco: str) -> str:
+    if county and stabbr:
+        return f"{county}, {stabbr}"
+    if county:
+        return county
+    if stabbr:
+        return stabbr
+    return stco
+
+
+def build_html(rows_risk: list[tuple[str, dict[str, float]]], county_rows: list[tuple[str, int, float]]) -> str:
+    """rows_risk: (label, {tracts, expb}); county_rows: (county label, tract_count, ealt_sum) sorted by EALT desc."""
     tr_b: list[str] = []
-    tr_p: list[str] = []
-    for label, v in rows:
+    for label, v in rows_risk:
         n = int(v["tracts"])
         s_b = float(v["expb"])
-        s_p = float(v["expp"])
         esc = html.escape(label)
         tr_b.append(
-            f"<tr><td>{esc}</td><td class=\"num\">{n}</td><td class=\"num\">{fmt_usd_millions(s_b)}</td></tr>"
+            f'<tr><td>{esc}</td><td class="num">{n}</td><td class="num">{fmt_usd_millions(s_b)}</td></tr>'
         )
-        tr_p.append(
-            f"<tr><td>{esc}</td><td class=\"num\">{n}</td><td class=\"num\">{fmt_persons_sum(s_p)}</td></tr>"
+
+    tr_c: list[str] = []
+    for cname, ntract, ealt in county_rows:
+        esc = html.escape(cname)
+        tr_c.append(
+            f'<tr><td>{esc}</td><td class="num">{ntract}</td><td class="num">{fmt_usd_ealt(ealt)}</td></tr>'
         )
 
     table_b = "\n".join(tr_b)
-    table_p = "\n".join(tr_p)
+    table_c = "\n".join(tr_c)
 
     return f"""<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>NRI wildfire exposure by risk rating</title>
+<title>NRI wildfire: tract exposure and county expected loss</title>
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
 <style>
   body {{ font-family: system-ui, sans-serif; margin: 0; padding: 1rem; background: #f1f5f9; color: #0f172a; }}
   h1 {{ font-size: 1.2rem; margin: 0 0 0.5rem; }}
   h2 {{ font-size: 1.05rem; margin: 1.25rem 0 0.5rem; color: #0f172a; }}
-  p.meta {{ font-size: 0.82rem; color: #64748b; margin: 0 0 1rem; line-height: 1.45; max-width: 52rem; }}
   p.back {{ font-size: 0.88rem; margin: 0 0 1rem; }}
   .wrap {{ max-width: 52rem; margin: 0 auto 1rem; background: #fff; padding: 1rem 1.25rem; border-radius: 8px;
     box-shadow: 0 1px 3px rgb(0 0 0 / 0.08); }}
@@ -152,36 +165,46 @@ def build_html(rows: list[tuple[str, dict[str, float]]]) -> str:
   a {{ color: #2563eb; }}
   #map {{ height: min(52vh, 520px); width: 100%; border-radius: 8px; border: 1px solid #e2e8f0; margin-top: 0.35rem; }}
   .map-note {{ font-size: 0.78rem; color: #64748b; margin: 0.35rem 0 0; }}
+  footer.footnotes {{ font-size: 0.78rem; color: #475569; line-height: 1.55; max-width: 52rem; margin: 0 auto 1.5rem; }}
+  footer.footnotes h2 {{ font-size: 0.95rem; margin: 0 0 0.4rem; color: #334155; }}
+  footer.footnotes ol {{ margin: 0; padding-left: 1.25rem; }}
+  footer.footnotes li {{ margin: 0.35rem 0; }}
 </style>
 </head>
 <body>
   <p class="back"><a href="index.html">← PGE reports</a></p>
   <div class="wrap">
-    <h1>NRI wildfire: exposure by risk rating</h1>
-    <p class="meta">FEMA National Risk Index census tracts (PGE clip). Rows: <strong>WFIR_RISKR</strong> (highest risk first).
-      <strong>WFIR_EXPB</strong> = building exposure — <strong>total</strong> in millions of USD (table shows <strong>$</strong> with comma grouping).
-      <strong>WFIR_EXPP</strong> = population exposure — <strong>total persons</strong> (comma grouping).
-      Source: <code>NRI_Census_Tracts_PGE.dbf</code>. Map: tract boundaries from <code>NRI_Census_Tracts_PGE.geojson</code> (EPSG:4326, simplified) over
-      <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>. Not a FEMA publication; confirm definitions in the
-      <a href="https://hazards.fema.gov/nri/technical-documentation">NRI technical documentation</a>.</p>
+    <h1>NRI wildfire: tract exposure and county expected loss</h1>
     <h2>Tract map (wildfire risk rating)</h2>
     <div id="map" role="img" aria-label="Map of NRI census tracts colored by WFIR_RISKR"></div>
     <p class="map-note">Tiles © OpenStreetMap contributors. Click a tract for attributes.</p>
-    <h2>1. Building exposure (WFIR_EXPB) by WFIR_RISKR</h2>
+    <h2>1. Building Exposure to Wildfire Risk by Census Tract</h2>
     <table>
-      <thead><tr><th>WFIR_RISKR</th><th class="num">Tracts</th><th class="num">Sum (million USD)</th></tr></thead>
+      <thead><tr><th>Risk Category</th><th class="num">Tracts</th><th class="num">Sum (million USD)</th></tr></thead>
       <tbody>
 {table_b}
       </tbody>
     </table>
-    <h2>2. Population exposure (WFIR_EXPP) by WFIR_RISKR</h2>
+    <h2>2. Expected annual loss from wildfire (WFIR_EALT) by county</h2>
     <table>
-      <thead><tr><th>WFIR_RISKR</th><th class="num">Tracts</th><th class="num">Sum (persons)</th></tr></thead>
+      <thead><tr><th>County</th><th class="num"># of Tracts</th><th class="num">Expected Annual Loss</th></tr></thead>
       <tbody>
-{table_p}
+{table_c}
       </tbody>
     </table>
   </div>
+  <footer class="footnotes">
+    <h2>Notes</h2>
+    <ol>
+      <li>FEMA National Risk Index census tracts (PGE clip). Table 1 groups tracts by <strong>WFIR_RISKR</strong> (wildfire risk category), highest risk first.
+        <strong>WFIR_EXPB</strong> is building exposure — tract values are summed; amounts are in millions of USD in the source layer (table shows <strong>$</strong> with comma grouping).
+        Source attributes: <code>NRI_Census_Tracts_PGE.dbf</code>. Map: tract boundaries from <code>NRI_Census_Tracts_PGE.geojson</code> (EPSG:4326, simplified) over
+        <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>. Not a FEMA publication; confirm definitions in the
+        <a href="https://hazards.fema.gov/nri/technical-documentation">NRI technical documentation</a>.</li>
+      <li>Table 2 aggregates <strong>WFIR_EALT</strong> (expected annual loss from wildfire) across tracts in each county. Counties use the tract attribute <strong>STCOFIPS</strong> (state + county FIPS);
+        the <strong>County</strong> column uses <strong>COUNTY</strong> and <strong>STATEABBRV</strong> from the same NRI tract record when present. This matches the tract → county geography in the published GeoJSON used on the map.</li>
+    </ol>
+  </footer>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
 (function () {{
@@ -208,6 +231,11 @@ def build_html(rows: list[tuple[str, dict[str, float]]]) -> str:
     if (v == null || isNaN(v)) return '—';
     return '$' + (Number(v) / 1e6).toLocaleString(undefined, {{ minimumFractionDigits: 2, maximumFractionDigits: 2 }}) + 'M';
   }}
+  function fmtUsdEalt(v) {{
+    if (v == null || isNaN(v)) return '—';
+    return '$' + Math.round(Number(v)).toLocaleString();
+  }}
+
   function fmtPop(v) {{
     if (v == null || isNaN(v)) return '—';
     return Math.round(Number(v)).toLocaleString();
@@ -228,12 +256,14 @@ def build_html(rows: list[tuple[str, dict[str, float]]]) -> str:
         }},
         onEachFeature: function (feature, lyr) {{
           const p = feature.properties || {{}};
+          const countyLine = (p.COUNTY && p.STATEABBRV) ? (p.COUNTY + ', ' + p.STATEABBRV) : (p.COUNTY || p.STATEABBRV || '');
           const lines = [
             '<strong>' + (p.TRACTFIPS || '') + '</strong>',
-            p.COUNTY ? 'County: ' + p.COUNTY : '',
+            countyLine ? 'County: ' + countyLine : '',
             p.WFIR_RISKR ? 'Wildfire risk: ' + p.WFIR_RISKR : '',
             'Building exposure: ' + fmtUsdM(p.WFIR_EXPB),
-            'Population exposure: ' + fmtPop(p.WFIR_EXPP) + ' persons'
+            'Population exposure: ' + fmtPop(p.WFIR_EXPP) + ' persons',
+            (p.WFIR_EALT != null && !isNaN(p.WFIR_EALT)) ? ('Expected annual loss (WFIR_EALT): ' + fmtUsdEalt(p.WFIR_EALT)) : ''
           ].filter(Boolean);
           lyr.bindPopup(lines.join('<br/>'));
         }}
@@ -252,7 +282,7 @@ def build_html(rows: list[tuple[str, dict[str, float]]]) -> str:
 
 
 def main() -> None:
-    ap = argparse.ArgumentParser(description="WFIR building/pop exposure by WFIR_RISKR (NRI tract .dbf).")
+    ap = argparse.ArgumentParser(description="WFIR building exposure by risk category + county EALT (NRI tract .dbf).")
     ap.add_argument(
         "--dbf",
         type=Path,
@@ -277,31 +307,72 @@ def main() -> None:
     data = args.dbf.read_bytes()
     nrec, hlen, rlen, fields = parse_dbf_header(data)
     fo = field_offsets(fields)
-    for req in ("WFIR_RISKR", "WFIR_EXPB", "WFIR_EXPP"):
+    for req in ("WFIR_RISKR", "WFIR_EXPB", "WFIR_EALT", "STCOFIPS"):
         if req not in fo:
             raise SystemExit(f"missing column {req} in {args.dbf}")
 
-    agg: dict[str, dict[str, float]] = defaultdict(lambda: {"tracts": 0, "expb": 0.0, "expp": 0.0})
+    agg: dict[str, dict[str, float]] = defaultdict(lambda: {"tracts": 0, "expb": 0.0})
+    county_agg: dict[str, dict[str, float | str | None]] = defaultdict(
+        lambda: {"tracts": 0, "ealt": 0.0, "county": None, "stabbr": None}
+    )
+
     for rec in iter_records(data, nrec, hlen, rlen):
         r = get_field(rec, fo, "WFIR_RISKR")
         key = r if isinstance(r, str) else "(missing)"
         b = get_field(rec, fo, "WFIR_EXPB")
-        p = get_field(rec, fo, "WFIR_EXPP")
         cell = agg[key]
         cell["tracts"] += 1
         if isinstance(b, (int, float)):
             cell["expb"] += float(b)
-        if isinstance(p, (int, float)):
-            cell["expp"] += float(p)
+
+        stco_raw = get_field(rec, fo, "STCOFIPS")
+        if isinstance(stco_raw, (int, float)) and not isinstance(stco_raw, bool):
+            stco = f"{int(stco_raw):05d}"
+        elif isinstance(stco_raw, str) and stco_raw.strip():
+            digits = "".join(ch for ch in stco_raw.strip() if ch.isdigit())
+            stco = f"{int(digits):05d}" if len(digits) >= 5 else stco_raw.strip()
+        else:
+            conly = get_field(rec, fo, "COUNTY")
+            st = get_field(rec, fo, "STATEFIPS") if "STATEFIPS" in fo else None
+            st_s = ""
+            if isinstance(st, (int, float)) and not isinstance(st, bool):
+                st_s = f"{int(st):02d}"
+            elif isinstance(st, str) and st.strip():
+                d = "".join(ch for ch in st.strip() if ch.isdigit())
+                st_s = f"{int(d):02d}"[-2:] if d else ""
+            c_s = conly.strip() if isinstance(conly, str) else ""
+            stco = f"X:{st_s}:{c_s}" if (st_s or c_s) else "UNKNOWN"
+
+        co = get_field(rec, fo, "COUNTY")
+        ab = get_field(rec, fo, "STATEABBRV")
+        ce = county_agg[stco]
+        ce["tracts"] += 1  # type: ignore[operator]
+        ealt = get_field(rec, fo, "WFIR_EALT")
+        if isinstance(ealt, (int, float)):
+            ce["ealt"] += float(ealt)  # type: ignore[operator]
+        if isinstance(co, str) and co.strip() and not ce.get("county"):
+            ce["county"] = co.strip()
+        if isinstance(ab, str) and ab.strip() and not ce.get("stabbr"):
+            ce["stabbr"] = ab.strip()
 
     rows = sorted(agg.items(), key=lambda kv: sort_key_rating_desc(kv[0]))
+
+    county_rows: list[tuple[str, int, float]] = []
+    for stco, cv in county_agg.items():
+        label = county_display_name(
+            cv["county"] if isinstance(cv["county"], str) else None,
+            cv["stabbr"] if isinstance(cv["stabbr"], str) else None,
+            stco,
+        )
+        county_rows.append((label, int(cv["tracts"]), float(cv["ealt"])))
+    county_rows.sort(key=lambda t: (-t[2], t[0].lower()))
 
     args.out_dir.mkdir(parents=True, exist_ok=True)
     args.html_out.parent.mkdir(parents=True, exist_ok=True)
 
     md_path = args.out_dir / "nri_wfir_exposure_by_riskr.md"
     csv_b = args.out_dir / "nri_wfir_expb_by_riskr.csv"
-    csv_p = args.out_dir / "nri_wfir_expp_by_riskr.csv"
+    csv_c = args.out_dir / "nri_wfir_ealt_by_county.csv"
 
     with csv_b.open("w", newline="") as f:
         w = csv.writer(f)
@@ -311,21 +382,20 @@ def main() -> None:
             s = v["expb"]
             w.writerow([label, n, f"{s / 1e6:.2f}"])
 
-    with csv_p.open("w", newline="") as f:
+    with csv_c.open("w", newline="") as f:
         w = csv.writer(f)
-        w.writerow(["WFIR_RISKR", "tract_count", "WFIR_EXPP_sum_persons"])
-        for label, v in rows:
-            n = int(v["tracts"])
-            s = v["expp"]
-            w.writerow([label, n, int(round(s)) if n else ""])
+        w.writerow(["county", "tract_count", "WFIR_EALT_sum_usd"])
+        for label, ntract, ealt in county_rows:
+            w.writerow([label, ntract, f"{ealt:.2f}"])
 
     lines = [
-        "# NRI wildfire: exposure by wildfire risk rating",
+        "# NRI wildfire: tract exposure and county expected loss",
         "",
         "Source: `NRI_Census_Tracts_PGE.dbf` (FEMA National Risk Index, wildfire fields).",
-        "Rows are **WFIR_RISKR** sorted **highest risk first**; **tract_count** = census tracts in that category.",
+        "Table 1: **WFIR_RISKR** sorted **highest risk first**; **tract_count** = census tracts in that category.",
+        "Table 2: **WFIR_EALT** summed by county using **STCOFIPS** from each tract (county label from **COUNTY** + **STATEABBRV** when present).",
         "",
-        "**WFIR_EXPB** total per row: **millions of USD** (numeric column in CSV; Markdown shows **$** with commas). **WFIR_EXPP** total: **persons** (whole numbers).",
+        "**WFIR_EXPB** total per row: **millions of USD** (numeric column in CSV; Markdown shows **$** with commas). **WFIR_EALT** totals: **USD** (see NRI technical documentation).",
         "",
         "## 1. WFIR_EXPB (building exposure) by WFIR_RISKR",
         "",
@@ -340,26 +410,24 @@ def main() -> None:
     lines.extend(
         [
             "",
-            "## 2. WFIR_EXPP (population exposure) by WFIR_RISKR",
+            "## 2. WFIR_EALT (expected annual loss) by county",
             "",
-            "| WFIR_RISKR | Tracts | Sum (persons) |",
+            "| County | # of Tracts | Expected annual loss (USD) |",
             "| --- | ---: | ---: |",
         ]
     )
-    for label, v in rows:
-        n = int(v["tracts"])
-        s = v["expp"]
-        lines.append(f"| {label} | {n} | {fmt_persons_sum(s)} |")
+    for label, ntract, ealt in county_rows:
+        lines.append(f"| {label} | {ntract} | {round(ealt):,} |")
 
     lines.append("")
     lines.append("Not a FEMA publication; confirm units in the NRI technical documentation.")
     lines.append("")
     md_path.write_text("\n".join(lines), encoding="utf-8")
 
-    args.html_out.write_text(build_html(rows), encoding="utf-8")
+    args.html_out.write_text(build_html(rows, county_rows), encoding="utf-8")
 
     print(f"Wrote {csv_b}")
-    print(f"Wrote {csv_p}")
+    print(f"Wrote {csv_c}")
     print(f"Wrote {md_path}")
     print(f"Wrote {args.html_out}")
 

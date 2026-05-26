@@ -1,18 +1,15 @@
 #!/usr/bin/env python3
 """
-Build **line chart** HTML (Chart.js) of ICE BofA OAS by rating bucket, and optionally
-a **combined dashboard** with the borrowing-cost NPV table + the same chart.
+Build the **combined dashboard** HTML (Chart.js) of ICE BofA OAS by rating bucket
+plus the borrowing-cost NPV table when the NPV CSV is present.
 
 Reads the tidy CSV from ``fred_ice_bofa_oas_tidy.py`` (or ``--input``). Uses the
 last ``--years`` of data by default. **BBB+** is the mean of **A** and **BBB**
 per date (computed if not already present in the CSV). The **CCC & lower** strip is
 **not** drawn on the line chart (other buckets unchanged).
 
-Outputs (defaults under ``data/utilities/``):
-
-- ``ice_bofa_oas_line_chart.html`` — chart only
-- ``pge_oas_debt_dashboard.html`` — NPV table (from ``--npv-csv``) + chart (skipped
-  table if the NPV file is missing)
+Default output: ``data/utilities/pge_oas_debt_dashboard.html`` (NPV table from
+``--npv-csv`` when available; chart always included).
 
 ICE / FRED — respect license terms on the underlying series pages.
 """
@@ -57,12 +54,6 @@ def parse_args() -> argparse.Namespace:
         help="Tidy OAS CSV (default: data/utilities/ice_bofa_oas_tidy.csv).",
     )
     p.add_argument(
-        "--output",
-        "-o",
-        default="",
-        help="Output HTML (default: data/utilities/ice_bofa_oas_line_chart.html).",
-    )
-    p.add_argument(
         "--years",
         type=float,
         default=2.0,
@@ -77,11 +68,6 @@ def parse_args() -> argparse.Namespace:
         "--dashboard-output",
         default="",
         help="Combined table+chart HTML (default: data/utilities/pge_oas_debt_dashboard.html).",
-    )
-    p.add_argument(
-        "--no-dashboard",
-        action="store_true",
-        help="Do not write the combined dashboard HTML.",
     )
     return p.parse_args()
 
@@ -203,39 +189,6 @@ if (_oasEl) {{
     }}
   }});
 }}
-"""
-
-
-def build_html(*, labels: list[str], series: dict[str, list[float | None]], title: str) -> str:
-    payload = json.dumps(chart_payload_dict(labels, series), ensure_ascii=True)
-    return f"""<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="utf-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>{title}</title>
-<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
-<style>
-  body {{ font-family: system-ui, sans-serif; margin: 0; padding: 1rem; background: #f8fafc; color: #0f172a; }}
-  h1 {{ font-size: 1.1rem; margin: 0 0 0.5rem; }}
-  p.meta {{ font-size: 0.8rem; color: #64748b; margin: 0 0 1rem; }}
-  .wrap {{ max-width: 1100px; margin: 0 auto; background: #fff; padding: 1rem; border-radius: 8px;
-    box-shadow: 0 1px 3px rgb(0 0 0 / 0.08); }}
-  canvas {{ max-height: 70vh; }}
-</style>
-</head>
-<body>
-<div class="wrap">
-  <h1>{title}</h1>
-  <p class="meta">Option-adjusted spread (%), daily. <strong>BBB+</strong> = average of <strong>A</strong> and <strong>BBB</strong> each day.
-    IG buckets (AAA–A) in greens; HY (BBB–B) in reds; <strong>BBB+</strong> black (wide line). CCC & lower excluded from this chart. Not investment advice.</p>
-  <canvas id="c" height="420"></canvas>
-</div>
-<script>
-{chart_init_script(payload, canvas_id="c")}
-</script>
-</body>
-</html>
 """
 
 
@@ -458,9 +411,6 @@ def main() -> int:
     in_path = (args.input or "").strip() or os.path.join(
         repo_root(), "data", "utilities", "ice_bofa_oas_tidy.csv"
     )
-    out_path = (args.output or "").strip() or os.path.join(
-        repo_root(), "data", "utilities", "ice_bofa_oas_line_chart.html"
-    )
     if not os.path.isfile(in_path):
         print(f"Input not found: {in_path}", file=sys.stderr)
         return 2
@@ -486,41 +436,39 @@ def main() -> int:
         if any(v is not None for v in vals):
             series[b] = vals
 
-    t0, t1 = dates[0], dates[-1]
-    title = f"ICE BofA OAS by rating ({t0} to {t1})"
-    html = build_html(labels=dates, series=series, title=title)
-    os.makedirs(os.path.dirname(out_path) or ".", exist_ok=True)
-    with open(out_path, "w", encoding="utf-8") as f:
-        f.write(html)
-    print(f"Wrote {out_path} ({len(dates)} days, {len(series)} series)", file=sys.stderr)
+    if not series:
+        print("No series to plot after filtering.", file=sys.stderr)
+        return 2
 
-    if not args.no_dashboard:
-        dash_path = (args.dashboard_output or "").strip() or os.path.join(
-            repo_root(), "data", "utilities", "pge_oas_debt_dashboard.html"
-        )
-        npv_path = (args.npv_csv or "").strip() or os.path.join(
-            repo_root(), "data", "utilities", "pge_borrowing_cost_npv_by_rating.csv"
-        )
-        npv_rows: list[dict[str, str]] | None = None
-        npv_note = (
-            "NPV table not found. Run: "
-            "<code>python3 scripts/pge_proforma_2026_debt_sensitivity.py</code>"
-        )
-        if os.path.isfile(npv_path):
-            npv_rows = read_npv_csv(npv_path)
-            if not npv_rows:
-                npv_rows = None
-                npv_note = "NPV file was empty."
-        dash_html = build_dashboard_html(
-            labels=dates,
-            series=series,
-            npv_rows=npv_rows,
-            npv_missing_note=npv_note,
-        )
-        os.makedirs(os.path.dirname(dash_path) or ".", exist_ok=True)
-        with open(dash_path, "w", encoding="utf-8") as f:
-            f.write(dash_html)
-        print(f"Wrote {dash_path}", file=sys.stderr)
+    dash_path = (args.dashboard_output or "").strip() or os.path.join(
+        repo_root(), "data", "utilities", "pge_oas_debt_dashboard.html"
+    )
+    npv_path = (args.npv_csv or "").strip() or os.path.join(
+        repo_root(), "data", "utilities", "pge_borrowing_cost_npv_by_rating.csv"
+    )
+    npv_rows: list[dict[str, str]] | None = None
+    npv_note = (
+        "NPV table not found. Run: "
+        "<code>python3 scripts/pge_proforma_2026_debt_sensitivity.py</code>"
+    )
+    if os.path.isfile(npv_path):
+        npv_rows = read_npv_csv(npv_path)
+        if not npv_rows:
+            npv_rows = None
+            npv_note = "NPV file was empty."
+    dash_html = build_dashboard_html(
+        labels=dates,
+        series=series,
+        npv_rows=npv_rows,
+        npv_missing_note=npv_note,
+    )
+    os.makedirs(os.path.dirname(dash_path) or ".", exist_ok=True)
+    with open(dash_path, "w", encoding="utf-8") as f:
+        f.write(dash_html)
+    print(
+        f"Wrote {dash_path} ({len(dates)} days, {len(series)} series)",
+        file=sys.stderr,
+    )
 
     return 0
 

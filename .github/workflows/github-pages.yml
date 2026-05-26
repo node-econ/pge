@@ -48,8 +48,7 @@ jobs:
             cp "$f" _site/wildfire/
           done
           for f in \
-            data/utilities/pge_oas_debt_dashboard.html \
-            data/utilities/ice_bofa_oas_line_chart.html
+            data/utilities/pge_oas_debt_dashboard.html
           do
             test -f "$f" || { echo "missing: $f" >&2; exit 1; }
             cp "$f" _site/utilities/

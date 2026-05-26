@@ -49,17 +49,12 @@ Columns: `observation_date`, `rating_bucket`, `fred_index_segment` (`US_Corporat
 
 ## `ice_bofa_oas_line_chart.py`
 
-Reads the tidy CSV (no FRED calls) and writes:
-
-- **`data/utilities/ice_bofa_oas_line_chart.html`** — OAS line chart only
-- **`data/utilities/pge_oas_debt_dashboard.html`** — **Borrowing cost by credit rating** (NPV table with interactive issuance amount + OAS chart; reads `pge_borrowing_cost_npv_by_rating.csv` if present; otherwise shows a short notice to run the proforma script)
+Reads the tidy CSV (no FRED calls) and writes **`data/utilities/pge_oas_debt_dashboard.html`** — **Borrowing cost by credit rating** (NPV table with interactive issuance amount + OAS chart; reads `pge_borrowing_cost_npv_by_rating.csv` if present; otherwise shows a short notice to run the proforma script).
 
 **BBB+** is the daily mean of **A** and **BBB** (computed if missing from the CSV). Styling: **BBB+** = black, thicker stroke; **AAA / AA / A** = greens; **BBB / BB / B** = reds. The **line chart** and **NPV table** both omit **CCC & lower** (rows are filtered when reading the NPV CSV for the dashboard).
 
 ```bash
 python3 scripts/ice_bofa_oas_line_chart.py --years 2
-# Chart HTML only (omit --no-dashboard to also write the combined OAS + NPV dashboard):
-python3 scripts/ice_bofa_oas_line_chart.py --no-dashboard
 ```
 
 Open the HTML in a browser (Chart.js loads from a CDN).
@@ -91,7 +86,7 @@ python3 scripts/ferc1_form1_export.py --years 2024 2025
 
 ## `nri_wfir_exposure_by_riskr.py`
 
-Summarizes **wildfire** building exposure (`WFIR_EXPB`) and population exposure (`WFIR_EXPP`) by `WFIR_RISKR` from an NRI tract **`.dbf`**. Rows are **highest risk first**; **EXPB** totals use **$** and **millions of USD**; **EXPP** totals are **whole persons**. Writes `spatial/nri_wfir_*.csv`, `spatial/nri_wfir_exposure_by_riskr.md`, and **`web/nri_wfir_exposure.html`** (includes a Leaflet map over OpenStreetMap; loads **`web/NRI_Census_Tracts_PGE.geojson`**). See [NRI technical documentation](https://hazards.fema.gov/nri/technical-documentation).
+Summarizes **wildfire** building exposure (`WFIR_EXPB`) by **risk category** (`WFIR_RISKR`) and **expected annual loss** (`WFIR_EALT`) **by county** (tracts grouped by `STCOFIPS` from the same `.dbf`). Risk table rows are **highest risk first**; **EXPB** totals use **$** and **millions of USD**; county **EALT** is summed in **USD**. Writes `spatial/nri_wfir_expb_by_riskr.csv`, `spatial/nri_wfir_ealt_by_county.csv`, `spatial/nri_wfir_exposure_by_riskr.md`, and **`web/nri_wfir_exposure.html`** (Leaflet map over OpenStreetMap; loads **`web/NRI_Census_Tracts_PGE.geojson`** — include `WFIR_EALT` in the GeoJSON via `export_nri_pge_geojson.py`). See [NRI technical documentation](https://hazards.fema.gov/nri/technical-documentation).
 
 ```bash
 python3 scripts/export_nri_pge_geojson.py

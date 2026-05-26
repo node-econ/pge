@@ -3,13 +3,12 @@
 <head>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>NRI wildfire exposure by risk rating</title>
+<title>NRI wildfire: tract exposure and county expected loss</title>
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
 <style>
   body { font-family: system-ui, sans-serif; margin: 0; padding: 1rem; background: #f1f5f9; color: #0f172a; }
   h1 { font-size: 1.2rem; margin: 0 0 0.5rem; }
   h2 { font-size: 1.05rem; margin: 1.25rem 0 0.5rem; color: #0f172a; }
-  p.meta { font-size: 0.82rem; color: #64748b; margin: 0 0 1rem; line-height: 1.45; max-width: 52rem; }
   p.back { font-size: 0.88rem; margin: 0 0 1rem; }
   .wrap { max-width: 52rem; margin: 0 auto 1rem; background: #fff; padding: 1rem 1.25rem; border-radius: 8px;
     box-shadow: 0 1px 3px rgb(0 0 0 / 0.08); }
@@ -21,24 +20,22 @@
   a { color: #2563eb; }
   #map { height: min(52vh, 520px); width: 100%; border-radius: 8px; border: 1px solid #e2e8f0; margin-top: 0.35rem; }
   .map-note { font-size: 0.78rem; color: #64748b; margin: 0.35rem 0 0; }
+  footer.footnotes { font-size: 0.78rem; color: #475569; line-height: 1.55; max-width: 52rem; margin: 0 auto 1.5rem; }
+  footer.footnotes h2 { font-size: 0.95rem; margin: 0 0 0.4rem; color: #334155; }
+  footer.footnotes ol { margin: 0; padding-left: 1.25rem; }
+  footer.footnotes li { margin: 0.35rem 0; }
 </style>
 </head>
 <body>
   <p class="back"><a href="index.html">← PGE reports</a></p>
   <div class="wrap">
-    <h1>NRI wildfire: exposure by risk rating</h1>
-    <p class="meta">FEMA National Risk Index census tracts (PGE clip). Rows: <strong>WFIR_RISKR</strong> (highest risk first).
-      <strong>WFIR_EXPB</strong> = building exposure — <strong>total</strong> in millions of USD (table shows <strong>$</strong> with comma grouping).
-      <strong>WFIR_EXPP</strong> = population exposure — <strong>total persons</strong> (comma grouping).
-      Source: <code>NRI_Census_Tracts_PGE.dbf</code>. Map: tract boundaries from <code>NRI_Census_Tracts_PGE.geojson</code> (EPSG:4326, simplified) over
-      <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>. Not a FEMA publication; confirm definitions in the
-      <a href="https://hazards.fema.gov/nri/technical-documentation">NRI technical documentation</a>.</p>
+    <h1>NRI wildfire: tract exposure and county expected loss</h1>
     <h2>Tract map (wildfire risk rating)</h2>
     <div id="map" role="img" aria-label="Map of NRI census tracts colored by WFIR_RISKR"></div>
     <p class="map-note">Tiles © OpenStreetMap contributors. Click a tract for attributes.</p>
-    <h2>1. Building exposure (WFIR_EXPB) by WFIR_RISKR</h2>
+    <h2>1. Building Exposure to Wildfire Risk by Census Tract</h2>
     <table>
-      <thead><tr><th>WFIR_RISKR</th><th class="num">Tracts</th><th class="num">Sum (million USD)</th></tr></thead>
+      <thead><tr><th>Risk Category</th><th class="num">Tracts</th><th class="num">Sum (million USD)</th></tr></thead>
       <tbody>
 <tr><td>Very High</td><td class="num">2</td><td class="num">$1,892.94</td></tr>
 <tr><td>Relatively High</td><td class="num">1</td><td class="num">$469.79</td></tr>
@@ -48,19 +45,35 @@
 <tr><td>No Rating</td><td class="num">82</td><td class="num">$0.00</td></tr>
       </tbody>
     </table>
-    <h2>2. Population exposure (WFIR_EXPP) by WFIR_RISKR</h2>
+    <h2>2. Expected annual loss from wildfire (WFIR_EALT) by county</h2>
     <table>
-      <thead><tr><th>WFIR_RISKR</th><th class="num">Tracts</th><th class="num">Sum (persons)</th></tr></thead>
+      <thead><tr><th>County</th><th class="num"># of Tracts</th><th class="num">Expected Annual Loss</th></tr></thead>
       <tbody>
-<tr><td>Very High</td><td class="num">2</td><td class="num">5,772</td></tr>
-<tr><td>Relatively High</td><td class="num">1</td><td class="num">1,207</td></tr>
-<tr><td>Relatively Moderate</td><td class="num">7</td><td class="num">8,056</td></tr>
-<tr><td>Relatively Low</td><td class="num">58</td><td class="num">46,573</td></tr>
-<tr><td>Very Low</td><td class="num">329</td><td class="num">90,916</td></tr>
-<tr><td>No Rating</td><td class="num">82</td><td class="num">0</td></tr>
+<tr><td>Wasco, OR</td><td class="num">1</td><td class="num">$8,868,191</td></tr>
+<tr><td>Hood River, OR</td><td class="num">1</td><td class="num">$2,090,859</td></tr>
+<tr><td>Clackamas, OR</td><td class="num">87</td><td class="num">$1,084,028</td></tr>
+<tr><td>Multnomah, OR</td><td class="num">165</td><td class="num">$154,246</td></tr>
+<tr><td>Marion, OR</td><td class="num">64</td><td class="num">$74,722</td></tr>
+<tr><td>Washington, OR</td><td class="num">133</td><td class="num">$64,724</td></tr>
+<tr><td>Yamhill, OR</td><td class="num">14</td><td class="num">$58,169</td></tr>
+<tr><td>Polk, OR</td><td class="num">8</td><td class="num">$26,264</td></tr>
+<tr><td>Tillamook, OR</td><td class="num">4</td><td class="num">$20,308</td></tr>
+<tr><td>Columbia, OR</td><td class="num">2</td><td class="num">$909</td></tr>
       </tbody>
     </table>
   </div>
+  <footer class="footnotes">
+    <h2>Notes</h2>
+    <ol>
+      <li>FEMA National Risk Index census tracts (PGE clip). Table 1 groups tracts by <strong>WFIR_RISKR</strong> (wildfire risk category), highest risk first.
+        <strong>WFIR_EXPB</strong> is building exposure — tract values are summed; amounts are in millions of USD in the source layer (table shows <strong>$</strong> with comma grouping).
+        Source attributes: <code>NRI_Census_Tracts_PGE.dbf</code>. Map: tract boundaries from <code>NRI_Census_Tracts_PGE.geojson</code> (EPSG:4326, simplified) over
+        <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>. Not a FEMA publication; confirm definitions in the
+        <a href="https://hazards.fema.gov/nri/technical-documentation">NRI technical documentation</a>.</li>
+      <li>Table 2 aggregates <strong>WFIR_EALT</strong> (expected annual loss from wildfire) across tracts in each county. Counties use the tract attribute <strong>STCOFIPS</strong> (state + county FIPS);
+        the <strong>County</strong> column uses <strong>COUNTY</strong> and <strong>STATEABBRV</strong> from the same NRI tract record when present. This matches the tract → county geography in the published GeoJSON used on the map.</li>
+    </ol>
+  </footer>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
 (function () {
@@ -87,6 +100,11 @@
     if (v == null || isNaN(v)) return '—';
     return '$' + (Number(v) / 1e6).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + 'M';
   }
+  function fmtUsdEalt(v) {
+    if (v == null || isNaN(v)) return '—';
+    return '$' + Math.round(Number(v)).toLocaleString();
+  }
+
   function fmtPop(v) {
     if (v == null || isNaN(v)) return '—';
     return Math.round(Number(v)).toLocaleString();
@@ -107,12 +125,14 @@
         },
         onEachFeature: function (feature, lyr) {
           const p = feature.properties || {};
+          const countyLine = (p.COUNTY && p.STATEABBRV) ? (p.COUNTY + ', ' + p.STATEABBRV) : (p.COUNTY || p.STATEABBRV || '');
           const lines = [
             '<strong>' + (p.TRACTFIPS || '') + '</strong>',
-            p.COUNTY ? 'County: ' + p.COUNTY : '',
+            countyLine ? 'County: ' + countyLine : '',
             p.WFIR_RISKR ? 'Wildfire risk: ' + p.WFIR_RISKR : '',
             'Building exposure: ' + fmtUsdM(p.WFIR_EXPB),
-            'Population exposure: ' + fmtPop(p.WFIR_EXPP) + ' persons'
+            'Population exposure: ' + fmtPop(p.WFIR_EXPP) + ' persons',
+            (p.WFIR_EALT != null && !isNaN(p.WFIR_EALT)) ? ('Expected annual loss (WFIR_EALT): ' + fmtUsdEalt(p.WFIR_EALT)) : ''
           ].filter(Boolean);
           lyr.bindPopup(lines.join('<br/>'));
         }
