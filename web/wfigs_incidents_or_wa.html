@@ -15,7 +15,9 @@
     .banner code { font-size: 0.84rem; background: rgb(255 255 255 / 0.7); padding: 0.1rem 0.35rem; border-radius: 4px; }
     .wrap { max-width: 56rem; margin: 0 auto; padding: 1rem 1rem 1.25rem; }
     h1 { font-size: 1.15rem; margin: 0 0 0.35rem; }
-    p.meta { font-size: 0.82rem; color: #64748b; margin: 0 0 0.75rem; line-height: 1.45; max-width: 52rem; }
+    p.meta { font-size: 0.82rem; color: #64748b; margin: 1rem 0 0; line-height: 1.45; max-width: 52rem; }
+    footer.page-notes { margin-top: 1.25rem; padding-top: 1rem; border-top: 1px solid #e2e8f0; }
+    footer.page-notes h2 { font-size: 0.95rem; margin: 0 0 0.5rem; color: #334155; }
     p.back { font-size: 0.88rem; margin: 0 0 0.75rem; }
     a { color: #2563eb; }
     #map { height: min(70vh, 640px); width: 100%; border-radius: 8px; border: 1px solid #e2e8f0;
@@ -57,18 +59,6 @@
   <div class="wrap">
     <p class="back"><a href="index.html">← PGE reports</a></p>
     <h1>WFIGS current incidents (Oregon)</h1>
-    <p class="meta">
-      Points from <code>data/wildfire/wfigs_incident_locations_or.geojson</code> (NIFC WFIGS current incident locations, <code>POOState = US-OR</code>).
-      Transmission lines from <code>data/wildfire/transmission_lines_wgs84.geojson</code> (exported by <code>wfigs_nearest_transmission.py</code>).
-      <strong>PGE service area</strong> on the map: census tracts from <code>web/NRI_Census_Tracts_PGE.geojson</code> (≈60% transparent fill).
-      <span id="fetch-meta"></span>
-      Tiles: <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>.
-      <strong>Nearest transmission line</strong> table is below the map (from JSON). <strong>NRI tract WFIR_RISKR</strong> is joined when the point lies inside <code>web/NRI_Census_Tracts_PGE.geojson</code>; otherwise the table cell is blank. Also:
-      <a id="wf-csv-link" href="../data/wildfire/incidents_nearest_transmission.csv">CSV</a>,
-      <a id="wf-md-link" href="../data/wildfire/incidents_nearest_transmission.md">Markdown</a>.
-      Regenerate: <code>python3 scripts/wfigs_nearest_transmission.py</code> (GDAL <code>osgeo</code> + <code>ogr2ogr</code> on PATH).
-      <strong>Not</strong> an official evacuation or operations map — decision support only; follow NIFC Open Data terms.
-    </p>
     <div id="map" role="application" aria-label="Map of Oregon wildfire incident points"></div>
     <p class="map-foot">Blue tint: PGE service area (NRI census tracts). Click a fire marker or a table row to highlight the nearest transmission line (full shapefile feature used in the distance test). Markers: popup for incident details.</p>
     <div id="load-err" class="err" style="display:none;"></div>
@@ -93,6 +83,23 @@
       </table>
     </div>
     <p id="nearest-table-missing" style="display:none;"></p>
+
+    <footer class="page-notes">
+      <h2>About this map</h2>
+      <p class="meta">
+        Points from <code>data/wildfire/wfigs_incident_locations_or.geojson</code> (NIFC WFIGS current incident locations, <code>POOState = US-OR</code>).
+        Transmission lines from <code>data/wildfire/transmission_lines_wgs84.geojson</code> (exported by <code>wfigs_nearest_transmission.py</code>).
+        <strong>PGE service area</strong> on the map: census tracts from <code>web/NRI_Census_Tracts_PGE.geojson</code> (≈60% transparent fill).
+        <span id="fetch-meta"></span>
+        Tiles: <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>.
+        The <strong>nearest transmission line</strong> table above is built from JSON.
+        <strong>Risk Level</strong> (NRI <code>WFIR_RISKR</code>) is joined when the point lies inside <code>web/NRI_Census_Tracts_PGE.geojson</code>; otherwise the table cell is blank. Also:
+        <a id="wf-csv-link" href="../data/wildfire/incidents_nearest_transmission.csv">CSV</a>,
+        <a id="wf-md-link" href="../data/wildfire/incidents_nearest_transmission.md">Markdown</a>.
+        Regenerate: <code>python3 scripts/wfigs_nearest_transmission.py</code> (GDAL <code>osgeo</code> + <code>ogr2ogr</code> on PATH).
+        <strong>Not</strong> an official evacuation or operations map — decision support only; follow NIFC Open Data terms.
+      </p>
+    </footer>
   </div>
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <script>
@@ -229,7 +236,7 @@
       var nearestPayload = results[2];
       var pgeTractsData = results[3];
 
-      if (incidentData._meta && incidentData._meta.fetched_at_utc) {
+      if (metaEl && incidentData._meta && incidentData._meta.fetched_at_utc) {
         metaEl.textContent = 'Snapshot: ' + incidentData._meta.fetched_at_utc + '. ';
       }
 
@@ -239,7 +246,7 @@
           interactive: false
         });
         pgeLayer.addTo(map);
-        metaEl.textContent += 'PGE tract overlay loaded. ';
+        if (metaEl) metaEl.textContent += 'PGE tract overlay loaded. ';
       }
 
       var nearestByIrwin = {};
