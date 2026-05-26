@@ -11,6 +11,11 @@
 .DS_Store
 node_modules/
 
+# Python bytecode
+__pycache__/
+*.py[cod]
+*$py.class
+
 # FERC taxonomy extract is huge; not needed for published dashboards
 data/utilities/ferc1_taxonomy_extracted/
 
