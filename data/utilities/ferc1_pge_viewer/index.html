@@ -37,7 +37,13 @@ async function load() {
   const data = await (await fetch('./pge_form1_financials.json')).json();
   document.getElementById('title').textContent = 'FERC Form 1 — ' + data.company;
   document.getElementById('sub').textContent = (data.amount_display_note || '') + ' '
-    + (data.year_meta || []).map(m => m.year + ': ' + (m.placeholder ? '(pending)' : m.xbrl_member)).join(' · ');
+    + (data.year_meta || []).map(function (m) {
+        if (m.placeholder) return m.year + ': (pending)';
+        if (m.forecast) {
+          return m.year + ': ' + (m.forecast_note || 'Illustrative forecast') + ' — ' + (m.xbrl_member || '');
+        }
+        return m.year + ': ' + (m.xbrl_member || '');
+      }).join(' · ');
   const years = data.years;
   const tabs = document.getElementById('tabs');
   const main = document.getElementById('main');
@@ -59,7 +65,11 @@ async function load() {
     sec.className = 'panel' + (b.className ? '' : ' hidden');
     if (!b.className) sec.classList.add('hidden');
     let thead = '<tr><th>Line</th>';
-    for (const y of years) thead += '<th class="num">' + y + ' (US$ M)</th>';
+    for (const y of years) {
+      const m = (data.year_meta || []).find(x => x.year === y);
+      const suf = (m && m.forecast) ? ' (forecast)' : '';
+      thead += '<th class="num">' + y + suf + ' (US$ M)</th>';
+    }
     thead += '</tr>';
     sec.innerHTML = '<table><thead>' + thead + '</thead><tbody></tbody></table>';
     main.appendChild(sec);

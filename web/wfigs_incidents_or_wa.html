@@ -167,8 +167,8 @@
     var wfir = wfirByIrwin[key];
     var risk = wfir != null && wfir !== '' ? String(wfir) : '—';
     var rows = [
-      ['Risk Level', risk],
       ['Incident', props.IncidentName],
+      ['Risk Level', risk],
       ['County', props.POOCounty],
       ['Discovered', fmtDate(props.FireDiscoveryDateTime)],
       ['Modified', fmtDate(props.ModifiedOnDateTime_dt)],

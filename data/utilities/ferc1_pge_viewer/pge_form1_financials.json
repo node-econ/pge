@@ -5,11 +5,32 @@
     "pudl": "https://github.com/catalyst-cooperative/pudl"
   },
   "years": [
+    2021,
+    2022,
+    2023,
     2024,
     2025,
     2026
   ],
   "year_meta": [
+    {
+      "year": 2021,
+      "xbrl_member": "Portland_General_Electric_Company_form1_Q4_1649808303.xbrl",
+      "form_taxonomy_version": "2022-01-01",
+      "placeholder": false
+    },
+    {
+      "year": 2022,
+      "xbrl_member": "Portland_General_Electric_Company_form1_Q4_1681505942.xbrl",
+      "form_taxonomy_version": "2022-01-01",
+      "placeholder": false
+    },
+    {
+      "year": 2023,
+      "xbrl_member": "Portland_General_Electric_Company_form1_Q4_1713472896.xbrl",
+      "form_taxonomy_version": "2023-11-01",
+      "placeholder": false
+    },
     {
       "year": 2024,
       "xbrl_member": "Portland_General_Electric_Company_form1_Q4_1744404205.xbrl",
@@ -24,92 +45,27 @@
     },
     {
       "year": 2026,
-      "xbrl_member": null,
+      "xbrl_member": "(illustrative forecast \u00d71.03)",
       "form_taxonomy_version": null,
-      "placeholder": true
+      "placeholder": false,
+      "forecast": true,
+      "forecast_note": "Illustrative only: each line uses the nearest prior year with a value \u00d7 1.03."
     }
   ],
   "amount_display": "usd_millions_two_decimals",
-  "amount_display_note": "Amounts in millions of USD (value \u00f7 1e6, two decimal places). Placeholder years have no filing data yet.",
+  "amount_display_note": "Amounts in millions of USD (value \u00f7 1e6, two decimal places). 2026 is an illustrative forecast only (each line: nearest prior year with data \u00d7 1.03). Other columns are from FERC Form 1 XBRL filings.",
   "income_statement": [
-    {
-      "concept": "ScheduleStatementOfIncomeAbstract",
-      "label": "Schedule Statement Of Income",
-      "depth": 0,
-      "by_year": {
-        "2024": null,
-        "2025": null,
-        "2026": null
-      }
-    },
-    {
-      "concept": "ElectricUtilityMember",
-      "label": "Electric Utility Member",
-      "depth": 4,
-      "by_year": {
-        "2024": null,
-        "2025": null,
-        "2026": null
-      }
-    },
-    {
-      "concept": "GasUtilityMember",
-      "label": "Gas Utility Member",
-      "depth": 4,
-      "by_year": {
-        "2024": null,
-        "2025": null,
-        "2026": null
-      }
-    },
-    {
-      "concept": "OtherUtilityMember",
-      "label": "Other Utility Member",
-      "depth": 4,
-      "by_year": {
-        "2024": null,
-        "2025": null,
-        "2026": null
-      }
-    },
-    {
-      "concept": "StatementOfIncomeLineItems",
-      "label": "Statement Of Income Line Items",
-      "depth": 2,
-      "by_year": {
-        "2024": null,
-        "2025": null,
-        "2026": null
-      }
-    },
-    {
-      "concept": "UtilityOperatingIncomeAbstract",
-      "label": "Utility Operating Income",
-      "depth": 3,
-      "by_year": {
-        "2024": null,
-        "2025": null,
-        "2026": null
-      }
-    },
     {
       "concept": "OperatingRevenues",
       "label": "Operating Revenues",
       "depth": 4,
       "by_year": {
+        "2021": "2415154366",
+        "2022": "2702424185",
+        "2023": "2966551020",
         "2024": "3460714742",
         "2025": "3548184245",
-        "2026": null
-      }
-    },
-    {
-      "concept": "OperatingExpensesAbstract",
-      "label": "Operating Expenses",
-      "depth": 3,
-      "by_year": {
-        "2024": null,
-        "2025": null,
-        "2026": null
+        "2026": "3654629772"
       }
     },
     {
@@ -117,9 +73,12 @@
       "label": "Operation Expense",
       "depth": 4,
       "by_year": {
+        "2021": "1335310689",
+        "2022": "1536397416",
+        "2023": "1739144236",
         "2024": "2003804192",
         "2025": "1961359620",
-        "2026": null
+        "2026": "2020200409"
       }
     },
     {
@@ -127,9 +86,12 @@
       "label": "Maintenance Expense",
       "depth": 4,
       "by_year": {
+        "2021": "165907236",
+        "2022": "203629987",
+        "2023": "222811863",
         "2024": "274450195",
         "2025": "326003423",
-        "2026": null
+        "2026": "335783526"
       }
     },
     {
@@ -137,9 +99,12 @@
       "label": "Depreciation Expense",
       "depth": 4,
       "by_year": {
+        "2021": "318796594",
+        "2022": "335206965",
+        "2023": "361540625",
         "2024": "392816166",
         "2025": "525171285",
-        "2026": null
+        "2026": "540926424"
       }
     },
     {
@@ -147,9 +112,12 @@
       "label": "Depreciation Expense For Asset Retirement Costs",
       "depth": 4,
       "by_year": {
+        "2021": "2813130",
+        "2022": "3555122",
+        "2023": "3635829",
         "2024": "13420449",
         "2025": "1431028",
-        "2026": null
+        "2026": "1473959"
       }
     },
     {
@@ -157,19 +125,12 @@
       "label": "Amortization And Depletion Of Utility Plant",
       "depth": 4,
       "by_year": {
+        "2021": "57981551",
+        "2022": "60100949",
+        "2023": "65864461",
         "2024": "79219629",
         "2025": "3842149",
-        "2026": null
-      }
-    },
-    {
-      "concept": "AmortizationOfElectricPlantAcquisitionAdjustments",
-      "label": "Amortization Of Electric Plant Acquisition Adjustments",
-      "depth": 4,
-      "by_year": {
-        "2024": "0",
-        "2025": "0",
-        "2026": null
+        "2026": "3957413"
       }
     },
     {
@@ -177,19 +138,12 @@
       "label": "Amortization Of Property Losses Unrecovered Plant And Regulatory Study Costs",
       "depth": 4,
       "by_year": {
+        "2021": "1900000",
+        "2022": "283290",
+        "2023": "-82944",
         "2024": "1899953",
         "2025": "1900046",
-        "2026": null
-      }
-    },
-    {
-      "concept": "AmortizationOfConversionExpenses",
-      "label": "Amortization Of Conversion Expenses",
-      "depth": 4,
-      "by_year": {
-        "2024": "0",
-        "2025": "0",
-        "2026": null
+        "2026": "1957047"
       }
     },
     {
@@ -197,9 +151,12 @@
       "label": "Regulatory Debits",
       "depth": 4,
       "by_year": {
+        "2021": "42205195",
+        "2022": "23096438",
+        "2023": "24239596",
         "2024": "21600074",
         "2025": "30353150",
-        "2026": null
+        "2026": "31263744"
       }
     },
     {
@@ -207,9 +164,12 @@
       "label": "Regulatory Credits",
       "depth": 4,
       "by_year": {
+        "2021": "17083227",
+        "2022": "15271896",
+        "2023": "3402683",
         "2024": "16653804",
         "2025": "11724528",
-        "2026": null
+        "2026": "12076264"
       }
     },
     {
@@ -217,9 +177,12 @@
       "label": "Taxes Other Than Income Taxes Utility Operating Income",
       "depth": 4,
       "by_year": {
+        "2021": "143889438",
+        "2022": "154021039",
+        "2023": "161434174",
         "2024": "173230151",
         "2025": "187937578",
-        "2026": null
+        "2026": "193575705"
       }
     },
     {
@@ -227,9 +190,12 @@
       "label": "Income Taxes Operating Income",
       "depth": 4,
       "by_year": {
+        "2021": "7528447",
+        "2022": "9567596",
+        "2023": "9247886",
         "2024": "5845379",
         "2025": "6460018",
-        "2026": null
+        "2026": "6653819"
       }
     },
     {
@@ -237,9 +203,12 @@
       "label": "Income Taxes Utility Operating Income Other",
       "depth": 4,
       "by_year": {
+        "2021": "15676517",
+        "2022": "23960867",
+        "2023": "25127505",
         "2024": "13653558",
         "2025": "15751884",
-        "2026": null
+        "2026": "16224441"
       }
     },
     {
@@ -247,9 +216,12 @@
       "label": "Provisions For Deferred Income Taxes Utility Operating Income",
       "depth": 4,
       "by_year": {
+        "2021": "391473121",
+        "2022": "346448410",
+        "2023": "471976889",
         "2024": "830068797",
         "2025": "544565394",
-        "2026": null
+        "2026": "560902356"
       }
     },
     {
@@ -257,9 +229,12 @@
       "label": "Provision For Deferred Income Taxes Credit Operating Income",
       "depth": 4,
       "by_year": {
+        "2021": "391287302",
+        "2022": "342334727",
+        "2023": "466804780",
         "2024": "872487715",
         "2025": "647188660",
-        "2026": null
+        "2026": "666604320"
       }
     },
     {
@@ -267,9 +242,12 @@
       "label": "Investment Tax Credit Adjustments",
       "depth": 4,
       "by_year": {
+        "2021": "0",
+        "2022": "0",
+        "2023": "0",
         "2024": "60295123",
         "2025": "133710395",
-        "2026": null
+        "2026": "137721707"
       }
     },
     {
@@ -277,39 +255,12 @@
       "label": "Gains From Disposition Of Plant",
       "depth": 4,
       "by_year": {
+        "2021": "14621896",
+        "2022": "605776",
+        "2023": "0",
         "2024": "0",
         "2025": "0",
-        "2026": null
-      }
-    },
-    {
-      "concept": "LossesFromDispositionOfServiceCompanyPlant",
-      "label": "Losses From Disposition Of Service Company Plant",
-      "depth": 4,
-      "by_year": {
-        "2024": "0",
-        "2025": "0",
-        "2026": null
-      }
-    },
-    {
-      "concept": "GainsFromDispositionOfAllowances",
-      "label": "Gains From Disposition Of Allowances",
-      "depth": 4,
-      "by_year": {
-        "2024": "0",
-        "2025": "0",
-        "2026": null
-      }
-    },
-    {
-      "concept": "LossesFromDispositionOfAllowances",
-      "label": "Losses From Disposition Of Allowances",
-      "depth": 4,
-      "by_year": {
-        "2024": "0",
-        "2025": "0",
-        "2026": null
+        "2026": "0"
       }
     },
     {
@@ -317,9 +268,12 @@
       "label": "Accretion Expense",
       "depth": 4,
       "by_year": {
+        "2021": "3197046",
+        "2022": "2935076",
+        "2023": "2946089",
         "2024": "3163181",
         "2025": "3139198",
-        "2026": null
+        "2026": "3233374"
       }
     },
     {
@@ -327,19 +281,12 @@
       "label": "Gains From Disposition Of Environmental Credits",
       "depth": 4,
       "by_year": {
+        "2021": null,
+        "2022": null,
+        "2023": null,
         "2024": null,
         "2025": "33331250",
-        "2026": null
-      }
-    },
-    {
-      "concept": "LossesFromDispositionOfEnvironmentalCredits",
-      "label": "Losses From Disposition Of Environmental Credits",
-      "depth": 4,
-      "by_year": {
-        "2024": null,
-        "2025": "0",
-        "2026": null
+        "2026": "34331188"
       }
     },
     {
@@ -347,9 +294,12 @@
       "label": "Utility Operating Expenses",
       "depth": 4,
       "by_year": {
+        "2021": "2063686539",
+        "2022": "2340990756",
+        "2023": "2617678746",
         "2024": "2984325328",
         "2025": "3049380730",
-        "2026": null
+        "2026": "3140862152"
       }
     },
     {
@@ -357,39 +307,12 @@
       "label": "Net Utility Operating Income",
       "depth": 4,
       "by_year": {
+        "2021": "351467827",
+        "2022": "361433429",
+        "2023": "348872274",
         "2024": "476389414",
         "2025": "498803515",
-        "2026": null
-      }
-    },
-    {
-      "concept": "OtherIncomeAndDeductionsAbstract",
-      "label": "Other Income And Deductions",
-      "depth": 3,
-      "by_year": {
-        "2024": null,
-        "2025": null,
-        "2026": null
-      }
-    },
-    {
-      "concept": "OtherIncomeAbstract",
-      "label": "Other Income",
-      "depth": 4,
-      "by_year": {
-        "2024": null,
-        "2025": null,
-        "2026": null
-      }
-    },
-    {
-      "concept": "NonutilityOperatingIncomeAbstract",
-      "label": "Nonutility Operating Income",
-      "depth": 5,
-      "by_year": {
-        "2024": null,
-        "2025": null,
-        "2026": null
+        "2026": "513767620"
       }
     },
     {
@@ -397,9 +320,12 @@
       "label": "Revenues From Merchandising Jobbing And Contract Work",
       "depth": 6,
       "by_year": {
+        "2021": null,
+        "2022": null,
+        "2023": null,
         "2024": null,
         "2025": "60990",
-        "2026": null
+        "2026": "62820"
       }
     },
     {
@@ -407,9 +333,12 @@
       "label": "Costs And Expenses Of Merchandising Jobbing And Contract Work",
       "depth": 6,
       "by_year": {
+        "2021": null,
+        "2022": "4040",
+        "2023": "0",
         "2024": "0",
         "2025": "-28678",
-        "2026": null
+        "2026": "-29538"
       }
     },
     {
@@ -417,9 +346,12 @@
       "label": "Revenues From Nonutility Operations",
       "depth": 6,
       "by_year": {
+        "2021": "2707194",
+        "2022": "3412801",
+        "2023": "2900050",
         "2024": "3769578",
         "2025": "3560877",
-        "2026": null
+        "2026": "3667703"
       }
     },
     {
@@ -427,9 +359,12 @@
       "label": "Expenses Of Nonutility Operations",
       "depth": 6,
       "by_year": {
+        "2021": "4606580",
+        "2022": "5086681",
+        "2023": "5101217",
         "2024": "7021690",
         "2025": "4993741",
-        "2026": null
+        "2026": "5143553"
       }
     },
     {
@@ -437,9 +372,12 @@
       "label": "Nonoperating Rental Income",
       "depth": 6,
       "by_year": {
+        "2021": "512365",
+        "2022": "383537",
+        "2023": "221616",
         "2024": "308684",
         "2025": "-324157",
-        "2026": null
+        "2026": "-333882"
       }
     },
     {
@@ -447,9 +385,12 @@
       "label": "Equity In Earnings Of Subsidiary Companies",
       "depth": 6,
       "by_year": {
+        "2021": "1113932",
+        "2022": "691455",
+        "2023": "1075032",
         "2024": "1278305",
         "2025": "1862508",
-        "2026": null
+        "2026": "1918383"
       }
     },
     {
@@ -457,9 +398,12 @@
       "label": "Interest And Dividend Income",
       "depth": 6,
       "by_year": {
+        "2021": "356132",
+        "2022": "950598",
+        "2023": "4027081",
         "2024": "5954821",
         "2025": "3725004",
-        "2026": null
+        "2026": "3836754"
       }
     },
     {
@@ -467,9 +411,12 @@
       "label": "Allowance For Other Funds Used During Construction",
       "depth": 6,
       "by_year": {
+        "2021": "16515804",
+        "2022": "13599123",
+        "2023": "19200081",
         "2024": "23190377",
         "2025": "17686684",
-        "2026": null
+        "2026": "18217285"
       }
     },
     {
@@ -477,9 +424,12 @@
       "label": "Miscellaneous Nonoperating Income",
       "depth": 6,
       "by_year": {
+        "2021": "8011165",
+        "2022": "10402354",
+        "2023": "16263135",
         "2024": "17884638",
         "2025": "17734070",
-        "2026": null
+        "2026": "18266092"
       }
     },
     {
@@ -487,9 +437,12 @@
       "label": "Gain On Disposition Of Property",
       "depth": 6,
       "by_year": {
+        "2021": "229709",
+        "2022": "24765",
+        "2023": "0",
         "2024": "0",
         "2025": "2725",
-        "2026": null
+        "2026": "2807"
       }
     },
     {
@@ -497,19 +450,12 @@
       "label": "Other Income",
       "depth": 6,
       "by_year": {
+        "2021": "24839721",
+        "2022": "24373912",
+        "2023": "38585778",
         "2024": "45364713",
         "2025": "39343638",
-        "2026": null
-      }
-    },
-    {
-      "concept": "OtherIncomeDeductionsAbstract",
-      "label": "Other Income Deductions",
-      "depth": 5,
-      "by_year": {
-        "2024": null,
-        "2025": null,
-        "2026": null
+        "2026": "40523947"
       }
     },
     {
@@ -517,19 +463,12 @@
       "label": "Loss On Disposition Of Property",
       "depth": 6,
       "by_year": {
+        "2021": "60005",
+        "2022": "0",
+        "2023": null,
         "2024": null,
         "2025": null,
-        "2026": null
-      }
-    },
-    {
-      "concept": "MiscellaneousAmortization",
-      "label": "Miscellaneous Amortization",
-      "depth": 6,
-      "by_year": {
-        "2024": null,
-        "2025": null,
-        "2026": null
+        "2026": "0"
       }
     },
     {
@@ -537,9 +476,12 @@
       "label": "Donations",
       "depth": 6,
       "by_year": {
+        "2021": "2213410",
+        "2022": "2266554",
+        "2023": "2085895",
         "2024": "2448733",
         "2025": "2092812",
-        "2026": null
+        "2026": "2155596"
       }
     },
     {
@@ -547,9 +489,12 @@
       "label": "Life Insurance",
       "depth": 6,
       "by_year": {
+        "2021": "-3063217",
+        "2022": "4228435",
+        "2023": "-2695608",
         "2024": "-1865398",
         "2025": "-2996000",
-        "2026": null
+        "2026": "-3085880"
       }
     },
     {
@@ -557,9 +502,12 @@
       "label": "Penalties",
       "depth": 6,
       "by_year": {
+        "2021": "151133",
+        "2022": "733",
+        "2023": "26119",
         "2024": "217991",
         "2025": "4207",
-        "2026": null
+        "2026": "4333"
       }
     },
     {
@@ -567,9 +515,12 @@
       "label": "Expenditures For Certain Civic Political And Related Activities",
       "depth": 6,
       "by_year": {
+        "2021": "1385189",
+        "2022": "1273149",
+        "2023": "1187925",
         "2024": "1683614",
         "2025": "2329176",
-        "2026": null
+        "2026": "2399051"
       }
     },
     {
@@ -577,9 +528,12 @@
       "label": "Other Deductions",
       "depth": 6,
       "by_year": {
+        "2021": "4910313",
+        "2022": "549573",
+        "2023": "4974782",
         "2024": "11437125",
         "2025": "16406881",
-        "2026": null
+        "2026": "16899087"
       }
     },
     {
@@ -587,19 +541,12 @@
       "label": "Other Income Deductions",
       "depth": 6,
       "by_year": {
+        "2021": "5656833",
+        "2022": "8318444",
+        "2023": "5579113",
         "2024": "13922065",
         "2025": "17837076",
-        "2026": null
-      }
-    },
-    {
-      "concept": "TaxesApplicableToOtherIncomeAndDeductionsAbstract",
-      "label": "Taxes Applicable To Other Income And Deductions",
-      "depth": 5,
-      "by_year": {
-        "2024": null,
-        "2025": null,
-        "2026": null
+        "2026": "18372188"
       }
     },
     {
@@ -607,9 +554,12 @@
       "label": "Taxes Other Than Income Taxes Other Income And Deductions",
       "depth": 6,
       "by_year": {
+        "2021": "332094",
+        "2022": "365294",
+        "2023": "427618",
         "2024": "414051",
         "2025": "294082",
-        "2026": null
+        "2026": "302904"
       }
     },
     {
@@ -617,9 +567,12 @@
       "label": "Income Taxes Federal",
       "depth": 6,
       "by_year": {
+        "2021": "-4336194",
+        "2022": "-908375",
+        "2023": "1390231",
         "2024": "-4248414",
         "2025": "-4260284",
-        "2026": null
+        "2026": "-4388093"
       }
     },
     {
@@ -627,9 +580,12 @@
       "label": "Income Taxes Other",
       "depth": 6,
       "by_year": {
+        "2021": "-1849003",
+        "2022": "-386463",
+        "2023": "593999",
         "2024": "-1813370",
         "2025": "-1787239",
-        "2026": null
+        "2026": "-1840856"
       }
     },
     {
@@ -637,9 +593,12 @@
       "label": "Provision For Deferred Income Taxes Other Income And Deductions",
       "depth": 6,
       "by_year": {
+        "2021": "6678363",
+        "2022": "5809155",
+        "2023": "4895268",
         "2024": "8217792",
         "2025": "13664808",
-        "2026": null
+        "2026": "14074752"
       }
     },
     {
@@ -647,19 +606,12 @@
       "label": "Provision For Deferred Income Taxes Credit Other Income And Deductions",
       "depth": 6,
       "by_year": {
+        "2021": "1482208",
+        "2022": "3717411",
+        "2023": "2279544",
         "2024": "2702006",
         "2025": "8190868",
-        "2026": null
-      }
-    },
-    {
-      "concept": "InvestmentTaxCreditAdjustmentsNonutilityOperations",
-      "label": "Investment Tax Credit Adjustments Nonutility Operations",
-      "depth": 6,
-      "by_year": {
-        "2024": null,
-        "2025": null,
-        "2026": null
+        "2026": "8436594"
       }
     },
     {
@@ -667,9 +619,12 @@
       "label": "Investment Tax Credits",
       "depth": 6,
       "by_year": {
+        "2021": null,
+        "2022": null,
+        "2023": null,
         "2024": null,
         "2025": "8957",
-        "2026": null
+        "2026": "9226"
       }
     },
     {
@@ -677,9 +632,12 @@
       "label": "Taxes On Other Income And Deductions",
       "depth": 6,
       "by_year": {
+        "2021": "-656948",
+        "2022": "1162200",
+        "2023": "5027572",
         "2024": "-131947",
         "2025": "-288458",
-        "2026": null
+        "2026": "-297112"
       }
     },
     {
@@ -687,19 +645,12 @@
       "label": "Net Other Income And Deductions",
       "depth": 6,
       "by_year": {
+        "2021": "19839836",
+        "2022": "14893268",
+        "2023": "27979093",
         "2024": "31574595",
         "2025": "21795020",
-        "2026": null
-      }
-    },
-    {
-      "concept": "InterestChargesAbstract",
-      "label": "Interest Charges",
-      "depth": 5,
-      "by_year": {
-        "2024": null,
-        "2025": null,
-        "2026": null
+        "2026": "22448871"
       }
     },
     {
@@ -707,9 +658,12 @@
       "label": "Interest On Long Term Debt",
       "depth": 6,
       "by_year": {
+        "2021": "127313142",
+        "2022": "136366647",
+        "2023": "153441203",
         "2024": "195186585",
         "2025": "212570060",
-        "2026": null
+        "2026": "218947162"
       }
     },
     {
@@ -717,9 +671,12 @@
       "label": "Amortization Of Debt Discount And Expense",
       "depth": 6,
       "by_year": {
+        "2021": "1286222",
+        "2022": "1192613",
+        "2023": "1593767",
         "2024": "1539130",
         "2025": "1428894",
-        "2026": null
+        "2026": "1471761"
       }
     },
     {
@@ -727,19 +684,12 @@
       "label": "Amortization Of Loss On Reacquired Debt",
       "depth": 6,
       "by_year": {
+        "2021": "1594762",
+        "2022": "1594761",
+        "2023": "1260409",
         "2024": "1104802",
         "2025": "1115979",
-        "2026": null
-      }
-    },
-    {
-      "concept": "AmortizationOfPremiumOnDebtCredit",
-      "label": "Amortization Of Premium On Debt Credit",
-      "depth": 6,
-      "by_year": {
-        "2024": "0",
-        "2025": "0",
-        "2026": null
+        "2026": "1149458"
       }
     },
     {
@@ -747,19 +697,12 @@
       "label": "Amortization Of Gain On Reacquired Debt Credit",
       "depth": 6,
       "by_year": {
+        "2021": "8052",
+        "2022": "8052",
+        "2023": "2013",
         "2024": "0",
         "2025": "0",
-        "2026": null
-      }
-    },
-    {
-      "concept": "InterestOnDebtToAssociatedCompanies",
-      "label": "Interest On Debt To Associated Companies",
-      "depth": 6,
-      "by_year": {
-        "2024": "0",
-        "2025": "0",
-        "2026": null
+        "2026": "0"
       }
     },
     {
@@ -767,9 +710,12 @@
       "label": "Other Interest Expense",
       "depth": 6,
       "by_year": {
+        "2021": "4223453",
+        "2022": "5692958",
+        "2023": "10494708",
         "2024": "9172712",
         "2025": "9153903",
-        "2026": null
+        "2026": "9428520"
       }
     },
     {
@@ -777,9 +723,12 @@
       "label": "Allowance For Borrowed Funds Used During Construction Credit",
       "depth": 6,
       "by_year": {
+        "2021": "8492618",
+        "2022": "7376075",
+        "2023": "12742176",
         "2024": "15344389",
         "2025": "11263956",
-        "2026": null
+        "2026": "11601875"
       }
     },
     {
@@ -787,9 +736,12 @@
       "label": "Net Interest Charges",
       "depth": 6,
       "by_year": {
+        "2021": "125916909",
+        "2022": "137462852",
+        "2023": "154045898",
         "2024": "191658840",
         "2025": "213004880",
-        "2026": null
+        "2026": "219395026"
       }
     },
     {
@@ -797,69 +749,12 @@
       "label": "Income Before Extraordinary Items",
       "depth": 6,
       "by_year": {
+        "2021": "245390754",
+        "2022": "238863845",
+        "2023": "222805469",
         "2024": "316305169",
         "2025": "307593655",
-        "2026": null
-      }
-    },
-    {
-      "concept": "ExtraordinaryItemsAbstract",
-      "label": "Extraordinary Items",
-      "depth": 5,
-      "by_year": {
-        "2024": null,
-        "2025": null,
-        "2026": null
-      }
-    },
-    {
-      "concept": "ExtraordinaryIncome",
-      "label": "Extraordinary Income",
-      "depth": 6,
-      "by_year": {
-        "2024": null,
-        "2025": null,
-        "2026": null
-      }
-    },
-    {
-      "concept": "ExtraordinaryDeductions",
-      "label": "Extraordinary Deductions",
-      "depth": 6,
-      "by_year": {
-        "2024": null,
-        "2025": null,
-        "2026": null
-      }
-    },
-    {
-      "concept": "NetExtraordinaryItems",
-      "label": "Net Extraordinary Items",
-      "depth": 6,
-      "by_year": {
-        "2024": "0",
-        "2025": "0",
-        "2026": null
-      }
-    },
-    {
-      "concept": "IncomeTaxesExtraordinaryItems",
-      "label": "Income Taxes Extraordinary Items",
-      "depth": 6,
-      "by_year": {
-        "2024": null,
-        "2025": null,
-        "2026": null
-      }
-    },
-    {
-      "concept": "ExtraordinaryItemsAfterTaxes",
-      "label": "Extraordinary Items After Taxes",
-      "depth": 6,
-      "by_year": {
-        "2024": "0",
-        "2025": "0",
-        "2026": null
+        "2026": "316821465"
       }
     },
     {
@@ -867,61 +762,27 @@
       "label": "Net Income (Loss)",
       "depth": 3,
       "by_year": {
+        "2021": "245390754",
+        "2022": "238863845",
+        "2023": "222805469",
         "2024": "316305169",
         "2025": "307593655",
-        "2026": null
+        "2026": "316821465"
       }
     }
   ],
   "balance_sheet_assets": [
     {
-      "concept": "ScheduleComparativeBalanceSheetAssetsAndOtherDebitsAbstract",
-      "label": "Schedule Comparative Balance Sheet Assets And Other Debits",
-      "depth": 0,
-      "by_year": {
-        "2024": null,
-        "2025": null,
-        "2026": null
-      }
-    },
-    {
-      "concept": "ComparativeBalanceSheetLineItems",
-      "label": "Comparative Balance Sheet Line Items",
-      "depth": 2,
-      "by_year": {
-        "2024": null,
-        "2025": null,
-        "2026": null
-      }
-    },
-    {
-      "concept": "AssetsAndOtherDebitsAbstract",
-      "label": "Assets And Other Debits",
-      "depth": 3,
-      "by_year": {
-        "2024": null,
-        "2025": null,
-        "2026": null
-      }
-    },
-    {
-      "concept": "UtilityPlantAbstract",
-      "label": "Utility Plant",
-      "depth": 4,
-      "by_year": {
-        "2024": null,
-        "2025": null,
-        "2026": null
-      }
-    },
-    {
       "concept": "UtilityPlant",
       "label": "Utility Plant",
       "depth": 5,
       "by_year": {
+        "2021": "11855629261",
+        "2022": "12403927120",
+        "2023": "13294752697",
         "2024": "15111925280",
         "2025": "16218702929",
-        "2026": null
+        "2026": "16705264017"
       }
     },
     {
@@ -929,9 +790,12 @@
       "label": "Construction Work In Progress",
       "depth": 5,
       "by_year": {
+        "2021": "317489515",
+        "2022": "479229849",
+        "2023": "974517848",
         "2024": "569951129",
         "2025": "414862438",
-        "2026": null
+        "2026": "427308311"
       }
     },
     {
@@ -939,9 +803,12 @@
       "label": "Utility Plant And Construction Work In Progress",
       "depth": 5,
       "by_year": {
+        "2021": "12173118776",
+        "2022": "12883156969",
+        "2023": "14269270545",
         "2024": "15681876409",
         "2025": "16633565367",
-        "2026": null
+        "2026": "17132572328"
       }
     },
     {
@@ -949,9 +816,12 @@
       "label": "Accumulated Provision For Depreciation Amortization And Depletion Of Plant Utility",
       "depth": 5,
       "by_year": {
+        "2021": "5168097757",
+        "2022": "5495106410",
+        "2023": "5851760350",
         "2024": "6196192797",
         "2025": "6556171085",
-        "2026": null
+        "2026": "6752856218"
       }
     },
     {
@@ -959,79 +829,12 @@
       "label": "Utility Plant Net",
       "depth": 5,
       "by_year": {
+        "2021": "7005021019",
+        "2022": "7388050559",
+        "2023": "8417510195",
         "2024": "9485683612",
         "2025": "10077394282",
-        "2026": null
-      }
-    },
-    {
-      "concept": "NuclearFuelInProcessOfRefinementConversionEnrichmentAndFabrication",
-      "label": "Nuclear Fuel In Process Of Refinement Conversion Enrichment And Fabrication",
-      "depth": 5,
-      "by_year": {
-        "2024": "0",
-        "2025": "0",
-        "2026": null
-      }
-    },
-    {
-      "concept": "NuclearFuelMaterialsAndAssembliesStockAccountMajorOnly",
-      "label": "Nuclear Fuel Materials And Assemblies Stock Account Major Only",
-      "depth": 5,
-      "by_year": {
-        "2024": "0",
-        "2025": "0",
-        "2026": null
-      }
-    },
-    {
-      "concept": "NuclearFuelAssembliesInReactorMajorOnly",
-      "label": "Nuclear Fuel Assemblies In Reactor Major Only",
-      "depth": 5,
-      "by_year": {
-        "2024": "0",
-        "2025": "0",
-        "2026": null
-      }
-    },
-    {
-      "concept": "SpentNuclearFuelMajorOnly",
-      "label": "Spent Nuclear Fuel Major Only",
-      "depth": 5,
-      "by_year": {
-        "2024": "0",
-        "2025": "0",
-        "2026": null
-      }
-    },
-    {
-      "concept": "NuclearFuelUnderCapitalLeases",
-      "label": "Nuclear Fuel Under Capital Leases",
-      "depth": 5,
-      "by_year": {
-        "2024": "0",
-        "2025": "0",
-        "2026": null
-      }
-    },
-    {
-      "concept": "AccumulatedProvisionForAmortizationOfNuclearFuelAssemblies",
-      "label": "Accumulated Provision For Amortization Of Nuclear Fuel Assemblies",
-      "depth": 5,
-      "by_year": {
-        "2024": "0",
-        "2025": "0",
-        "2026": null
-      }
-    },
-    {
-      "concept": "NuclearFuelNet",
-      "label": "Nuclear Fuel Net",
-      "depth": 5,
-      "by_year": {
-        "2024": "0",
-        "2025": "0",
-        "2026": null
+        "2026": "10379716110"
       }
     },
     {
@@ -1039,39 +842,12 @@
       "label": "Utility Plant And Nuclear Fuel Net",
       "depth": 5,
       "by_year": {
+        "2021": "7005021019",
+        "2022": "7388050559",
+        "2023": "8417510195",
         "2024": "9485683612",
         "2025": "10077394282",
-        "2026": null
-      }
-    },
-    {
-      "concept": "OtherElectricPlantAdjustments",
-      "label": "Other Electric Plant Adjustments",
-      "depth": 5,
-      "by_year": {
-        "2024": "0",
-        "2025": "0",
-        "2026": null
-      }
-    },
-    {
-      "concept": "GasStoredUndergroundNoncurrent",
-      "label": "Gas Stored Underground Noncurrent",
-      "depth": 5,
-      "by_year": {
-        "2024": "0",
-        "2025": "0",
-        "2026": null
-      }
-    },
-    {
-      "concept": "OtherPropertyAndInvestmentsAbstract",
-      "label": "Other Property And Investments",
-      "depth": 4,
-      "by_year": {
-        "2024": null,
-        "2025": null,
-        "2026": null
+        "2026": "10379716110"
       }
     },
     {
@@ -1079,9 +855,12 @@
       "label": "Nonutility Property",
       "depth": 5,
       "by_year": {
+        "2021": "2595247",
+        "2022": "2870226",
+        "2023": "2916261",
         "2024": "2892161",
         "2025": "2892138",
-        "2026": null
+        "2026": "2978902"
       }
     },
     {
@@ -1089,19 +868,12 @@
       "label": "Accumulated Provision For Depreciation And Amortization Of Nonutility Property",
       "depth": 5,
       "by_year": {
+        "2021": "467810",
+        "2022": "465486",
+        "2023": "511360",
         "2024": "549606",
         "2025": "580889",
-        "2026": null
-      }
-    },
-    {
-      "concept": "InvestmentInAssociatedCompanies",
-      "label": "Investment In Associated Companies",
-      "depth": 5,
-      "by_year": {
-        "2024": "0",
-        "2025": "0",
-        "2026": null
+        "2026": "598316"
       }
     },
     {
@@ -1109,19 +881,12 @@
       "label": "Investment In Subsidiary Companies",
       "depth": 5,
       "by_year": {
+        "2021": "83200892",
+        "2022": "83892347",
+        "2023": "84967379",
         "2024": "86245684",
         "2025": "89052874",
-        "2026": null
-      }
-    },
-    {
-      "concept": "NoncurrentPortionOfAllowances",
-      "label": "Noncurrent Portion Of Allowances",
-      "depth": 5,
-      "by_year": {
-        "2024": "0",
-        "2025": "0",
-        "2026": null
+        "2026": "91724460"
       }
     },
     {
@@ -1129,39 +894,12 @@
       "label": "Other Investments",
       "depth": 5,
       "by_year": {
+        "2021": "4850418",
+        "2022": "5923767",
+        "2023": "9097650",
         "2024": "13246789",
         "2025": "18809411",
-        "2026": null
-      }
-    },
-    {
-      "concept": "SinkingFunds",
-      "label": "Sinking Funds",
-      "depth": 5,
-      "by_year": {
-        "2024": "0",
-        "2025": "0",
-        "2026": null
-      }
-    },
-    {
-      "concept": "DepreciationFund",
-      "label": "Depreciation Fund",
-      "depth": 5,
-      "by_year": {
-        "2024": "0",
-        "2025": "0",
-        "2026": null
-      }
-    },
-    {
-      "concept": "AmortizationFundFederal",
-      "label": "Amortization Fund Federal",
-      "depth": 5,
-      "by_year": {
-        "2024": "0",
-        "2025": "0",
-        "2026": null
+        "2026": "19373693"
       }
     },
     {
@@ -1169,19 +907,12 @@
       "label": "Other Special Funds",
       "depth": 5,
       "by_year": {
+        "2021": "96398039",
+        "2022": "80794848",
+        "2023": "73077737",
         "2024": "69963786",
         "2025": "84797541",
-        "2026": null
-      }
-    },
-    {
-      "concept": "SpecialFunds",
-      "label": "Special Funds",
-      "depth": 5,
-      "by_year": {
-        "2024": "0",
-        "2025": "0",
-        "2026": null
+        "2026": "87341467"
       }
     },
     {
@@ -1189,19 +920,12 @@
       "label": "Derivative Instrument Assets Long Term",
       "depth": 5,
       "by_year": {
+        "2021": "34946317",
+        "2022": "73435140",
+        "2023": "11107353",
         "2024": "2161907",
         "2025": "1449111",
-        "2026": null
-      }
-    },
-    {
-      "concept": "DerivativeInstrumentAssetsHedgesLongTerm",
-      "label": "Derivative Instrument Assets Hedges Long Term",
-      "depth": 5,
-      "by_year": {
-        "2024": "0",
-        "2025": "0",
-        "2026": null
+        "2026": "1492584"
       }
     },
     {
@@ -1209,29 +933,12 @@
       "label": "Other Property And Investments",
       "depth": 5,
       "by_year": {
+        "2021": "221523103",
+        "2022": "246450842",
+        "2023": "180655020",
         "2024": "173960721",
         "2025": "196420186",
-        "2026": null
-      }
-    },
-    {
-      "concept": "CurrentAndAccruedAssetsAbstract",
-      "label": "Current And Accrued Assets",
-      "depth": 4,
-      "by_year": {
-        "2024": null,
-        "2025": null,
-        "2026": null
-      }
-    },
-    {
-      "concept": "CashAndWorkingFunds",
-      "label": "Cash And Working Funds",
-      "depth": 5,
-      "by_year": {
-        "2024": "0",
-        "2025": "0",
-        "2026": null
+        "2026": "202312792"
       }
     },
     {
@@ -1239,9 +946,12 @@
       "label": "Cash",
       "depth": 5,
       "by_year": {
+        "2021": "8267481",
+        "2022": "15666550",
+        "2023": "4569354",
         "2024": "460719",
         "2025": "17030226",
-        "2026": null
+        "2026": "17541133"
       }
     },
     {
@@ -1249,19 +959,12 @@
       "label": "Special Deposits",
       "depth": 5,
       "by_year": {
+        "2021": "37141298",
+        "2022": "116528103",
+        "2023": "92079229",
         "2024": "125094853",
         "2025": "123237654",
-        "2026": null
-      }
-    },
-    {
-      "concept": "WorkingFunds",
-      "label": "Working Funds",
-      "depth": 5,
-      "by_year": {
-        "2024": "0",
-        "2025": "0",
-        "2026": null
+        "2026": "126934784"
       }
     },
     {
@@ -1269,19 +972,12 @@
       "label": "Temporary Cash Investments",
       "depth": 5,
       "by_year": {
+        "2021": "44000000",
+        "2022": "150000001",
+        "2023": "96842",
         "2024": "12000000",
         "2025": "59000000",
-        "2026": null
-      }
-    },
-    {
-      "concept": "NotesReceivable",
-      "label": "Notes Receivable",
-      "depth": 5,
-      "by_year": {
-        "2024": "0",
-        "2025": "0",
-        "2026": null
+        "2026": "60770000"
       }
     },
     {
@@ -1289,9 +985,12 @@
       "label": "Customer Accounts Receivable",
       "depth": 5,
       "by_year": {
+        "2021": "181230082",
+        "2022": "219473279",
+        "2023": "219789679",
         "2024": "231923765",
         "2025": "227154932",
-        "2026": null
+        "2026": "233969580"
       }
     },
     {
@@ -1299,9 +998,12 @@
       "label": "Other Accounts Receivable",
       "depth": 5,
       "by_year": {
+        "2021": "56123221",
+        "2022": "58776357",
+        "2023": "64204830",
         "2024": "58056268",
         "2025": "65100969",
-        "2026": null
+        "2026": "67053998"
       }
     },
     {
@@ -1309,19 +1011,12 @@
       "label": "Accumulated Provision For Uncollectible Accounts Credit",
       "depth": 5,
       "by_year": {
+        "2021": "26237603",
+        "2022": "12085787",
+        "2023": "9443726",
         "2024": "11815522",
         "2025": "12540157",
-        "2026": null
-      }
-    },
-    {
-      "concept": "NotesReceivableFromAssociatedCompanies",
-      "label": "Notes Receivable From Associated Companies",
-      "depth": 5,
-      "by_year": {
-        "2024": "0",
-        "2025": "0",
-        "2026": null
+        "2026": "12916362"
       }
     },
     {
@@ -1329,9 +1024,12 @@
       "label": "Accounts Receivable From Associated Companies",
       "depth": 5,
       "by_year": {
+        "2021": "1286504",
+        "2022": "1351058",
+        "2023": "1890454",
         "2024": "1786663",
         "2025": "17021",
-        "2026": null
+        "2026": "17532"
       }
     },
     {
@@ -1339,9 +1037,12 @@
       "label": "Fuel Stock",
       "depth": 5,
       "by_year": {
+        "2021": "25459349",
+        "2022": "29151034",
+        "2023": "28001414",
         "2024": "21338923",
         "2025": "20520498",
-        "2026": null
+        "2026": "21136113"
       }
     },
     {
@@ -1349,19 +1050,12 @@
       "label": "Fuel Stock Expenses Undistributed",
       "depth": 5,
       "by_year": {
+        "2021": "0",
+        "2022": "1378",
+        "2023": "0",
         "2024": "0",
         "2025": "0",
-        "2026": null
-      }
-    },
-    {
-      "concept": "Residuals",
-      "label": "Residuals",
-      "depth": 5,
-      "by_year": {
-        "2024": "0",
-        "2025": "0",
-        "2026": null
+        "2026": "0"
       }
     },
     {
@@ -1369,39 +1063,12 @@
       "label": "Plant Materials And Operating Supplies",
       "depth": 5,
       "by_year": {
+        "2021": "48295804",
+        "2022": "60023704",
+        "2023": "78836409",
         "2024": "87914386",
         "2025": "94244273",
-        "2026": null
-      }
-    },
-    {
-      "concept": "Merchandise",
-      "label": "Merchandise",
-      "depth": 5,
-      "by_year": {
-        "2024": "0",
-        "2025": "0",
-        "2026": null
-      }
-    },
-    {
-      "concept": "OtherMaterialsAndSupplies",
-      "label": "Other Materials And Supplies",
-      "depth": 5,
-      "by_year": {
-        "2024": "0",
-        "2025": "0",
-        "2026": null
-      }
-    },
-    {
-      "concept": "NuclearMaterialsHeldForSale",
-      "label": "Nuclear Materials Held For Sale",
-      "depth": 5,
-      "by_year": {
-        "2024": "0",
-        "2025": "0",
-        "2026": null
+        "2026": "97071601"
       }
     },
     {
@@ -1409,9 +1076,12 @@
       "label": "Allowance Inventory And Withheld",
       "depth": 5,
       "by_year": {
+        "2021": "1528000",
+        "2022": "3023770",
+        "2023": "2111148",
         "2024": "513783",
         "2025": "4450707",
-        "2026": null
+        "2026": "4584228"
       }
     },
     {
@@ -1419,29 +1089,12 @@
       "label": "Stores Expense Undistributed",
       "depth": 5,
       "by_year": {
+        "2021": "2270648",
+        "2022": "2754586",
+        "2023": "3950888",
         "2024": "4343197",
         "2025": "4756089",
-        "2026": null
-      }
-    },
-    {
-      "concept": "GasStoredCurrent",
-      "label": "Gas Stored Current",
-      "depth": 5,
-      "by_year": {
-        "2024": "0",
-        "2025": "0",
-        "2026": null
-      }
-    },
-    {
-      "concept": "LiquefiedNaturalGasStoredAndHeldForProcessing",
-      "label": "Liquefied Natural Gas Stored And Held For Processing",
-      "depth": 5,
-      "by_year": {
-        "2024": "0",
-        "2025": "0",
-        "2026": null
+        "2026": "4898772"
       }
     },
     {
@@ -1449,39 +1102,12 @@
       "label": "Prepayments",
       "depth": 5,
       "by_year": {
+        "2021": "71979456",
+        "2022": "80855866",
+        "2023": "78543398",
         "2024": "98995958",
         "2025": "99185007",
-        "2026": null
-      }
-    },
-    {
-      "concept": "AdvancesForGas",
-      "label": "Advances For Gas",
-      "depth": 5,
-      "by_year": {
-        "2024": "0",
-        "2025": "0",
-        "2026": null
-      }
-    },
-    {
-      "concept": "InterestAndDividendsReceivable",
-      "label": "Interest And Dividends Receivable",
-      "depth": 5,
-      "by_year": {
-        "2024": "0",
-        "2025": "0",
-        "2026": null
-      }
-    },
-    {
-      "concept": "RentsReceivable",
-      "label": "Rents Receivable",
-      "depth": 5,
-      "by_year": {
-        "2024": "0",
-        "2025": "0",
-        "2026": null
+        "2026": "102160557"
       }
     },
     {
@@ -1489,19 +1115,12 @@
       "label": "Accrued Utility Revenues",
       "depth": 5,
       "by_year": {
+        "2021": "117683800",
+        "2022": "131856462",
+        "2023": "138282759",
         "2024": "177284816",
         "2025": "180135074",
-        "2026": null
-      }
-    },
-    {
-      "concept": "MiscellaneousCurrentAndAccruedAssets",
-      "label": "Miscellaneous Current And Accrued Assets",
-      "depth": 5,
-      "by_year": {
-        "2024": "0",
-        "2025": "0",
-        "2026": null
+        "2026": "185539126"
       }
     },
     {
@@ -1509,19 +1128,12 @@
       "label": "Derivative Instrument Assets",
       "depth": 5,
       "by_year": {
+        "2021": "137169781",
+        "2022": "386616225",
+        "2023": "32622968",
         "2024": "34395859",
         "2025": "33040014",
-        "2026": null
-      }
-    },
-    {
-      "concept": "DerivativeInstrumentAssetsHedges",
-      "label": "Derivative Instrument Assets Hedges",
-      "depth": 5,
-      "by_year": {
-        "2024": "0",
-        "2025": "0",
-        "2026": null
+        "2026": "34031214"
       }
     },
     {
@@ -1529,19 +1141,12 @@
       "label": "Current And Accrued Assets",
       "depth": 5,
       "by_year": {
+        "2021": "671251504",
+        "2022": "1170557446",
+        "2023": "724428293",
         "2024": "840131761",
         "2025": "913883196",
-        "2026": null
-      }
-    },
-    {
-      "concept": "DeferredDebitsAbstract",
-      "label": "Deferred Debits",
-      "depth": 4,
-      "by_year": {
-        "2024": null,
-        "2025": null,
-        "2026": null
+        "2026": "941299692"
       }
     },
     {
@@ -1549,19 +1154,12 @@
       "label": "Unamortized Debt Expense",
       "depth": 5,
       "by_year": {
+        "2021": "13045696",
+        "2022": "12510845",
+        "2023": "13455185",
         "2024": "14608223",
         "2025": "16688208",
-        "2026": null
-      }
-    },
-    {
-      "concept": "ExtraordinaryPropertyLosses",
-      "label": "Extraordinary Property Losses",
-      "depth": 5,
-      "by_year": {
-        "2024": "0",
-        "2025": "0",
-        "2026": null
+        "2026": "17188854"
       }
     },
     {
@@ -1569,9 +1167,12 @@
       "label": "Unrecovered Plant And Regulatory Study Costs",
       "depth": 5,
       "by_year": {
+        "2021": "90148743",
+        "2022": "132510020",
+        "2023": "138708705",
         "2024": "160790054",
         "2025": "161162526",
-        "2026": null
+        "2026": "165997402"
       }
     },
     {
@@ -1579,9 +1180,12 @@
       "label": "Other Regulatory Assets",
       "depth": 5,
       "by_year": {
+        "2021": "500623391",
+        "2022": "434088731",
+        "2023": "613582050",
         "2024": "724330912",
         "2025": "669563221",
-        "2026": null
+        "2026": "689650118"
       }
     },
     {
@@ -1589,29 +1193,12 @@
       "label": "Preliminary Survey And Investigation Charges",
       "depth": 5,
       "by_year": {
+        "2021": "1027290",
+        "2022": "1980265",
+        "2023": "3537042",
         "2024": "10522530",
         "2025": "8535817",
-        "2026": null
-      }
-    },
-    {
-      "concept": "PreliminaryNaturalGasSurveyAndInvestigationChargesAndOtherPreliminarySurveyAndInvestigationCharges",
-      "label": "Preliminary Natural Gas Survey And Investigation Charges And Other Preliminary Survey And Investigation Charges",
-      "depth": 5,
-      "by_year": {
-        "2024": "0",
-        "2025": "0",
-        "2026": null
-      }
-    },
-    {
-      "concept": "OtherPreliminarySurveyAndInvestigationCharges",
-      "label": "Other Preliminary Survey And Investigation Charges",
-      "depth": 5,
-      "by_year": {
-        "2024": "0",
-        "2025": "0",
-        "2026": null
+        "2026": "8791892"
       }
     },
     {
@@ -1619,9 +1206,12 @@
       "label": "Clearing Accounts",
       "depth": 5,
       "by_year": {
+        "2021": "0",
+        "2022": "0",
+        "2023": "14768",
         "2024": "-9",
         "2025": "42580",
-        "2026": null
+        "2026": "43857"
       }
     },
     {
@@ -1629,9 +1219,12 @@
       "label": "Temporary Facilities",
       "depth": 5,
       "by_year": {
+        "2021": "0",
+        "2022": "24702",
+        "2023": "0",
         "2024": "36671",
         "2025": "1124",
-        "2026": null
+        "2026": "1158"
       }
     },
     {
@@ -1639,29 +1232,12 @@
       "label": "Miscellaneous Deferred Debits",
       "depth": 5,
       "by_year": {
+        "2021": "10937917",
+        "2022": "9736583",
+        "2023": "8502469",
         "2024": "9730684",
         "2025": "11705880",
-        "2026": null
-      }
-    },
-    {
-      "concept": "DeferredLossesFromDispositionOfUtilityPlant",
-      "label": "Deferred Losses From Disposition Of Utility Plant",
-      "depth": 5,
-      "by_year": {
-        "2024": "0",
-        "2025": "0",
-        "2026": null
-      }
-    },
-    {
-      "concept": "ResearchDevelopmentAndDemonstrationExpenditures",
-      "label": "Research Development And Demonstration Expenditures",
-      "depth": 5,
-      "by_year": {
-        "2024": "0",
-        "2025": "0",
-        "2026": null
+        "2026": "12057056"
       }
     },
     {
@@ -1669,9 +1245,12 @@
       "label": "Unamortized Loss On Reacquired Debt",
       "depth": 5,
       "by_year": {
+        "2021": "18929465",
+        "2022": "17340512",
+        "2023": "16085911",
         "2024": "14986918",
         "2025": "14123482",
-        "2026": null
+        "2026": "14547186"
       }
     },
     {
@@ -1679,19 +1258,12 @@
       "label": "Accumulated Deferred Income Taxes",
       "depth": 5,
       "by_year": {
+        "2021": "601566238",
+        "2022": "640683198",
+        "2023": "573553162",
         "2024": "590385635",
         "2025": "6687494",
-        "2026": null
-      }
-    },
-    {
-      "concept": "UnrecoveredPurchasedGasCosts",
-      "label": "Unrecovered Purchased Gas Costs",
-      "depth": 5,
-      "by_year": {
-        "2024": "0",
-        "2025": "0",
-        "2026": null
+        "2026": "6888119"
       }
     },
     {
@@ -1699,9 +1271,12 @@
       "label": "Deferred Debits",
       "depth": 5,
       "by_year": {
+        "2021": "1245977707",
+        "2022": "1248874856",
+        "2023": "1367439292",
         "2024": "1525391618",
         "2025": "1505303096",
-        "2026": null
+        "2026": "1550462189"
       }
     },
     {
@@ -1709,101 +1284,27 @@
       "label": "Assets And Other Debits",
       "depth": 4,
       "by_year": {
+        "2021": "9143773333",
+        "2022": "10053933703",
+        "2023": "10690032800",
         "2024": "12025167712",
         "2025": "12693000760",
-        "2026": null
+        "2026": "13073790783"
       }
     }
   ],
   "balance_sheet_liabilities": [
     {
-      "concept": "ScheduleComparativeBalanceSheetLiabilitiesOtherCreditsAbstract",
-      "label": "Schedule Comparative Balance Sheet Liabilities Other Credits",
-      "depth": 0,
-      "by_year": {
-        "2024": null,
-        "2025": null,
-        "2026": null
-      }
-    },
-    {
-      "concept": "ComparativeBalanceSheetLineItems",
-      "label": "Comparative Balance Sheet Line Items",
-      "depth": 2,
-      "by_year": {
-        "2024": null,
-        "2025": null,
-        "2026": null
-      }
-    },
-    {
-      "concept": "LiabilitiesAndOtherCreditsAbstract",
-      "label": "Liabilities And Other Credits",
-      "depth": 3,
-      "by_year": {
-        "2024": null,
-        "2025": null,
-        "2026": null
-      }
-    },
-    {
-      "concept": "ProprietaryCapitalAbstract",
-      "label": "Proprietary Capital",
-      "depth": 4,
-      "by_year": {
-        "2024": null,
-        "2025": null,
-        "2026": null
-      }
-    },
-    {
       "concept": "CommonStockIssued",
       "label": "Common Stock Issued",
       "depth": 5,
       "by_year": {
+        "2021": "1245720283",
+        "2022": "1253363919",
+        "2023": "1753903725",
         "2024": "2122277163",
         "2025": "2406878394",
-        "2026": null
-      }
-    },
-    {
-      "concept": "PreferredStockIssued",
-      "label": "Preferred Stock Issued",
-      "depth": 5,
-      "by_year": {
-        "2024": "0",
-        "2025": "0",
-        "2026": null
-      }
-    },
-    {
-      "concept": "CapitalStockSubscribed",
-      "label": "Capital Stock Subscribed",
-      "depth": 5,
-      "by_year": {
-        "2024": "0",
-        "2025": "0",
-        "2026": null
-      }
-    },
-    {
-      "concept": "StockLiabilityForConversion",
-      "label": "Stock Liability For Conversion",
-      "depth": 5,
-      "by_year": {
-        "2024": "0",
-        "2025": "0",
-        "2026": null
-      }
-    },
-    {
-      "concept": "PremiumOnCapitalStock",
-      "label": "Premium On Capital Stock",
-      "depth": 5,
-      "by_year": {
-        "2024": "0",
-        "2025": "0",
-        "2026": null
+        "2026": "2479084746"
       }
     },
     {
@@ -1811,29 +1312,12 @@
       "label": "Other Paid In Capital",
       "depth": 5,
       "by_year": {
+        "2021": "18789718",
+        "2022": "18789718",
+        "2023": "18789718",
         "2024": "18789718",
         "2025": "18789718",
-        "2026": null
-      }
-    },
-    {
-      "concept": "InstallmentsReceivedOnCapitalStock",
-      "label": "Installments Received On Capital Stock",
-      "depth": 5,
-      "by_year": {
-        "2024": "0",
-        "2025": "0",
-        "2026": null
-      }
-    },
-    {
-      "concept": "DiscountOnCapitalStock",
-      "label": "Discount On Capital Stock",
-      "depth": 5,
-      "by_year": {
-        "2024": "0",
-        "2025": "0",
-        "2026": null
+        "2026": "19353410"
       }
     },
     {
@@ -1841,9 +1325,12 @@
       "label": "Capital Stock Expense",
       "depth": 5,
       "by_year": {
+        "2021": "23113532",
+        "2022": "23113532",
+        "2023": "23113532",
         "2024": "23113532",
         "2025": "44095927",
-        "2026": null
+        "2026": "45418805"
       }
     },
     {
@@ -1851,9 +1338,12 @@
       "label": "Retained Earnings",
       "depth": 5,
       "by_year": {
+        "2021": "1471363440",
+        "2022": "1535343048",
+        "2023": "1568996980",
         "2024": "1676875055",
         "2025": "1750034536",
-        "2026": null
+        "2026": "1802535572"
       }
     },
     {
@@ -1861,29 +1351,12 @@
       "label": "Unappropriated Undistributed Subsidiary Earnings",
       "depth": 5,
       "by_year": {
+        "2021": "5661231",
+        "2022": "6352686",
+        "2023": "7427718",
         "2024": "8706023",
         "2025": "11523213",
-        "2026": null
-      }
-    },
-    {
-      "concept": "ReacquiredCapitalStock",
-      "label": "Reacquired Capital Stock",
-      "depth": 5,
-      "by_year": {
-        "2024": "0",
-        "2025": "0",
-        "2026": null
-      }
-    },
-    {
-      "concept": "NoncorporateProprietorship",
-      "label": "Noncorporate Proprietorship",
-      "depth": 5,
-      "by_year": {
-        "2024": "0",
-        "2025": "0",
-        "2026": null
+        "2026": "11868909"
       }
     },
     {
@@ -1891,9 +1364,12 @@
       "label": "Accumulated Other Comprehensive Income",
       "depth": 5,
       "by_year": {
+        "2021": "-9929713",
+        "2022": "-3965243",
+        "2023": "-4999964",
         "2024": "-3855949",
         "2025": "-3792791",
-        "2026": null
+        "2026": "-3906575"
       }
     },
     {
@@ -1901,19 +1377,12 @@
       "label": "Proprietary Capital",
       "depth": 5,
       "by_year": {
+        "2021": "2708491427",
+        "2022": "2786770596",
+        "2023": "3321004645",
         "2024": "3799678478",
         "2025": "4139337143",
-        "2026": null
-      }
-    },
-    {
-      "concept": "LongTermDebtAbstract",
-      "label": "Long Term Debt",
-      "depth": 4,
-      "by_year": {
-        "2024": null,
-        "2025": null,
-        "2026": null
+        "2026": "4263517257"
       }
     },
     {
@@ -1921,29 +1390,12 @@
       "label": "Bonds",
       "depth": 5,
       "by_year": {
+        "2021": "3298800000",
+        "2022": "3398800000",
+        "2023": "3998800000",
         "2024": "4368800000",
         "2025": "4678800000",
-        "2026": null
-      }
-    },
-    {
-      "concept": "ReacquiredBonds",
-      "label": "Reacquired Bonds",
-      "depth": 5,
-      "by_year": {
-        "2024": "0",
-        "2025": "0",
-        "2026": null
-      }
-    },
-    {
-      "concept": "AdvancesFromAssociatedCompanies",
-      "label": "Advances From Associated Companies",
-      "depth": 5,
-      "by_year": {
-        "2024": "0",
-        "2025": "0",
-        "2026": null
+        "2026": "4819164000"
       }
     },
     {
@@ -1951,19 +1403,12 @@
       "label": "Other Long Term Debt",
       "depth": 5,
       "by_year": {
+        "2021": "0",
+        "2022": "260000000",
+        "2023": "0",
         "2024": "170000000",
         "2025": "0",
-        "2026": null
-      }
-    },
-    {
-      "concept": "UnamortizedPremiumOnLongTermDebt",
-      "label": "Unamortized Premium On Long Term Debt",
-      "depth": 5,
-      "by_year": {
-        "2024": "0",
-        "2025": "0",
-        "2026": null
+        "2026": "0"
       }
     },
     {
@@ -1971,9 +1416,12 @@
       "label": "Unamortized Discount On Long Term Debt Debit",
       "depth": 5,
       "by_year": {
+        "2021": "354262",
+        "2022": "329866",
+        "2023": "305471",
         "2024": "281074",
         "2025": "256678",
-        "2026": null
+        "2026": "264378"
       }
     },
     {
@@ -1981,19 +1429,12 @@
       "label": "Long Term Debt",
       "depth": 5,
       "by_year": {
+        "2021": "3298445738",
+        "2022": "3658470134",
+        "2023": "3998494529",
         "2024": "4538518926",
         "2025": "4678543322",
-        "2026": null
-      }
-    },
-    {
-      "concept": "OtherNoncurrentLiabilitiesAbstract",
-      "label": "Other Noncurrent Liabilities",
-      "depth": 4,
-      "by_year": {
-        "2024": null,
-        "2025": null,
-        "2026": null
+        "2026": "4818899622"
       }
     },
     {
@@ -2001,9 +1442,12 @@
       "label": "Obligations Under Capital Lease Noncurrent",
       "depth": 5,
       "by_year": {
+        "2021": "294466454",
+        "2022": "337658448",
+        "2023": "332552355",
         "2024": "588409041",
         "2025": "565806493",
-        "2026": null
+        "2026": "582780688"
       }
     },
     {
@@ -2011,9 +1455,12 @@
       "label": "Accumulated Provision For Property Insurance",
       "depth": 5,
       "by_year": {
+        "2021": "0",
+        "2022": "0",
+        "2023": "0",
         "2024": "300000",
         "2025": "800000",
-        "2026": null
+        "2026": "824000"
       }
     },
     {
@@ -2021,9 +1468,12 @@
       "label": "Accumulated Provision For Injuries And Damages",
       "depth": 5,
       "by_year": {
+        "2021": "7232587",
+        "2022": "7019752",
+        "2023": "6675302",
         "2024": "5896183",
         "2025": "5672497",
-        "2026": null
+        "2026": "5842672"
       }
     },
     {
@@ -2031,19 +1481,12 @@
       "label": "Accumulated Provision For Pensions And Benefits",
       "depth": 5,
       "by_year": {
+        "2021": "311391348",
+        "2022": "264684842",
+        "2023": "263566512",
         "2024": "225147883",
         "2025": "188812455",
-        "2026": null
-      }
-    },
-    {
-      "concept": "AccumulatedMiscellaneousOperatingProvisions",
-      "label": "Accumulated Miscellaneous Operating Provisions",
-      "depth": 5,
-      "by_year": {
-        "2024": "0",
-        "2025": "0",
-        "2026": null
+        "2026": "194476829"
       }
     },
     {
@@ -2051,9 +1494,12 @@
       "label": "Accumulated Provision For Rate Refunds",
       "depth": 5,
       "by_year": {
+        "2021": "23697796",
+        "2022": "10245694",
+        "2023": "8073398",
         "2024": "2705614",
         "2025": "0",
-        "2026": null
+        "2026": "0"
       }
     },
     {
@@ -2061,19 +1507,12 @@
       "label": "Long Term Portion Of Derivative Instrument Liabilities",
       "depth": 5,
       "by_year": {
+        "2021": "90195814",
+        "2022": "75471084",
+        "2023": "74459595",
         "2024": "71721254",
         "2025": "55663470",
-        "2026": null
-      }
-    },
-    {
-      "concept": "LongTermPortionOfDerivativeInstrumentLiabilitiesHedges",
-      "label": "Long Term Portion Of Derivative Instrument Liabilities Hedges",
-      "depth": 5,
-      "by_year": {
-        "2024": "0",
-        "2025": "0",
-        "2026": null
+        "2026": "57333374"
       }
     },
     {
@@ -2081,9 +1520,12 @@
       "label": "Asset Retirement Obligations",
       "depth": 5,
       "by_year": {
+        "2021": "269591828",
+        "2022": "289128195",
+        "2023": "285151269",
         "2024": "309492546",
         "2025": "311621399",
-        "2026": null
+        "2026": "320970041"
       }
     },
     {
@@ -2091,19 +1533,12 @@
       "label": "Other Noncurrent Liabilities",
       "depth": 5,
       "by_year": {
+        "2021": "996575827",
+        "2022": "984208015",
+        "2023": "970478431",
         "2024": "1203672521",
         "2025": "1128376314",
-        "2026": null
-      }
-    },
-    {
-      "concept": "CurrentAndAccruedLiabilitiesAbstract",
-      "label": "Current And Accrued Liabilities",
-      "depth": 4,
-      "by_year": {
-        "2024": null,
-        "2025": null,
-        "2026": null
+        "2026": "1162227603"
       }
     },
     {
@@ -2111,9 +1546,12 @@
       "label": "Notes Payable",
       "depth": 5,
       "by_year": {
+        "2021": "0",
+        "2022": "0",
+        "2023": "145811136",
         "2024": "0",
         "2025": "0",
-        "2026": null
+        "2026": "0"
       }
     },
     {
@@ -2121,19 +1559,12 @@
       "label": "Accounts Payable",
       "depth": 5,
       "by_year": {
+        "2021": "353434290",
+        "2022": "552847660",
+        "2023": "470087386",
         "2024": "478425863",
         "2025": "463591071",
-        "2026": null
-      }
-    },
-    {
-      "concept": "NotesPayableToAssociatedCompanies",
-      "label": "Notes Payable To Associated Companies",
-      "depth": 5,
-      "by_year": {
-        "2024": "0",
-        "2025": "0",
-        "2026": null
+        "2026": "477498803"
       }
     },
     {
@@ -2141,9 +1572,12 @@
       "label": "Accounts Payable To Associated Companies",
       "depth": 5,
       "by_year": {
+        "2021": "13650173",
+        "2022": "15025014",
+        "2023": "11403070",
         "2024": "12155943",
         "2025": "10252081",
-        "2026": null
+        "2026": "10559643"
       }
     },
     {
@@ -2151,9 +1585,12 @@
       "label": "Customer Deposits",
       "depth": 5,
       "by_year": {
+        "2021": "72906806",
+        "2022": "154738250",
+        "2023": "25601775",
         "2024": "26675753",
         "2025": "59069435",
-        "2026": null
+        "2026": "60841518"
       }
     },
     {
@@ -2161,9 +1598,12 @@
       "label": "Taxes Accrued",
       "depth": 5,
       "by_year": {
+        "2021": "25933908",
+        "2022": "12258338",
+        "2023": "12211988",
         "2024": "19197791",
         "2025": "16438597",
-        "2026": null
+        "2026": "16931755"
       }
     },
     {
@@ -2171,9 +1611,12 @@
       "label": "Interest Accrued",
       "depth": 5,
       "by_year": {
+        "2021": "29267150",
+        "2022": "30682106",
+        "2023": "39954525",
         "2024": "48514317",
         "2025": "53263455",
-        "2026": null
+        "2026": "54861359"
       }
     },
     {
@@ -2181,29 +1624,12 @@
       "label": "Dividends Declared",
       "depth": 5,
       "by_year": {
+        "2021": "40144573",
+        "2022": "42454026",
+        "2023": "50595253",
         "2024": "57371089",
         "2025": "62844522",
-        "2026": null
-      }
-    },
-    {
-      "concept": "MaturedLongTermDebt",
-      "label": "Matured Long Term Debt",
-      "depth": 5,
-      "by_year": {
-        "2024": "0",
-        "2025": "0",
-        "2026": null
-      }
-    },
-    {
-      "concept": "MaturedInterest",
-      "label": "Matured Interest",
-      "depth": 5,
-      "by_year": {
-        "2024": "0",
-        "2025": "0",
-        "2026": null
+        "2026": "64729858"
       }
     },
     {
@@ -2211,9 +1637,12 @@
       "label": "Tax Collections Payable",
       "depth": 5,
       "by_year": {
+        "2021": "22565242",
+        "2022": "18743334",
+        "2023": "22492203",
         "2024": "21945265",
         "2025": "28512528",
-        "2026": null
+        "2026": "29367904"
       }
     },
     {
@@ -2221,9 +1650,12 @@
       "label": "Miscellaneous Current And Accrued Liabilities",
       "depth": 5,
       "by_year": {
+        "2021": "33121754",
+        "2022": "32229226",
+        "2023": "46939573",
         "2024": "46682459",
         "2025": "22863904",
-        "2026": null
+        "2026": "23549821"
       }
     },
     {
@@ -2231,9 +1663,12 @@
       "label": "Obligations Under Capital Leases Current",
       "depth": 5,
       "by_year": {
+        "2021": "24209640",
+        "2022": "26983721",
+        "2023": "24913668",
         "2024": "59172193",
         "2025": "58826910",
-        "2026": null
+        "2026": "60591717"
       }
     },
     {
@@ -2241,19 +1676,12 @@
       "label": "Derivatives Instrument Liabilities",
       "depth": 5,
       "by_year": {
+        "2021": "136966656",
+        "2022": "193376878",
+        "2023": "238759624",
         "2024": "219038315",
         "2025": "213937754",
-        "2026": null
-      }
-    },
-    {
-      "concept": "DerivativeInstrumentLiabilitiesHedges",
-      "label": "Derivative Instrument Liabilities Hedges",
-      "depth": 5,
-      "by_year": {
-        "2024": "0",
-        "2025": "0",
-        "2026": null
+        "2026": "220355887"
       }
     },
     {
@@ -2261,19 +1689,12 @@
       "label": "Current And Accrued Liabilities",
       "depth": 5,
       "by_year": {
+        "2021": "662004378",
+        "2022": "1003867469",
+        "2023": "1014310606",
         "2024": "917457734",
         "2025": "933936787",
-        "2026": null
-      }
-    },
-    {
-      "concept": "DeferredCreditsAbstract",
-      "label": "Deferred Credits",
-      "depth": 4,
-      "by_year": {
-        "2024": null,
-        "2025": null,
-        "2026": null
+        "2026": "961954891"
       }
     },
     {
@@ -2281,9 +1702,12 @@
       "label": "Customer Advances For Construction",
       "depth": 5,
       "by_year": {
+        "2021": "0",
+        "2022": "0",
+        "2023": "0",
         "2024": "605021",
         "2025": "825424",
-        "2026": null
+        "2026": "850187"
       }
     },
     {
@@ -2291,19 +1715,12 @@
       "label": "Accumulated Deferred Investment Tax Credits",
       "depth": 5,
       "by_year": {
+        "2021": "0",
+        "2022": "0",
+        "2023": "497448",
         "2024": "60671318",
         "2025": "194060311",
-        "2026": null
-      }
-    },
-    {
-      "concept": "DeferredGainsFromDispositionOfUtilityPlant",
-      "label": "Deferred Gains From Disposition Of Utility Plant",
-      "depth": 5,
-      "by_year": {
-        "2024": "0",
-        "2025": "0",
-        "2026": null
+        "2026": "199882120"
       }
     },
     {
@@ -2311,9 +1728,12 @@
       "label": "Other Deferred Credits",
       "depth": 5,
       "by_year": {
+        "2021": "19581112",
+        "2022": "28268513",
+        "2023": "36787807",
         "2024": "27080559",
         "2025": "39544017",
-        "2026": null
+        "2026": "40730338"
       }
     },
     {
@@ -2321,9 +1741,12 @@
       "label": "Other Regulatory Liabilities",
       "depth": 5,
       "by_year": {
+        "2021": "433439910",
+        "2022": "511529098",
+        "2023": "286202265",
         "2024": "320924678",
         "2025": "352120895",
-        "2026": null
+        "2026": "362684522"
       }
     },
     {
@@ -2331,19 +1754,12 @@
       "label": "Unamortized Gain On Reacquired Debt",
       "depth": 5,
       "by_year": {
+        "2021": "10065",
+        "2022": "2013",
+        "2023": "0",
         "2024": "0",
         "2025": "0",
-        "2026": null
-      }
-    },
-    {
-      "concept": "AccumulatedDeferredIncomeTaxesAcceleratedAmortizationProperty",
-      "label": "Accumulated Deferred Income Taxes Accelerated Amortization Property",
-      "depth": 5,
-      "by_year": {
-        "2024": "0",
-        "2025": "0",
-        "2026": null
+        "2026": "0"
       }
     },
     {
@@ -2351,9 +1767,12 @@
       "label": "Accumulated Deferred Income Taxes Other Property",
       "depth": 5,
       "by_year": {
+        "2021": "834236978",
+        "2022": "841673575",
+        "2023": "876069126",
         "2024": "944427755",
         "2025": "1027088246",
-        "2026": null
+        "2026": "1057900893"
       }
     },
     {
@@ -2361,9 +1780,12 @@
       "label": "Accumulated Deferred Income Taxes Other",
       "depth": 5,
       "by_year": {
+        "2021": "190987898",
+        "2022": "239144290",
+        "2023": "186187943",
         "2024": "212130722",
         "2025": "178963708",
-        "2026": null
+        "2026": "184332619"
       }
     },
     {
@@ -2371,9 +1793,12 @@
       "label": "Deferred Credits",
       "depth": 5,
       "by_year": {
+        "2021": "1478255963",
+        "2022": "1620617489",
+        "2023": "1385744589",
         "2024": "1565840053",
         "2025": "1812807194",
-        "2026": null
+        "2026": "1867191410"
       }
     },
     {
@@ -2381,61 +1806,27 @@
       "label": "Liabilities And Other Credits",
       "depth": 4,
       "by_year": {
+        "2021": "9143773333",
+        "2022": "10053933703",
+        "2023": "10690032800",
         "2024": "12025167712",
         "2025": "12693000760",
-        "2026": null
+        "2026": "13073790783"
       }
     }
   ],
   "cash_flows": [
     {
-      "concept": "ScheduleStatementOfCashFlowsAbstract",
-      "label": "Schedule Statement Of Cash Flows",
-      "depth": 0,
-      "by_year": {
-        "2024": null,
-        "2025": null,
-        "2026": null
-      }
-    },
-    {
-      "concept": "CashFlowLineItems",
-      "label": "Cash Flow Line Items",
-      "depth": 2,
-      "by_year": {
-        "2024": null,
-        "2025": null,
-        "2026": null
-      }
-    },
-    {
-      "concept": "NetCashFlowFromOperatingActivitiesAbstract",
-      "label": "Net Cash Flow From Operating Activities",
-      "depth": 3,
-      "by_year": {
-        "2024": null,
-        "2025": null,
-        "2026": null
-      }
-    },
-    {
       "concept": "NetIncomeLoss",
       "label": "Net Income (Loss)",
       "depth": 4,
       "by_year": {
+        "2021": "245390754",
+        "2022": "238863845",
+        "2023": "222805469",
         "2024": "316305169",
         "2025": "307593655",
-        "2026": null
-      }
-    },
-    {
-      "concept": "NoncashChargesCreditsToIncomeAbstract",
-      "label": "Noncash Charges Credits To Income",
-      "depth": 4,
-      "by_year": {
-        "2024": null,
-        "2025": null,
-        "2026": null
+        "2026": "316821465"
       }
     },
     {
@@ -2443,19 +1834,12 @@
       "label": "Depreciation And Depletion",
       "depth": 5,
       "by_year": {
+        "2021": "379591275",
+        "2022": "398863036",
+        "2023": "431040915",
         "2024": "485456244",
         "2025": "530444462",
-        "2026": null
-      }
-    },
-    {
-      "concept": "NoncashAdjustmentsToCashFlowsFromOperatingActivities",
-      "label": "Noncash Adjustments To Cash Flows From Operating Activities",
-      "depth": 5,
-      "by_year": {
-        "2024": null,
-        "2025": null,
-        "2026": null
+        "2026": "546357796"
       }
     },
     {
@@ -2463,9 +1847,12 @@
       "label": "Deferred Income Taxes Net",
       "depth": 4,
       "by_year": {
+        "2021": "5381975",
+        "2022": "6205427",
+        "2023": "7787833",
         "2024": "-36903130",
         "2025": "36561069",
-        "2026": null
+        "2026": "37657901"
       }
     },
     {
@@ -2473,9 +1860,12 @@
       "label": "Investment Tax Credit Adjustments Net",
       "depth": 4,
       "by_year": {
+        "2021": "0",
+        "2022": "0",
+        "2023": "0",
         "2024": "0",
         "2025": "8957",
-        "2026": null
+        "2026": "9226"
       }
     },
     {
@@ -2483,9 +1873,12 @@
       "label": "Net Increase Decrease In Receivables Operating Activities",
       "depth": 4,
       "by_year": {
+        "2021": "59098176",
+        "2022": "69285365",
+        "2023": "-8219063",
         "2024": "-70145639",
         "2025": "-176134712",
-        "2026": null
+        "2026": "-181418753"
       }
     },
     {
@@ -2493,19 +1886,12 @@
       "label": "Net Increase Decrease In Inventory Operating Activities",
       "depth": 4,
       "by_year": {
+        "2021": "5744282",
+        "2022": "17400671",
+        "2023": "17945387",
         "2024": "1210430",
         "2025": "9861278",
-        "2026": null
-      }
-    },
-    {
-      "concept": "NetIncreaseDecreaseInAllowancesInventoryOperatingActivities",
-      "label": "Net Increase Decrease In Allowances Inventory Operating Activities",
-      "depth": 4,
-      "by_year": {
-        "2024": null,
-        "2025": "0",
-        "2026": null
+        "2026": "10157116"
       }
     },
     {
@@ -2513,9 +1899,12 @@
       "label": "Net Increase Decrease In Payables And Accrued Expenses Operating Activities",
       "depth": 4,
       "by_year": {
+        "2021": "55566699",
+        "2022": "162468899",
+        "2023": "-177058522",
         "2024": "53577232",
         "2025": "45018652",
-        "2026": null
+        "2026": "46369212"
       }
     },
     {
@@ -2523,9 +1912,12 @@
       "label": "Net Increase Decrease In Other Regulatory Assets Operating Activities",
       "depth": 4,
       "by_year": {
+        "2021": "46086999",
+        "2022": "-186268489",
+        "2023": "359725699",
         "2024": "98593793",
         "2025": "-48331802",
-        "2026": null
+        "2026": "-49781756"
       }
     },
     {
@@ -2533,9 +1925,12 @@
       "label": "Net Increase Decrease In Other Regulatory Liabilities Operating Activities",
       "depth": 4,
       "by_year": {
+        "2021": "71818085",
+        "2022": "-27791356",
+        "2023": "4350066",
         "2024": "9204285",
         "2025": "-35829819",
-        "2026": null
+        "2026": "-36904714"
       }
     },
     {
@@ -2543,9 +1938,12 @@
       "label": "Allowance For Other Funds Used During Construction Operating Activities",
       "depth": 4,
       "by_year": {
+        "2021": "16515804",
+        "2022": "13599123",
+        "2023": "19200081",
         "2024": "23190377",
         "2025": "17686684",
-        "2026": null
+        "2026": "18217285"
       }
     },
     {
@@ -2553,19 +1951,12 @@
       "label": "Undistributed Earnings From Subsidiary Companies Operating Activities",
       "depth": 4,
       "by_year": {
+        "2021": "1113932",
+        "2022": "691455",
+        "2023": "1075032",
         "2024": "1278305",
         "2025": "1862508",
-        "2026": null
-      }
-    },
-    {
-      "concept": "OtherAdjustmentsToCashFlowsFromOperatingActivities",
-      "label": "Other Adjustments To Cash Flows From Operating Activities",
-      "depth": 4,
-      "by_year": {
-        "2024": null,
-        "2025": null,
-        "2026": null
+        "2026": "1918383"
       }
     },
     {
@@ -2573,9 +1964,12 @@
       "label": "Net Cash Flow From Operating Activities",
       "depth": 4,
       "by_year": {
+        "2021": "534455010",
+        "2022": "684228202",
+        "2023": "412167046",
         "2024": "776981263",
         "2025": "1102218800",
-        "2026": null
+        "2026": "1135285364"
       }
     },
     {
@@ -2583,29 +1977,12 @@
       "label": "Order Number",
       "depth": 3,
       "by_year": {
+        "2021": "6",
+        "2022": null,
+        "2023": null,
         "2024": null,
         "2025": "1",
-        "2026": null
-      }
-    },
-    {
-      "concept": "CashFlowsFromInvestmentActivitiesAbstract",
-      "label": "Cash Flows From Investment Activities",
-      "depth": 3,
-      "by_year": {
-        "2024": null,
-        "2025": null,
-        "2026": null
-      }
-    },
-    {
-      "concept": "ConstructionAndAcquisitionOfPlantIncludingLandAbstract",
-      "label": "Construction And Acquisition Of Plant Including Land",
-      "depth": 4,
-      "by_year": {
-        "2024": null,
-        "2025": null,
-        "2026": null
+        "2026": "1"
       }
     },
     {
@@ -2613,29 +1990,12 @@
       "label": "Gross Additions To Utility Plant Less Nuclear Fuel Investing Activities",
       "depth": 5,
       "by_year": {
+        "2021": "660956523",
+        "2022": "794015596",
+        "2023": "1373225203",
         "2024": "1291637940",
         "2025": "1200320722",
-        "2026": null
-      }
-    },
-    {
-      "concept": "GrossAdditionsToNuclearFuelInvestingActivities",
-      "label": "Gross Additions To Nuclear Fuel Investing Activities",
-      "depth": 5,
-      "by_year": {
-        "2024": null,
-        "2025": "0",
-        "2026": null
-      }
-    },
-    {
-      "concept": "GrossAdditionsToCommonUtilityPlantInvestingActivities",
-      "label": "Gross Additions To Common Utility Plant Investing Activities",
-      "depth": 5,
-      "by_year": {
-        "2024": null,
-        "2025": "0",
-        "2026": null
+        "2026": "1236330344"
       }
     },
     {
@@ -2643,9 +2003,12 @@
       "label": "Gross Additions To Nonutility Plant Investing Activities",
       "depth": 5,
       "by_year": {
+        "2021": "233451",
+        "2022": "274979",
+        "2023": "46035",
         "2024": "23",
         "2025": "-23",
-        "2026": null
+        "2026": "-24"
       }
     },
     {
@@ -2653,19 +2016,12 @@
       "label": "Allowance For Other Funds Used During Construction Investing Activities",
       "depth": 5,
       "by_year": {
+        "2021": "16515804",
+        "2022": "13599123",
+        "2023": "19200081",
         "2024": "23190377",
         "2025": "17686684",
-        "2026": null
-      }
-    },
-    {
-      "concept": "OtherConstructionAndAcquisitionOfPlantInvestmentActivities",
-      "label": "Other Construction And Acquisition Of Plant Investment Activities",
-      "depth": 5,
-      "by_year": {
-        "2024": null,
-        "2025": null,
-        "2026": null
+        "2026": "18217285"
       }
     },
     {
@@ -2673,29 +2029,12 @@
       "label": "Cash Outflows For Plant",
       "depth": 5,
       "by_year": {
+        "2021": "661338592",
+        "2022": "791125862",
+        "2023": "1364717274",
         "2024": "1301395744",
         "2025": "1194811529",
-        "2026": null
-      }
-    },
-    {
-      "concept": "AcquisitionOfOtherNoncurrentAssets",
-      "label": "Acquisition Of Other Noncurrent Assets",
-      "depth": 4,
-      "by_year": {
-        "2024": null,
-        "2025": "0",
-        "2026": null
-      }
-    },
-    {
-      "concept": "ProceedsFromDisposalOfNoncurrentAssets",
-      "label": "Proceeds From Disposal Of Noncurrent Assets",
-      "depth": 4,
-      "by_year": {
-        "2024": "0",
-        "2025": null,
-        "2026": null
+        "2026": "1230655875"
       }
     },
     {
@@ -2703,129 +2042,12 @@
       "label": "Investments In And Advances To Associated And Subsidiary Companies",
       "depth": 4,
       "by_year": {
+        "2021": "0",
+        "2022": "0",
+        "2023": "0",
         "2024": "0",
         "2025": "944682",
-        "2026": null
-      }
-    },
-    {
-      "concept": "ContributionsAndAdvancesFromAssociatedAndSubsidiaryCompanies",
-      "label": "Contributions And Advances From Associated And Subsidiary Companies",
-      "depth": 4,
-      "by_year": {
-        "2024": "0",
-        "2025": "0",
-        "2026": null
-      }
-    },
-    {
-      "concept": "DispositionOfInvestmentsInAndAdvancesToAssociatedAndSubsidiaryCompaniesAbstract",
-      "label": "Disposition Of Investments In And Advances To Associated And Subsidiary Companies",
-      "depth": 4,
-      "by_year": {
-        "2024": null,
-        "2025": null,
-        "2026": null
-      }
-    },
-    {
-      "concept": "DispositionOfInvestmentsInAndAdvancesToAssociatedAndSubsidiaryCompanies",
-      "label": "Disposition Of Investments In And Advances To Associated And Subsidiary Companies",
-      "depth": 4,
-      "by_year": {
-        "2024": null,
-        "2025": null,
-        "2026": null
-      }
-    },
-    {
-      "concept": "PurchaseOfInvestmentSecurities",
-      "label": "Purchase Of Investment Securities",
-      "depth": 4,
-      "by_year": {
-        "2024": null,
-        "2025": "0",
-        "2026": null
-      }
-    },
-    {
-      "concept": "ProceedsFromSalesOfInvestmentSecurities",
-      "label": "Proceeds From Sales Of Investment Securities",
-      "depth": 4,
-      "by_year": {
-        "2024": null,
-        "2025": null,
-        "2026": null
-      }
-    },
-    {
-      "concept": "LoansMadeOrPurchased",
-      "label": "Loans Made Or Purchased",
-      "depth": 4,
-      "by_year": {
-        "2024": null,
-        "2025": "0",
-        "2026": null
-      }
-    },
-    {
-      "concept": "CollectionsOnLoans",
-      "label": "Collections On Loans",
-      "depth": 4,
-      "by_year": {
-        "2024": null,
-        "2025": null,
-        "2026": null
-      }
-    },
-    {
-      "concept": "NetIncreaseDecreaseInReceivablesInvestingActivities",
-      "label": "Net Increase Decrease In Receivables Investing Activities",
-      "depth": 4,
-      "by_year": {
-        "2024": null,
-        "2025": "0",
-        "2026": null
-      }
-    },
-    {
-      "concept": "NetIncreaseDecreaseInInventoryInvestingActivities",
-      "label": "Net Increase Decrease In Inventory Investing Activities",
-      "depth": 4,
-      "by_year": {
-        "2024": null,
-        "2025": "0",
-        "2026": null
-      }
-    },
-    {
-      "concept": "NetIncreaseDecreaseInAllowancesHeldForSpeculationInvestingActivities",
-      "label": "Net Increase Decrease In Allowances Held For Speculation Investing Activities",
-      "depth": 4,
-      "by_year": {
-        "2024": null,
-        "2025": null,
-        "2026": null
-      }
-    },
-    {
-      "concept": "NetIncreaseDecreaseInPayablesAndAccruedExpensesInvestingActivities",
-      "label": "Net Increase Decrease In Payables And Accrued Expenses Investing Activities",
-      "depth": 4,
-      "by_year": {
-        "2024": null,
-        "2025": null,
-        "2026": null
-      }
-    },
-    {
-      "concept": "OtherAdjustmentsToCashFlowsFromInvestmentActivities",
-      "label": "Other Adjustments To Cash Flows From Investment Activities",
-      "depth": 4,
-      "by_year": {
-        "2024": null,
-        "2025": null,
-        "2026": null
+        "2026": "973022"
       }
     },
     {
@@ -2833,99 +2055,12 @@
       "label": "Cash Flows Provided From Used In Investment Activities",
       "depth": 4,
       "by_year": {
+        "2021": "-664008185",
+        "2022": "-774254866",
+        "2023": "-1356415331",
         "2024": "-1301937268",
         "2025": "-1193811549",
-        "2026": null
-      }
-    },
-    {
-      "concept": "OtherAdjustmentsToCashFlowsFromOperatingActivities",
-      "label": "Other Adjustments To Cash Flows From Operating Activities",
-      "depth": 3,
-      "by_year": {
-        "2024": null,
-        "2025": null,
-        "2026": null
-      }
-    },
-    {
-      "concept": "OtherConstructionAndAcquisitionOfPlantInvestmentActivities",
-      "label": "Other Construction And Acquisition Of Plant Investment Activities",
-      "depth": 3,
-      "by_year": {
-        "2024": null,
-        "2025": null,
-        "2026": null
-      }
-    },
-    {
-      "concept": "OtherAdjustmentsToCashFlowsFromInvestmentActivities",
-      "label": "Other Adjustments To Cash Flows From Investment Activities",
-      "depth": 3,
-      "by_year": {
-        "2024": null,
-        "2025": null,
-        "2026": null
-      }
-    },
-    {
-      "concept": "NoncashAdjustmentsToCashFlowsFromOperatingActivities",
-      "label": "Noncash Adjustments To Cash Flows From Operating Activities",
-      "depth": 3,
-      "by_year": {
-        "2024": null,
-        "2025": null,
-        "2026": null
-      }
-    },
-    {
-      "concept": "OtherRetirementsOfBalancesImpactingCashFlowsFromFinancingActivities",
-      "label": "Other Retirements Of Balances Impacting Cash Flows From Financing Activities",
-      "depth": 3,
-      "by_year": {
-        "2024": null,
-        "2025": null,
-        "2026": null
-      }
-    },
-    {
-      "concept": "OtherAdjustmentsToCashFlowsFromFinancingActivities",
-      "label": "Other Adjustments To Cash Flows From Financing Activities",
-      "depth": 3,
-      "by_year": {
-        "2024": null,
-        "2025": null,
-        "2026": null
-      }
-    },
-    {
-      "concept": "OtherAdjustmentsByOutsideSourcesToCashFlowsFromFinancingActivities",
-      "label": "Other Adjustments By Outside Sources To Cash Flows From Financing Activities",
-      "depth": 3,
-      "by_year": {
-        "2024": null,
-        "2025": null,
-        "2026": null
-      }
-    },
-    {
-      "concept": "CashFlowsFromFinancingActivitiesAbstract",
-      "label": "Cash Flows From Financing Activities",
-      "depth": 3,
-      "by_year": {
-        "2024": null,
-        "2025": null,
-        "2026": null
-      }
-    },
-    {
-      "concept": "ProceedsFromIssuanceAbstract",
-      "label": "Proceeds From Issuance",
-      "depth": 4,
-      "by_year": {
-        "2024": null,
-        "2025": null,
-        "2026": null
+        "2026": "-1229625895"
       }
     },
     {
@@ -2933,19 +2068,12 @@
       "label": "Proceeds From Issuance Of Long Term Debt Financing Activities",
       "depth": 5,
       "by_year": {
+        "2021": "400000000",
+        "2022": "360000000",
+        "2023": "600000000",
         "2024": "670000000",
         "2025": "310000000",
-        "2026": null
-      }
-    },
-    {
-      "concept": "ProceedsFromIssuanceOfPreferredStockFinancingActivities",
-      "label": "Proceeds From Issuance Of Preferred Stock Financing Activities",
-      "depth": 5,
-      "by_year": {
-        "2024": null,
-        "2025": null,
-        "2026": null
+        "2026": "319300000"
       }
     },
     {
@@ -2953,19 +2081,12 @@
       "label": "Proceeds From Issuance Of Common Stock Financing Activities",
       "depth": 5,
       "by_year": {
+        "2021": "-1202389",
+        "2022": "-4862840",
+        "2023": "479821663",
         "2024": "341136729",
         "2025": "244331270",
-        "2026": null
-      }
-    },
-    {
-      "concept": "OtherAdjustmentsToCashFlowsFromFinancingActivities",
-      "label": "Other Adjustments To Cash Flows From Financing Activities",
-      "depth": 5,
-      "by_year": {
-        "2024": null,
-        "2025": null,
-        "2026": null
+        "2026": "251661208"
       }
     },
     {
@@ -2973,19 +2094,12 @@
       "label": "Net Increase In Short Term Debt",
       "depth": 5,
       "by_year": {
+        "2021": "-150000000",
+        "2022": "0",
+        "2023": "145811136",
         "2024": "0",
         "2025": "0",
-        "2026": null
-      }
-    },
-    {
-      "concept": "OtherAdjustmentsByOutsideSourcesToCashFlowsFromFinancingActivities",
-      "label": "Other Adjustments By Outside Sources To Cash Flows From Financing Activities",
-      "depth": 5,
-      "by_year": {
-        "2024": null,
-        "2025": null,
-        "2026": null
+        "2026": "0"
       }
     },
     {
@@ -2993,19 +2107,12 @@
       "label": "Cash Provided By Outside Sources",
       "depth": 5,
       "by_year": {
+        "2021": "248797611",
+        "2022": "355137160",
+        "2023": "1225632799",
         "2024": "1011136729",
         "2025": "554331270",
-        "2026": null
-      }
-    },
-    {
-      "concept": "PaymentsForRetirementAbstract",
-      "label": "Payments For Retirement",
-      "depth": 4,
-      "by_year": {
-        "2024": null,
-        "2025": null,
-        "2026": null
+        "2026": "570961208"
       }
     },
     {
@@ -3013,19 +2120,12 @@
       "label": "Payments For Retirement Of Long Term Debt Financing Activities",
       "depth": 4,
       "by_year": {
+        "2021": "160000000",
+        "2022": "0",
+        "2023": "260000000",
         "2024": "130000000",
         "2025": "170000000",
-        "2026": null
-      }
-    },
-    {
-      "concept": "PaymentsForRetirementOfPreferredStockFinancingActivities",
-      "label": "Payments For Retirement Of Preferred Stock Financing Activities",
-      "depth": 4,
-      "by_year": {
-        "2024": null,
-        "2025": "0",
-        "2026": null
+        "2026": "175100000"
       }
     },
     {
@@ -3033,19 +2133,12 @@
       "label": "Payments For Retirement Of Common Stock Financing Activities",
       "depth": 4,
       "by_year": {
+        "2021": "12018111",
+        "2022": "17995125",
+        "2023": "0",
         "2024": "0",
         "2025": "0",
-        "2026": null
-      }
-    },
-    {
-      "concept": "OtherRetirementsOfBalancesImpactingCashFlowsFromFinancingActivities",
-      "label": "Other Retirements Of Balances Impacting Cash Flows From Financing Activities",
-      "depth": 4,
-      "by_year": {
-        "2024": null,
-        "2025": null,
-        "2026": null
+        "2026": "0"
       }
     },
     {
@@ -3053,19 +2146,12 @@
       "label": "Net Decrease In Short Term Debt",
       "depth": 4,
       "by_year": {
+        "2021": null,
+        "2022": null,
+        "2023": null,
         "2024": "145811136",
         "2025": "0",
-        "2026": null
-      }
-    },
-    {
-      "concept": "DividendsOnPreferredStock",
-      "label": "Dividends On Preferred Stock",
-      "depth": 4,
-      "by_year": {
-        "2024": null,
-        "2025": "0",
-        "2026": null
+        "2026": "0"
       }
     },
     {
@@ -3073,9 +2159,12 @@
       "label": "Dividends On Common Stock",
       "depth": 4,
       "by_year": {
+        "2021": "149965295",
+        "2022": "157729263",
+        "2023": "179050329",
         "2024": "199490742",
         "2025": "224972331",
-        "2026": null
+        "2026": "231721501"
       }
     },
     {
@@ -3083,89 +2172,12 @@
       "label": "Cash Flows Provided From Used In Financing Activities",
       "depth": 4,
       "by_year": {
+        "2021": "-74961634",
+        "2022": "203425734",
+        "2023": "783247930",
         "2024": "532750528",
         "2025": "155162256",
-        "2026": null
-      }
-    },
-    {
-      "concept": "OtherAdjustmentsToCashFlowsFromOperatingActivitiesDescription",
-      "label": "Other Adjustments To Cash Flows From Operating Activities Description",
-      "depth": 3,
-      "by_year": {
-        "2024": null,
-        "2025": null,
-        "2026": null
-      }
-    },
-    {
-      "concept": "OtherConstructionAndAcquisitionOfPlantInvestmentActivitiesDescription",
-      "label": "Other Construction And Acquisition Of Plant Investment Activities Description",
-      "depth": 3,
-      "by_year": {
-        "2024": null,
-        "2025": null,
-        "2026": null
-      }
-    },
-    {
-      "concept": "OtherAdjustmentsToCashFlowsFromInvestmentActivitiesDescription",
-      "label": "Other Adjustments To Cash Flows From Investment Activities Description",
-      "depth": 3,
-      "by_year": {
-        "2024": null,
-        "2025": null,
-        "2026": null
-      }
-    },
-    {
-      "concept": "NoncashAdjustmentsToCashFlowsFromOperatingActivitiesDescription",
-      "label": "Noncash Adjustments To Cash Flows From Operating Activities Description",
-      "depth": 3,
-      "by_year": {
-        "2024": null,
-        "2025": null,
-        "2026": null
-      }
-    },
-    {
-      "concept": "DescriptionOfOtherRetirementsImpactingCashFlowsFromFinancingActivities",
-      "label": "Description Of Other Retirements Impacting Cash Flows From Financing Activities",
-      "depth": 3,
-      "by_year": {
-        "2024": null,
-        "2025": null,
-        "2026": null
-      }
-    },
-    {
-      "concept": "OtherAdjustmentsToCashFlowsFromFinancingActivitiesDescription",
-      "label": "Other Adjustments To Cash Flows From Financing Activities Description",
-      "depth": 3,
-      "by_year": {
-        "2024": null,
-        "2025": null,
-        "2026": null
-      }
-    },
-    {
-      "concept": "DescriptionForOtherAdjustmentsByOutsideSourcesToCashFlowsFromFinancingActivities",
-      "label": "Description For Other Adjustments By Outside Sources To Cash Flows From Financing Activities",
-      "depth": 3,
-      "by_year": {
-        "2024": null,
-        "2025": null,
-        "2026": null
-      }
-    },
-    {
-      "concept": "NetIncreaseDecreaseInCashAndCashEquivalentsAbstract",
-      "label": "Net Increase Decrease In Cash And Cash Equivalents",
-      "depth": 3,
-      "by_year": {
-        "2024": null,
-        "2025": null,
-        "2026": null
+        "2026": "159817124"
       }
     },
     {
@@ -3173,19 +2185,12 @@
       "label": "Net Increase Decrease In Cash And Cash Equivalents",
       "depth": 3,
       "by_year": {
+        "2021": "-204514809",
+        "2022": "113399070",
+        "2023": "-161000355",
         "2024": "7794523",
         "2025": "63569507",
-        "2026": null
-      }
-    },
-    {
-      "concept": "CashAndCashEquivalents",
-      "label": "Cash And Cash Equivalents",
-      "depth": 4,
-      "by_year": {
-        "2024": null,
-        "2025": null,
-        "2026": null
+        "2026": "65476592"
       }
     }
   ]

@@ -27,13 +27,17 @@ Outputs to data/utilities/ferc1_pge_viewer/:
 
 JSON groups each statement with one row per line and ``by_year`` amounts (raw
 strings from XBRL). Display uses **USD millions** (value ÷ 1e6) with **two**
-decimal places. Future calendar years may appear as empty placeholder columns.
+decimal places. The newest calendar year in ``PLACEHOLDER_DISPLAY_YEARS`` is
+filled with an **illustrative ×1.03** forecast from the nearest prior year with
+data on each line; rows that are entirely null or zero across all years are omitted.
 """
 
 ZENODO = "19947273"
 
-# Shown in outputs with empty amounts until XBRL is exported for that year.
+# Calendar years shown without an XBRL filing until filled by an illustrative forecast.
 PLACEHOLDER_DISPLAY_YEARS: tuple[int, ...] = (2026,)
+FORECAST_YEAR = 2026
+FORECAST_FACTOR = 1.03
 ZENODO_FILE = f"https://zenodo.org/records/{ZENODO}/files/{{}}?download=1"
 LINK_NS = "http://www.xbrl.org/2003/linkbase"
 XLINK_NS = "http://www.w3.org/1999/xlink"
@@ -390,6 +394,72 @@ def merge_statement_rows(
     return merged
 
 
+def _parse_xbrl_amount(raw: str | None) -> float | None:
+    if raw is None or raw == "":
+        return None
+    try:
+        return float(raw)
+    except ValueError:
+        return None
+
+
+def apply_percent_forecast(
+    payload: dict[str, Any], *, forecast_year: int, factor: float
+) -> None:
+    """Set ``forecast_year`` amounts to base × factor (base = newest prior calendar year with data)."""
+    fk = str(forecast_year)
+    for key in STATEMENT_KEYS:
+        for row in payload[key]:
+            by = row.setdefault("by_year", {})
+            if _parse_xbrl_amount(by.get(fk)) is not None:
+                continue
+            base: float | None = None
+            for y in range(forecast_year - 1, 1999, -1):
+                sk = str(y)
+                if sk not in by:
+                    continue
+                v = _parse_xbrl_amount(by.get(sk))
+                if v is not None:
+                    base = v
+                    break
+            if base is None:
+                continue
+            by[fk] = str(int(round(base * factor)))
+
+
+def tag_forecast_year_meta(payload: dict[str, Any], forecast_year: int) -> None:
+    for m in payload["year_meta"]:
+        if m.get("year") == forecast_year:
+            m["placeholder"] = False
+            m["forecast"] = True
+            m["forecast_note"] = (
+                "Illustrative only: each line uses the nearest prior year with a value × "
+                f"{FORECAST_FACTOR:.2f}."
+            )
+            m["xbrl_member"] = f"(illustrative forecast ×{FORECAST_FACTOR:g})"
+            m["form_taxonomy_version"] = None
+            break
+
+
+def filter_zero_only_rows(
+    rows: list[dict[str, Any]], year_cols: list[int]
+) -> list[dict[str, Any]]:
+    """Drop rows where every year is null/blank or numeric zero; keep rows with any nonzero amount."""
+    keys = [str(y) for y in year_cols]
+    out: list[dict[str, Any]] = []
+    for row in rows:
+        by = row.get("by_year") or {}
+        keep = False
+        for k in keys:
+            v = _parse_xbrl_amount(by.get(k))
+            if v is not None and v != 0.0:
+                keep = True
+                break
+        if keep:
+            out.append(row)
+    return out
+
+
 def build_view_payload(
     company: str, source: dict[str, str], years_out: list[dict[str, Any]]
 ) -> dict[str, Any]:
@@ -424,11 +494,21 @@ def build_view_payload(
         "amount_display": "usd_millions_two_decimals",
         "amount_display_note": (
             "Amounts in millions of USD (value ÷ 1e6, two decimal places). "
-            "Placeholder years have no filing data yet."
+            f"{FORECAST_YEAR} is an illustrative forecast only (each line: nearest prior year with data × "
+            f"{FORECAST_FACTOR:.2f}). Other columns are from FERC Form 1 XBRL filings."
         ),
     }
     for key in STATEMENT_KEYS:
         payload[key] = merge_statement_rows(years_out, key, display_years)
+
+    if FORECAST_YEAR in display_years:
+        apply_percent_forecast(
+            payload, forecast_year=FORECAST_YEAR, factor=FORECAST_FACTOR
+        )
+        tag_forecast_year_meta(payload, FORECAST_YEAR)
+
+    for key in STATEMENT_KEYS:
+        payload[key] = filter_zero_only_rows(payload[key], display_years)
     return payload
 
 
@@ -633,7 +713,13 @@ async function load() {
   const data = await (await fetch('./pge_form1_financials.json')).json();
   document.getElementById('title').textContent = 'FERC Form 1 — ' + data.company;
   document.getElementById('sub').textContent = (data.amount_display_note || '') + ' '
-    + (data.year_meta || []).map(m => m.year + ': ' + (m.placeholder ? '(pending)' : m.xbrl_member)).join(' · ');
+    + (data.year_meta || []).map(function (m) {
+        if (m.placeholder) return m.year + ': (pending)';
+        if (m.forecast) {
+          return m.year + ': ' + (m.forecast_note || 'Illustrative forecast') + ' — ' + (m.xbrl_member || '');
+        }
+        return m.year + ': ' + (m.xbrl_member || '');
+      }).join(' · ');
   const years = data.years;
   const tabs = document.getElementById('tabs');
   const main = document.getElementById('main');
@@ -655,7 +741,11 @@ async function load() {
     sec.className = 'panel' + (b.className ? '' : ' hidden');
     if (!b.className) sec.classList.add('hidden');
     let thead = '<tr><th>Line</th>';
-    for (const y of years) thead += '<th class="num">' + y + ' (US$ M)</th>';
+    for (const y of years) {
+      const m = (data.year_meta || []).find(x => x.year === y);
+      const suf = (m && m.forecast) ? ' (forecast)' : '';
+      thead += '<th class="num">' + y + suf + ' (US$ M)</th>';
+    }
     thead += '</tr>';
     sec.innerHTML = '<table><thead>' + thead + '</thead><tbody></tbody></table>';
     main.appendChild(sec);
@@ -706,7 +796,7 @@ load().catch(e => { document.getElementById('main').innerHTML = '<p>' + e + '</p
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("--company", default="Portland General Electric")
-    ap.add_argument("--years", nargs="+", type=int, default=[2024, 2025])
+    ap.add_argument("--years", nargs="+", type=int, default=[2021, 2022, 2023, 2024, 2025])
     ap.add_argument("--out-dir", type=Path, default=None)
     args = ap.parse_args()
     out = args.out_dir or viewer_dir()
