@@ -1,5 +1,5 @@
 {
-  "fetched_at_utc": "2026-05-26T02:51:18+00:00",
+  "fetched_at_utc": "2026-05-28T03:18:23+00:00",
   "source": "https://services3.arcgis.com/T4QMspbfLg3qTGWY/arcgis/rest/services/WFIGS_Incident_Locations_Current/FeatureServer/0/query",
   "where_clause": "POOState IN ('US-OR')",
   "states": [

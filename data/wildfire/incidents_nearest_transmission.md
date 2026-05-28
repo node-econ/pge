@@ -9,26 +9,26 @@ Distances are **horizontal meters** in **EPSG:5070** (NAD83 / Conus Albers) from
 - **Incident GeoJSON:** `data/wildfire/wfigs_incident_locations_or.geojson`
 - **NRI tracts (WFIR lookup):** `web/NRI_Census_Tracts_PGE.geojson`
 - **Lines:** `spatial/Transmission_Lines.shp`
-- **Generated (UTC):** `2026-05-26T03:07:18+00:00`
+- **Generated (UTC):** `2026-05-28T03:18:30+00:00`
 
 | Distance (Miles) | Incident | County | NRI tract WFIR_RISKR | Contain % | Acres | IrwinID | Line (FENAME) | Line OID |
 |---:|---|---|---|---|---:|---:|---|---:|
-| 3.451 | Rowell | Polk | Relatively Low |  | 0.18 | `{1F95A5C8-AE2B-4479-B048-E551D23C31BD}` |  | 62.0 |
+| 3.053 | Lost Lane | Clackamas | Relatively Low |  | 0.1 | `{444A3025-BB51-4692-BBD8-96AA7B34F5D8}` |  | 2434.0 |
 | 8.746 | Camp Cody Rx - East | Wasco |  |  | 32 | `{FE28FD4C-8981-40BC-AB0B-501666DD4846}` |  | 60.0 |
-| 21.267 | Fred Taylor | Lincoln |  |  |  | `{6041F421-1763-44E4-87D0-09CDFC042BCC}` |  | 1398.0 |
-| 24.341 | Botkin | Benton |  |  |  | `{49B15722-CBC5-4812-879F-25BEAE81D174}` |  | 1369.0 |
-| 24.482 | Mill 3 | Jefferson |  |  | 6 | `{13EECC73-83E2-497E-9999-E6F095E53760}` |  | 60.0 |
-| 51.178 | 0231 ZEN | Wasco |  | 0 | 1000 | `{FDA49146-327E-4651-835C-75B7F568A941}` |  | 60.0 |
+| 24.341 | Botkin | Benton |  |  | 0.59 | `{49B15722-CBC5-4812-879F-25BEAE81D174}` |  | 1369.0 |
+| 32.336 | Alsea Structure | Benton |  |  |  | `{F65240E9-06D2-40CF-8CA0-D02D03E0BA81}` |  | 1369.0 |
+| 51.178 | 0231 ZEN | Wasco |  | 40 | 1634 | `{FDA49146-327E-4651-835C-75B7F568A941}` |  | 60.0 |
+| 58.654 | Elk | Lane |  |  | 0.25 | `{77C4B798-9FBC-49A2-9250-4A46313D884D}` |  | 1369.0 |
+| 62.064 | Non-Stat HWY 58 MP 24 | Lane |  |  | 2 | `{007C11A0-4F59-49D9-8E99-43BB87BF4B6E}` |  | 1369.0 |
+| 71.08 | South Jetty 1 | Lane |  |  | 0.68 | `{33864B64-AD58-47D8-9649-2A9408FB58DD}` |  | 1369.0 |
 | 84.08 | UMATILLA NWR TUMBLEWEED RX | Morrow |  |  |  | `{071D817D-6DDB-485A-9B8E-387FE4E03C51}` |  | 1403.0 |
 | 89.018 | PINE MOUNTAIN | Deschutes |  | 100 | 2589 | `{5985829D-31DE-4A80-A836-25907B851057}` |  | 1360.0 |
-| 97.635 | Boulder | Douglas |  |  | 0.5 | `{3279F565-9957-4FE6-B689-A04C7FC2BFE3}` |  | 1369.0 |
-| 105.807 | Springer Creek | Douglas |  |  | 0.5 | `{A831E05F-E2A3-4A24-B1FF-47F4832A4BBA}` |  | 1369.0 |
+| 96.584 | 6750 Rd | Coos |  |  | 0.01 | `{75F90116-4E5F-4187-96C2-1BB89209291A}` |  | 1369.0 |
+| 113.734 | Camas Way | Douglas |  |  | 0.1 | `{A6266DA4-C3F2-401F-A6AB-DD3A0E8B6043}` |  | 1369.0 |
 | 141.502 | PP-A7343/Dog Creek Rd. 2001 | Josephine |  |  | 0.01 | `{DAB0AEEB-7C61-4C14-9179-85076ACEDE5B}` |  | 1369.0 |
-| 154.817 | Rogue River Hwy 535 | Jackson |  |  | 0.25 | `{AA7B7AB3-22ED-45A8-A989-E245EB767FE8}` |  | 1369.0 |
 | 155.447 | PP-01336005/Greens Creek Rd 190 | Josephine |  |  | 0.25 | `{FE1E9C1F-34DC-4E6F-A1C0-B4EBF3318C71}` |  | 1369.0 |
 | 155.555 | Blackwell Rd 8087 | Jackson |  |  |  | `{D2619F53-FF96-4ABB-8E24-14A8281C922D}` |  | 1369.0 |
 | 160.809 | ELK 16 RX | Grant |  |  | 10 | `{3B027DFA-0D43-4756-9F30-95CD8BB77DB9}` |  | 60.0 |
-| 166.357 | Griffin Lane 5213 | Jackson |  |  |  | `{37180B8C-DCB5-4631-8B1F-C36C45AE949D}` |  | 1369.0 |
-| 168.783 | PP# 342802 UPPER APPLEGATE RD | Jackson |  |  | 0.01 | `{AB96BE21-35D9-4005-AF2E-B5E6497D3DBB}` |  | 1369.0 |
-| 173.102 | Anderson Creek Rd | Jackson |  |  | 0.25 | `{B06DB187-521B-402C-BD73-6D788B54E9B1}` |  | 1369.0 |
+| 167.161 | Dark Hollow Rd. | Jackson |  |  | 0.01 | `{1D98C98D-2F8E-4EDF-BC11-BB9BEF4D1B11}` |  | 1369.0 |
+| 168.798 | PP# 342802 UPPER APPLEGATE RD | Jackson |  |  | 0.01 | `{AB96BE21-35D9-4005-AF2E-B5E6497D3DBB}` |  | 1369.0 |
 
